@@ -1,0 +1,87 @@
+﻿@using System.Web.Optimization
+@using Kendo.Mvc.UI
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+
+    @Styles.Render("~/Content/ThisMustBeHere")
+    <script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>
+    @*<script src="~/Scripts/JQuery/jquery.validate.js"></script>
+    <script src="~/Scripts/JQuery/jquery.validate.unobtrusive.js"></script>*@
+    <script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.6.2.js"></script>
+
+
+    @Scripts.Render("~/js")
+    @*<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>*@
+   
+</head>
+<body>
+    <header>
+        @* @Html.Partial("_LoginPartial")*@
+
+        @(Html.Kendo().Menu()
+            .Name("Menu")
+            .BindTo("sitemap")
+            .SecurityTrimming(false) // causes EXTREMELY slow debugging.
+        )
+
+    </header>
+
+    <div id="body">
+        @RenderSection("featured", required: false)
+        @RenderBody()
+    </div>
+    <footer>
+        <script type="text/javascript">
+            function exportGridData(sender) {
+
+                var gridDiv = ($(sender)).parents('div[class~="k-grid"]').first(); // да точно така е!!!
+                var grid = gridDiv.data("kendoGrid");
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Download/ExportWithOpenXML",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        html: grid.table.context.innerHTML
+                    }),
+                    success: function (data) {
+                    },
+                    error: function (result) {
+                        alert('Oh no: ' + result.responseText);
+                    },
+                    async: false
+                });
+            }
+
+            function getWeekString(weekInt) {
+                //debugger;
+                var res;
+                $.ajax({
+                    type: "POST",
+                    url: "/Chart/GetWeekString",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        dateEncoded: weekInt
+                    }),
+                    success: function (data) {
+                        res = data;
+                    },
+                    error: function (result) {
+                        alert('Oh no: ' + result.responseText);
+                    },
+                    async: false
+                });
+
+                return res;
+            }
+
+        </script>
+
+    </footer>
+</body>
+</html>

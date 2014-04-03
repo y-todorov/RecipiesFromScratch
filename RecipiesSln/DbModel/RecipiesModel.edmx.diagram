@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="598316e1cdbf4259b9c2d2ab7d6f7af9" Name="Diagram1">
+        <EntityTypeShape EntityType="recipiesMVCModel.EmailTemplate" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.C__RecipiesDataBase" Width="1.5" PointX="7.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_Applications" Width="1.5" PointX="10.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_Membership" Width="1.5" PointX="16" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_Paths" Width="1.5" PointX="13" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="15.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_PersonalizationPerUser" Width="1.5" PointX="15.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_Profile" Width="1.5" PointX="20.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_Roles" Width="1.5" PointX="13" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_SchemaVersions" Width="1.5" PointX="8.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_Users" Width="1.5" PointX="18.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.aspnet_WebEvent_Events" Width="1.5" PointX="10.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Department" Width="1.5" PointX="0.75" PointY="39" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Employee" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.EmployeeDepartment" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Shift" Width="1.5" PointX="0.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Inventory" Width="1.5" PointX="12.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Product" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductCategory" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductHistory" Width="1.5" PointX="15.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductIngredient" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductInventory" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductInventoryHeader" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductWaste" Width="1.5" PointX="8.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductWasteHeader" Width="1.5" PointX="6" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Recipe" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.RecipeIngredient" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.RecipeInventory" Width="1.5" PointX="5.25" PointY="44.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.RecipeWaste" Width="1.5" PointX="5.25" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Store" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.UnitMeasure" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Waste" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ProductVendor" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.PurchaseOrderDetail" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.PurchaseOrderHeader" Width="1.5" PointX="3" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.PurchaseOrderStatu" Width="1.5" PointX="0.75" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.ShipMethod" Width="1.5" PointX="0.75" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Vendor" Width="1.5" PointX="0.75" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.Customer" Width="1.5" PointX="3.75" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.PaymentType" Width="1.5" PointX="3.75" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.SalesOrderDetail" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.SalesOrderHeader" Width="1.5" PointX="6" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="recipiesMVCModel.SalesOrderStatu" Width="1.5" PointX="3.75" PointY="40.625" IsExpanded="true" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Me__Appli__2FCF1A8A" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Pa__Appli__6166761E" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Ro__Appli__4E53A1AA" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Us__Appli__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Me__UserI__30C33EC3" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Pe__PathI__671F4F74" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Pe__PathI__6AEFE058" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Pe__UserI__6BE40491" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK__aspnet_Pr__UserI__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_EmployeeDepartment_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_EmployeeDepartment_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_Order_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderHeader_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_EmployeeDepartment_Shift" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_Product_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_Product_Unit" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductInventory_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductVendor_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductWaste_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeIngredient_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_Recipe_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeIngredient_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductInventory_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductInventory_ProductInventoryHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductWaste_ProductWasteHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductWaste_Waste" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_OrderDetail_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeIngredient_IngredientRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeIngredient_ParentRecipe" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeInventory_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeWaste_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeInventory_Inventory" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_RecipeWaste_Waste" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductVendor_UnitMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductWaste_UnitMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderDetail_UnitMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_ProductVendor_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderDetail_PurchaseOrderHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderHeader_PurchaseOrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderHeader_ShipMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_PurchaseOrderHeader_Vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_SalesOrderHeader_PaymentType" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.FK_SalesOrderHeader_SalesOrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="recipiesMVCModel.aspnet_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
