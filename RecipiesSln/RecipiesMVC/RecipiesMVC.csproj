@@ -413,6 +413,7 @@
     <Content Include="Scripts\JQuery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\kendo.culture.en-IE.min.js" />
     <Content Include="Scripts\kendo.EVERYTHING.2014.1.318.min.js" />
+    <Content Include="Scripts\modernizr.2.6.2.js" />
     <Content Include="Scripts\MyJavaScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

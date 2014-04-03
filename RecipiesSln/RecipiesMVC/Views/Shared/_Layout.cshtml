@@ -9,15 +9,7 @@
 
     @Styles.Render("~/Content/ThisMustBeHere")
     <script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>
-    @*<script src="~/Scripts/JQuery/jquery.validate.js"></script>
-    <script src="~/Scripts/JQuery/jquery.validate.unobtrusive.js"></script>*@
-    <script src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.6.2.js"></script>
-
-
     @Scripts.Render("~/js")
-    @*<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"></script>*@
-   
 </head>
 <body>
     <header>
@@ -28,7 +20,6 @@
             .BindTo("sitemap")
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
         )
-
     </header>
 
     <div id="body">
@@ -36,7 +27,7 @@
         @RenderBody()
     </div>
     <footer>
-        <script type="text/javascript">
+        @*<script type="text/javascript">
             function exportGridData(sender) {
 
                 var gridDiv = ($(sender)).parents('div[class~="k-grid"]').first(); // да точно така е!!!
@@ -80,7 +71,7 @@
                 return res;
             }
 
-        </script>
+        </script>*@
 
     </footer>
 </body>
