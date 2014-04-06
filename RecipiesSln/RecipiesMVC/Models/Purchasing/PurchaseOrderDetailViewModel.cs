@@ -5,10 +5,10 @@ using System.Linq;
 using System.Web;
 using RecipiesModelNS;
 using System.ComponentModel;
-using InventoryManagementMVC.DataAnnotations;
+using RecipiesMVC.DataAnnotations;
 using System.Web.Mvc;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class PurchaseOrderDetailViewModel
     {

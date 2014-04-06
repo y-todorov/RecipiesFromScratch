@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+        @Styles.Render("~/Content/ThisMustBeHere")
+        <script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>
+        @Scripts.Render("~/js")
+    </head>
+    <body>
+        @RenderBody()
+    </body>
+</html>

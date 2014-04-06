@@ -1,4 +1,4 @@
-﻿using InventoryManagementMVC.Models;
+﻿using RecipiesMVC.Models;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System;
@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using System.Data.Entity;
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class ProductInventoryHeaderController : ControllerBase
     {

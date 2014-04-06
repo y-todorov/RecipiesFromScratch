@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class InventoryViewModel
     {

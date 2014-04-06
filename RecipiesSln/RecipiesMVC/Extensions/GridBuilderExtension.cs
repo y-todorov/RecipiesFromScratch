@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.UI.Fluent;
 using System.Web;
@@ -10,12 +10,12 @@ using System.Web.Mvc;
 using System.Web.Security.AntiXss;
 using System.Web.Util;
 using System.Diagnostics;
-using InventoryManagementMVC.DataAnnotations;
+using RecipiesMVC.DataAnnotations;
 using RecipiesModelNS;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace InventoryManagementMVC.Extensions
+namespace RecipiesMVC.Extensions
 {
     public static class GridBuilderExtension
     {

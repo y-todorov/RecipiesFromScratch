@@ -1,10 +1,10 @@
-﻿using InventoryManagementMVC.DataAnnotations;
+﻿using RecipiesMVC.DataAnnotations;
 using RecipiesModelNS;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class ProductViewModel
     {

@@ -1,5 +1,5 @@
 ﻿using Helpers;
-using InventoryManagementMVC.Models.Purchasing;
+using RecipiesMVC.Models.Purchasing;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System;
@@ -14,10 +14,10 @@ using Telerik.Reporting.Processing;
 using RestSharp;
 using System.Net;
 using System.Data.Entity;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 using RecipiesWebFormApp.Extensions;
 
-namespace InventoryManagementMVC.Controllers.Purchasing
+namespace RecipiesMVC.Controllers.Purchasing
 {
     public class PurchaseOrderHeaderController : ControllerBase
     {

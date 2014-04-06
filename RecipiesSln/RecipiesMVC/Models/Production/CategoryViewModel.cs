@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using RecipiesModelNS;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class CategoryViewModel
     {

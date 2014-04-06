@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace InventoryManagementMVC.DataAnnotations
+namespace RecipiesMVC.DataAnnotations
 {
     [AttributeUsageAttribute(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false,
         Inherited = true)]

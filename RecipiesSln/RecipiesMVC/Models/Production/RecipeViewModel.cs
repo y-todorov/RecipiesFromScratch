@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using RecipiesModelNS;
-using InventoryManagementMVC.DataAnnotations;
+using RecipiesMVC.DataAnnotations;
 using System.ComponentModel;
 using RecipiesWebFormApp.Helpers;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class RecipeViewModel
     {

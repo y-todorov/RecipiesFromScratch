@@ -1,18 +1,18 @@
 ﻿//using System.Collections.Generic;
 //using System.Linq;
 //using System.Web.Mvc;
-//using InventoryManagementMVC.Models;
+//using RecipiesMVC.Models;
 //using Kendo.Mvc.Extensions;
 //using Kendo.Mvc.UI;
 //using RecipiesModelNS;
 //using RecipiesWebFormApp;
 //using System.Web;
 //using System.Web.Caching;
-//using InventoryManagementMVC.Models;
+//using RecipiesMVC.Models;
 //using DevTrends.MvcDonutCaching;
 //using System.Data.Entity;
 
-//namespace InventoryManagementMVC.Controllers
+//namespace RecipiesMVC.Controllers
 //{
 //    public class TestController : ControllerBase
 //    {

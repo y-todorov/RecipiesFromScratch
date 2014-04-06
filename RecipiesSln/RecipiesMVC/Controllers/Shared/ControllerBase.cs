@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Web.UI;
 using DevTrends.MvcDonutCaching;
 using DevTrends.MvcDonutCaching.Annotations;
-using InventoryManagementMVC.DataAnnotations;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.DataAnnotations;
+using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
@@ -21,7 +21,7 @@ using System.Web.Script.Serialization;
 using System.Collections;
 using log4net;
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     //[DonutOutputCache(Duration = 24 * 3600,
     //    Options = OutputCacheOptions.IgnoreFormData | OutputCacheOptions.NoCacheLookupForPosts)]

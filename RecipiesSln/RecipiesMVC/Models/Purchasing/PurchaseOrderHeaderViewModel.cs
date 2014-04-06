@@ -1,4 +1,4 @@
-﻿using InventoryManagementMVC.DataAnnotations;
+﻿using RecipiesMVC.DataAnnotations;
 using RecipiesModelNS;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace InventoryManagementMVC.Models.Purchasing
+namespace RecipiesMVC.Models.Purchasing
 {
     public class PurchaseOrderHeaderViewModel
     {

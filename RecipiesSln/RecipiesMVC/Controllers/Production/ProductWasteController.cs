@@ -1,4 +1,4 @@
-﻿using InventoryManagementMVC.Models;
+﻿using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity; // .Include !!!!!!! THIS IS SO IMPROTANT
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class ProductWasteController : ControllerBase
     {

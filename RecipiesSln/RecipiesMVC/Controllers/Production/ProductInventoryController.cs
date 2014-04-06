@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System;
@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using System.Data.Entity; // .Include !!!!!!! THIS IS SO IMPROTANT
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class ProductInventoryController : ControllerBase
     {

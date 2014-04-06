@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class ProductWasteHeaderController : ControllerBase
     {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class ProductInventoryHeaderViewModel
     {

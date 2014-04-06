@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using InventoryManagementMVC.DataAnnotations;
+using RecipiesMVC.DataAnnotations;
 using RecipiesModelNS;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class ProductWasteViewModel : WasteViewModel
     {

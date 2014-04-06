@@ -15,7 +15,7 @@ using System.Xml.Linq;
 using Telerik.Reporting.Processing;
 using System.Data.Entity;
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class DownloadController : Controller
     {

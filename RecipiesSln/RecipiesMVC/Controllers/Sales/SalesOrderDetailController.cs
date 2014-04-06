@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using InventoryManagementMVC.Models;
-using InventoryManagementMVC.Models.Purchasing;
+using RecipiesMVC.Models;
+using RecipiesMVC.Models.Purchasing;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System.Data.Entity;
 using DevTrends.MvcDonutCaching; // .Include !!!!!!! THIS IS SO IMPROTANT
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class SalesOrderDetailController : ControllerBase
     {

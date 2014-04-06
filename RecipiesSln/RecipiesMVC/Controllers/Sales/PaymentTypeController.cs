@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Threading.Tasks;
-using InventoryManagementMVC.Models.Purchasing;
+using RecipiesMVC.Models.Purchasing;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System;
@@ -15,9 +15,9 @@ using RecipiesWebFormApp.Helpers;
 using RestSharp;
 using System.Net;
 using System.Data.Entity;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 
-namespace InventoryManagementMVC.Controllers.Purchasing
+namespace RecipiesMVC.Controllers.Purchasing
 {
     public class PaymentTypeController : ControllerBase
     {

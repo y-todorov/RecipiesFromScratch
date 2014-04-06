@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using RecipiesModelNS;
-using InventoryManagementMVC.DataAnnotations;
+using RecipiesMVC.DataAnnotations;
 using System.ComponentModel;
 using System.Web.Mvc;
 using System.Linq;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class ProductIngredientViewModel
     {

@@ -4,10 +4,10 @@ using System.Web.Mvc;
 using RecipiesModelNS;
 using System;
 using System.Diagnostics;
-using InventoryManagementMVC.Helpers;
+using RecipiesMVC.Helpers;
 
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class HomeController : ControllerBase
     {

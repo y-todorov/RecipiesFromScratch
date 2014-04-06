@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
@@ -14,7 +14,7 @@ using System.Web.Caching;
 using DevTrends.MvcDonutCaching;
 using System;
 
-namespace InventoryManagementMVC.Controllers
+namespace RecipiesMVC.Controllers
 {
     public class ProductController : ControllerBase
     {

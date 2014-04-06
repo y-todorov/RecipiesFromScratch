@@ -1,4 +1,4 @@
-﻿using InventoryManagementMVC.DataAnnotations;
+﻿using RecipiesMVC.DataAnnotations;
 using RecipiesModelNS;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace InventoryManagementMVC.Models
+namespace RecipiesMVC.Models
 {
     public class ProductInventoryViewModel : InventoryViewModel
     {

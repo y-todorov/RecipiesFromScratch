@@ -2,14 +2,14 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using InventoryManagementMVC.Models;
+using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System;
 using System.Globalization;
 
-namespace InventoryManagementMVC.Helpers
+namespace RecipiesMVC.Helpers
 {
     public static class ControllerHelper
     {
