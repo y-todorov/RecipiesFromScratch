@@ -1,5 +1,7 @@
 ﻿@using System.Web.Optimization
 @using Kendo.Mvc.UI
+@using Microsoft.AspNet.Identity
+
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +19,11 @@
 
         @(Html.Kendo().Menu()
             .Name("Menu")
-            .BindTo("sitemap")
+            .BindTo("sitemap").Items(children =>
+            {
+                children.Add().Text("You're logged in as " + @User.Identity.GetUserName());
+
+            })
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
         )
     </header>
@@ -26,7 +32,6 @@
         @RenderSection("featured", required: false)
         @RenderBody()
     </div>
-    <footer>
-    </footer>
+    <footer></footer>
 </body>
 </html>
