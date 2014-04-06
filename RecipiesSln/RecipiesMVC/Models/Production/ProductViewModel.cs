@@ -13,14 +13,19 @@ namespace RecipiesMVC.Models
 
         [Relation(EntityType = typeof (UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
         [Display(Name = "Unit Measure")]
+        [Required()]
         public int? UnitMeasureId { get; set; }
 
         [Relation(EntityType = typeof (ProductCategory), DataFieldValue = "CategoryId", DataFieldText = "Name")]
         [Display(Name = "Category")]
+        [Required()]
+
         public int? CategoryId { get; set; }
 
         [Relation(EntityType = typeof (Store), DataFieldValue = "StoreId", DataFieldText = "Name")]
         [Display(Name = "Store")]
+        [Required()]
+
         public int? StoreId { get; set; }
 
         [Required(ErrorMessage = "Please enter a name for the product!")]
@@ -82,10 +87,7 @@ namespace RecipiesMVC.Models
             entity.Name = Name;
             entity.Code = Code;
             entity.UnitPrice = Math.Round(UnitPrice.GetValueOrDefault(), 3);
-            //entity.UnitsInStock = Math.Round(UnitsInStock.GetValueOrDefault(), 3);
-            //entity.UnitsOnOrder = Math.Round(UnitsOnOrder.GetValueOrDefault(), 3);
             entity.ReorderLevel = Math.Round(ReorderLevel.GetValueOrDefault(), 3);
-            //entity.StockValue = (double) StockValue.GetValueOrDefault();
             entity.ModifiedDate = ModifiedDate;
             entity.ModifiedByUser = ModifiedByUser;
 

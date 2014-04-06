@@ -14,6 +14,7 @@ namespace RecipiesMVC.Models
 
         [Relation(EntityType = typeof (ProductCategory), DataFieldValue = "CategoryId", DataFieldText = "Name")]
         [Display(Name = "Category")]
+        [Required()]
         public int? CategoryId { get; set; }
 
         [Required(ErrorMessage = "Please enter a name for the recipie!")]

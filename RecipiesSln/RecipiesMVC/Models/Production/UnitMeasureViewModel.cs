@@ -17,6 +17,8 @@ namespace RecipiesMVC.Models
 
         [Relation(EntityType = typeof (UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
         [Display(Name = "Unit Measure")]
+        [Required()]
+
         public int? BaseUnitId { get; set; }
 
         [Range(0, int.MaxValue)]

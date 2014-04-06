@@ -14,6 +14,7 @@ namespace RecipiesMVC.Models
         [Relation(EntityType = typeof(UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
         [Display(Name = "Unit Measure")]
         [ReadOnly(true)]
+        [Required()]
         public int? UnitMeasureId { get; set; } // Check this
 
         public double? Quantity { get; set; }

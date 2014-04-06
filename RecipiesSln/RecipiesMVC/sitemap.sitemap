@@ -27,8 +27,8 @@
       <siteMapNode controller="ProductVendor" action="index" title="Product vendors" />
       <siteMapNode controller="ShipMethod" action="index" title="Ship methods" />
     </siteMapNode>
-    <siteMapNode title="To the OLD site" controller="Home" action="NavigateToOldSite">
-    </siteMapNode>
+    <!--<siteMapNode title="To the OLD site" controller="Home" action="NavigateToOldSite">
+    </siteMapNode>-->
     <!--<siteMapNode title="Human resources">
     </siteMapNode>
     <siteMapNode title="History">
