@@ -310,7 +310,6 @@
     <Compile Include="Controllers\Shared\ControllerBase.cs" />
     <Compile Include="Controllers\Shared\DownloadController.cs" />
     <Compile Include="Controllers\Shared\ErrorController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DataAnnotations\RelationAttribute.cs" />
     <Compile Include="Extensions\ChartBuilderExtension.cs" />
     <Compile Include="Extensions\CustomHandleErrorAttribute.cs" />
@@ -451,14 +450,10 @@
     <Content Include="Content\images\kendoui.woff" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\JQuery\jquery-2.1.0.min.map" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />

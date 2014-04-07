@@ -14,26 +14,26 @@
 
         <table>
             <tr>
-                <td>@Html.LabelFor(m => m.UserName, new { @class = "k-label" })</td>
+                <td>@Html.LabelFor(m => m.UserName)</td>
                 <td>@Html.TextBoxFor(m => m.UserName)</td>
                 <td>@Html.ValidationMessageFor(m => m.UserName)</td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.Password, new { @class = "k-label" })</td>
-                <td>@Html.PasswordFor(m => m.Password, new { @class = "k-textbox" })</td>
+                <td>@Html.LabelFor(m => m.Password)</td>
+                <td>@Html.PasswordFor(m => m.Password)</td>
                 <td>@Html.ValidationMessageFor(m => m.Password)</td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "k-checkbox" })
-                    @Html.LabelFor(m => m.RememberMe, new { @class = "k-label" })
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
                 </td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Log in" class="k-button" /></td>
+                <td><input type="submit" value="Log in"/></td>
                 <td></td>
             </tr>
         </table>

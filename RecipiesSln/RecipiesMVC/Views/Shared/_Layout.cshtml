@@ -20,8 +20,10 @@
             .Name("Menu")
             .BindTo("sitemap").Items(children =>
             {
-                children.Add().Text("You're logged in as " + @User.Identity.GetUserName());
-
+                children.Add().Text("You're logged in as " + @User.Identity.GetUserName()).Items(innerChildren =>
+                {
+                    innerChildren.Add().Text("Manage your account").Action("Manage", "Account");
+                });
             })
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
         )

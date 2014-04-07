@@ -1,5 +1,12 @@
 ﻿kendo.culture("en-IE");
 
+$(document).ready(function () {
+    $("label").addClass("k-label");
+    $("input[type=text]").addClass("k-textbox");
+    $("input[type=password]").addClass("k-textbox");
+    $("input[type=submit]").addClass("k-button");
+});
+
 function error_handler(e) {
     if (e.errors) {
         var message = "Errors:\n";
@@ -12,23 +19,6 @@ function error_handler(e) {
         });
         alert(message);
     }
-}
-
-
-// this is for the rad menu so root item cannot be clicked.
-function OnClientItemClicking(sender, args) {
-    if (args.get_item().get_items().get_count() != 0 && args.get_item().get_level() == 0) {
-        args.set_cancel(true); // Cancel the event 
-    }
-}
-
-
-function OnRequestStart() {
-    isInRequest = true;
-}
-
-function OnResponseEnd() {
-    isInRequest = false;
 }
 
 function exportGridData(sender) {
@@ -73,3 +63,4 @@ function getWeekString(weekInt) {
 
     return res;
 }
+
