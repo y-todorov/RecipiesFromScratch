@@ -2,10 +2,20 @@
 <html>
     <head>
         <title>@Page.Title</title>
-        <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
-        @Styles.Render("~/Content/ThisMustBeHere")
+        <link href="~/Content/kendo.blueopal.min.css" rel="stylesheet" />
+        <link href="~/Content/kendo.common.core.min.css" rel="stylesheet" />
+        <link href="~/Content/kendo.common.min.css" rel="stylesheet" />
+        <link href="~/Content/kendo.dataviz.blueopal.min.css" rel="stylesheet" />
+        <link href="~/Content/MyStyleSheet.css" rel="stylesheet" />
         <script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>
-        @Scripts.Render("~/js")
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("label").addClass("k-label");
+                $("input[type=text]").addClass("k-textbox");
+                $("input[type=password]").addClass("k-textbox");
+                $("input[type=submit]").addClass("k-button");
+            });
+        </script>
     </head>
     <body>
         @RenderBody()
