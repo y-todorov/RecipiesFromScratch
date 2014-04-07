@@ -192,33 +192,6 @@ namespace RecipiesMVC.Controllers
         }
 
         //
-        // GET: /Account/ExternalLoginCallback
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        //{
-        //    var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-        //    if (loginInfo == null)
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-
-        //    // Sign in the user with this external login provider if the user already has a login
-        //    var user = await UserManager.FindAsync(loginInfo.Login);
-        //    if (user != null)
-        //    {
-        //        await SignInAsync(user, isPersistent: false);
-        //        return RedirectToLocal(returnUrl);
-        //    }
-        //    else
-        //    {
-        //        // If the user does not have an account, then prompt the user to create an account
-        //        ViewBag.ReturnUrl = returnUrl;
-        //        ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-        //        return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
-        //    }
-        //}
-
-        //
         // POST: /Account/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -227,66 +200,11 @@ namespace RecipiesMVC.Controllers
             // Request a redirect to the external login provider to link a login for the current user
             return new ChallengeResult(provider, Url.Action("LinkLoginCallback", "Account"), User.Identity.GetUserId());
         }
-
-        //
-        // GET: /Account/LinkLoginCallback
-        //public async Task<ActionResult> LinkLoginCallback()
-        //{
-        //    var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-        //    if (loginInfo == null)
-        //    {
-        //        return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
-        //    }
-        //    var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-        //    if (result.Succeeded)
-        //    {
-        //        return RedirectToAction("Manage");
-        //    }
-        //    return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
-        //}
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        return RedirectToAction("Manage");
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Get the information about the user from the external login provider
-        //        var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-        //        if (info == null)
-        //        {
-        //            return View("ExternalLoginFailure");
-        //        }
-        //        var user = new ApplicationUser() { UserName = model.UserName };
-        //        var result = await UserManager.CreateAsync(user);
-        //        if (result.Succeeded)
-        //        {
-        //            result = await UserManager.AddLoginAsync(user.Id, info.Login);
-        //            if (result.Succeeded)
-        //            {
-        //                await SignInAsync(user, isPersistent: false);
-        //                return RedirectToLocal(returnUrl);
-        //            }
-        //        }
-        //        AddErrors(result);
-        //    }
-
-        //    ViewBag.ReturnUrl = returnUrl;
-        //    return View(model);
-        //}
-
-        //
+      
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        [HttpGet] // Yordan changed this
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();

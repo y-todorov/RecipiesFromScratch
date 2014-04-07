@@ -23,6 +23,7 @@
                 children.Add().Text("You're logged in as " + @User.Identity.GetUserName()).Items(innerChildren =>
                 {
                     innerChildren.Add().Text("Manage your account").Action("Manage", "Account");
+                    innerChildren.Add().Text("Log out").Action("LogOff", "Account");                    
                 });
             })
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
