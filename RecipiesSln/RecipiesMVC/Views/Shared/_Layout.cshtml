@@ -1,8 +1,6 @@
 ﻿@using System.Web.Optimization
 @using Kendo.Mvc.UI
 @using Microsoft.AspNet.Identity
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +12,6 @@
 </head>
 <body>
     <header>
-        @* @Html.Partial("_LoginPartial")*@
-
         @(Html.Kendo().Menu()
             .Name("Menu")
             .BindTo("sitemap").Items(children =>
@@ -23,17 +19,19 @@
                 children.Add().Text("You're logged in as " + @User.Identity.GetUserName()).Items(innerChildren =>
                 {
                     innerChildren.Add().Text("Manage your account").Action("Manage", "Account");
-                    innerChildren.Add().Text("Log out").Action("LogOff", "Account");                    
+                    innerChildren.Add().Text("Log out").Action("LogOff", "Account");
                 });
             })
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
         )
+        <span id="popupNotification"></span>
     </header>
 
     <div id="body">
         @RenderSection("featured", required: false)
         @RenderBody()
     </div>
-    <footer></footer>
+    <footer>
+    </footer>
 </body>
 </html>

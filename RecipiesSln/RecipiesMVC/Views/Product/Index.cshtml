@@ -16,7 +16,7 @@
                 .Read("Read", "Product")
                 .Update("Update", "Product")
                 .Destroy("Destroy", "Product")
-            ).Events(e => e.DataBound("onDataBound"))
+                ).Events(e => e.DataBound("onDataBound").SaveChanges("onSaveChanges").Save("onSave"))
             .ClientDetailTemplateId("template")
 
       )
@@ -46,6 +46,21 @@
                 $(currenRow).addClass("NeedsReorder");
             }
         }
+    }
+
+    function onSave(e) {
+        //debugger;
+        var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+        for (var key in e.values) {
+            var value = e.values[key];
+            popupNotification.show("The value of '" + key + " 'changed to '" + value +"'!");
+        }
+    }
+
+    function onSaveChanges(e) {
+        //debugger;
+        var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+        popupNotification.show("All pending changes are successfully saved!");
     }
 </script>
 

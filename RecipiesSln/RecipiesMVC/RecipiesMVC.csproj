@@ -284,7 +284,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Account\AccountController.cs" />
     <Compile Include="Controllers\Charts\ChartController.cs" />
     <Compile Include="Controllers\Dashboard\HomeController.cs" />
     <Compile Include="Controllers\Production\CategoryController.cs" />
@@ -324,14 +324,14 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\ModelHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Chart\GpPerDay.cs" />
     <Compile Include="Models\Chart\LowProducts.cs" />
     <Compile Include="Models\Chart\ProductsPerCategory.cs" />
     <Compile Include="Models\Chart\RecipeByGP.cs" />
     <Compile Include="Models\Chart\TotalPoByVendor.cs" />
     <Compile Include="Models\Chart\VendorPurchasesByWeek.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Account\IdentityModels.cs" />
     <Compile Include="Models\Production\CategoryViewModel.cs" />
     <Compile Include="Models\Production\InventoryViewModel.cs" />
     <Compile Include="Models\Production\ProductIngredientViewModel.cs" />
@@ -441,7 +441,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\HumanResources\" />
     <Folder Include="fonts\" />
-    <Folder Include="Models\Account\" />
     <Folder Include="Models\HumanResources\" />
   </ItemGroup>
   <ItemGroup>
