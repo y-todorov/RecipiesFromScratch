@@ -49,8 +49,8 @@
     }
 
     function onSave(e) {
-        //debugger;
-        var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+        debugger;
+        var popupNotification = $("#popupNotification").data("kendoNotification");
         for (var key in e.values) {
             var value = e.values[key];
             popupNotification.show("The value of '" + key + " 'changed to '" + value +"'!");
@@ -58,8 +58,8 @@
     }
 
     function onSaveChanges(e) {
-        //debugger;
-        var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+        debugger;
+        var popupNotification = $("#popupNotification").data("kendoNotification");
         popupNotification.show("All pending changes are successfully saved!");
     }
 </script>
