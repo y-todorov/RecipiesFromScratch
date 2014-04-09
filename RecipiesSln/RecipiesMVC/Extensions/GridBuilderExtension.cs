@@ -462,7 +462,7 @@ namespace RecipiesMVC.Extensions
             where T : class
         {
             builder
-                .Events(ev => ev.Save("onKendoGridSave").SaveChanges("onKendoGridSaveChanges"))
+                .Events(ev => ev.Save("onKendoGridSave").SaveChanges("onKendoGridSaveChanges").Remove("onKendoGridRemove"))
                 .AddBaseOptions()
                 .Editable(editable => editable.Mode(GridEditMode.InCell))
                 .AddToolbarOptions(isCreateVisible)

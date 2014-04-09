@@ -263,15 +263,11 @@ namespace RecipiesMVC.Controllers
                     if (val != null)
                     {
                         double dummyDouble;
-                        DateTime dummyDateTime;
+                      
                         if (double.TryParse(val, System.Globalization.NumberStyles.Any, null, out dummyDouble))
                         {
                             row.CreateCell(i).SetCellValue(dummyDouble);
                         }
-                            //else if (DateTime.TryParse(val, out dummyDateTime))
-                            //{
-                            //    row.CreateCell(i).SetCellValue(dummyDateTime); // fo not work well, should be tested more
-                            //}
                         else
                         {
                             row.CreateCell(i).SetCellValue(val);
@@ -419,37 +415,6 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult DownloadPurchaseOrder(int? purchaseOrderHeaderId)
         {
-            //PurchaseOrderHeader purchaseOrder =
-            //    ContextFactory.Current
-            //        .PurchaseOrderHeaders.FirstOrDefault(p => p.PurchaseOrderId == purchaseOrderHeaderId);
-
-            //ReportProcessor reportProcessor = new ReportProcessor();
-
-            //var instanceReportSource = new Telerik.Reporting.InstanceReportSource();
-            //RecipiesReports.PurchaseOrderDetailsReport salesOrderDetailsReport =
-            //    new RecipiesReports.PurchaseOrderDetailsReport();
-
-            //List<PurchaseOrderDetail> nonEmptyOrders =
-            //    purchaseOrder.PurchaseOrderDetails.Where(pod => pod.OrderQuantity.GetValueOrDefault() != 0).ToList();
-
-            //salesOrderDetailsReport.DataSource = nonEmptyOrders;
-
-            //instanceReportSource.ReportDocument = salesOrderDetailsReport;
-
-            ////specify the output format of the produced image.
-            //System.Collections.Hashtable deviceInfo =
-            //    new System.Collections.Hashtable();
-
-            //RenderingResult result = reportProcessor.RenderReport("IMAGE", instanceReportSource, null);
-
-            //string tempFileName = Path.GetTempFileName();
-            //System.IO.File.WriteAllBytes(tempFileName, result.DocumentBytes);
-
-
-
-            //string jpegFilePath = ImageHelper.ConvertTiffToJpeg(tempFileName).FirstOrDefault();
-
-
             //  http://www.telerik.com/community/forums/reporting/telerik-reporting/out-of-memory-in-azure-websites.aspx
 
 

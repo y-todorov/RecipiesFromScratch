@@ -36,6 +36,12 @@ function onKendoGridSaveChanges(e) {
     popupNotification.show("All pending changes are successfully saved!");
 }
 
+function onKendoGridRemove(e) {
+    debugger;
+    var popupNotification = $("#popupNotification").data("kendoNotification");
+    popupNotification.show("Item removed! Press 'Save Changes' to delete the item from the database!");
+}
+
 function exportGridData(sender) {
 
     var gridDiv = ($(sender)).parents('div[class~="k-grid"]').first(); // да точно така е!!!

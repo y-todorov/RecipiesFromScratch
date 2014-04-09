@@ -138,36 +138,7 @@ namespace RecipiesMVC.Controllers.Purchasing
                 ContextFactory.Current
                     .PurchaseOrderHeaders.FirstOrDefault(p => p.PurchaseOrderId == purchaseOrderHeaderId);
 
-            //ReportProcessor reportProcessor = new ReportProcessor();
-
-            //var instanceReportSource = new Telerik.Reporting.InstanceReportSource();
-            //RecipiesReports.PurchaseOrderDetailsReport salesOrderDetailsReport =
-            //    new RecipiesReports.PurchaseOrderDetailsReport();
-
-            //List<PurchaseOrderDetail> nonEmptyOrders =
-            //    purchaseOrder.PurchaseOrderDetails.Where(pod => pod.OrderQuantity.GetValueOrDefault() != 0).ToList();
-
-            //salesOrderDetailsReport.DataSource = nonEmptyOrders;
-            //instanceReportSource.ReportDocument = salesOrderDetailsReport;
-
-            //RenderingResult result = reportProcessor.RenderReport("Image", instanceReportSource, null);
-
-            ////PdfDocument doc = new PdfDocument();
-            ////doc.Pages.Add(new PdfPage());
-            ////XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[0]);
-
-            //string tempFileName = Path.GetTempFileName();
-            //System.IO.File.WriteAllBytes(tempFileName, result.DocumentBytes);
-
-
-            //string jpegFilePath = ImageHelper.ConvertTiffToJpeg(tempFileName).FirstOrDefault();
-
-            //XImage img = XImage.FromFile(tempFileName);
-
-            //xgr.DrawImage(img, 0, 0);
-            //tempFileName = Path.GetTempFileName();
-            //doc.Save(tempFileName);
-            //doc.Close();
+           
 
             EmailTemplate defaultTemplate =
                 ContextFactory.Current.EmailTemplates.FirstOrDefault(et => et.IsDefault);

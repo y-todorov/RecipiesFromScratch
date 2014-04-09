@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <DontImportPostSharp>True</DontImportPostSharp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -233,6 +234,10 @@
     <Reference Include="PdfSharp.Charting">
       <HintPath>..\Libs\PdfSharp.Charting.dll</HintPath>
     </Reference>
+    <Reference Include="PostSharp">
+      <HintPath>..\packages\PostSharp.3.1.35\lib\net20\PostSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Quartz">
       <HintPath>..\Libs\Quartz.dll</HintPath>
     </Reference>
@@ -286,6 +291,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
     <Compile Include="Controllers\Charts\ChartController.cs" />
+    <Compile Include="Controllers\ControllerHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\Dashboard\HomeController.cs" />
     <Compile Include="Controllers\Production\CategoryController.cs" />
     <Compile Include="Controllers\Production\ProductController.cs" />
@@ -310,7 +318,6 @@
     <Compile Include="Controllers\Shared\ControllerBase.cs" />
     <Compile Include="Controllers\Shared\DownloadController.cs" />
     <Compile Include="Controllers\Shared\ErrorController.cs" />
-    <Compile Include="DataAnnotations\RelationAttribute.cs" />
     <Compile Include="Extensions\ChartBuilderExtension.cs" />
     <Compile Include="Extensions\CustomHandleErrorAttribute.cs" />
     <Compile Include="Extensions\GridBuilderExtension.cs" />
@@ -318,12 +325,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CloudinaryHelper.cs" />
-    <Compile Include="Helpers\ControllerHelper.cs" />
-    <Compile Include="Helpers\EmailHelper.cs" />
-    <Compile Include="Helpers\ImageHelper.cs" />
-    <Compile Include="Helpers\ModelHelper.cs" />
-    <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
     <Compile Include="Models\Chart\GpPerDay.cs" />
     <Compile Include="Models\Chart\LowProducts.cs" />
@@ -357,15 +358,7 @@
     <Compile Include="Models\Sales\SalesOrderHeaderViewModel.cs" />
     <Compile Include="Models\Shared\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quartz\ActionsForScheduling\ActionsForScheduling.cs" />
-    <Compile Include="Quartz\Jobs\CalculateProductsUnitPriceJob.cs" />
-    <Compile Include="Quartz\Jobs\CalculateRecipesProductionValuePerPortionJob.cs" />
-    <Compile Include="Quartz\Jobs\CheckDatabaseForChangesJob.cs" />
-    <Compile Include="Quartz\Jobs\JobBase.cs" />
-    <Compile Include="Quartz\Jobs\RefreshWebsiteJob.cs" />
-    <Compile Include="Shared\LogentriesHelper.cs" />
-    <Compile Include="Shared\StopwatchHelper.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\BlueOpal\editor.png" />
@@ -418,7 +411,7 @@
     <Content Include="Content\textures\stripe6.png" />
     <Content Include="Content\textures\transparency.png" />
     <Content Include="Content\textures\transtexture.png" />
-    <Content Include="favicon.ico" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\JQuery\jquery-2.1.0.min.js" />
     <Content Include="Scripts\JQuery\jquery.validate.js" />
@@ -438,16 +431,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Controllers\HumanResources\" />
-    <Folder Include="fonts\" />
     <Folder Include="Models\HumanResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Content\images\kendoui.ttf" />
     <Content Include="Content\images\kendoui.woff" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\JQuery\jquery-2.1.0.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
@@ -509,6 +499,10 @@
       <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
       <Name>RecipiesModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RecipiesPlatform\RecipiesPlatform.csproj">
+      <Project>{c64d5533-f659-4121-ae8b-7f80b10ae7eb}</Project>
+      <Name>RecipiesPlatform</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecipiesReports\RecipiesReports.csproj">
       <Project>{b726482b-aee9-4c3f-9af6-9b60df2b5f3e}</Project>
       <Name>RecipiesReports</Name>
@@ -542,6 +536,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\PostSharp.3.1.35\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.3.1.35\tools\PostSharp.targets')" />
+  <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.3.1.35\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.3.1.35\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
