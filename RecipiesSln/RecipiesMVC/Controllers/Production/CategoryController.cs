@@ -21,11 +21,7 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
             var result = ReadBase(request, typeof(CategoryViewModel), typeof(ProductCategory), ContextFactory.Current.ProductCategories.ToList());
-            s.Stop();
-            long mils = s.ElapsedMilliseconds;
             return result;
         }
 
@@ -40,11 +36,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Create([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<CategoryViewModel> categories)
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
             var result = CreateBase(request, categories, typeof(CategoryViewModel), typeof(ProductCategory));
-            s.Stop();
-            long mils = s.ElapsedMilliseconds;
             return result;
         }
 
@@ -52,11 +44,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Update([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<CategoryViewModel> categories)
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
             var result = UpdateBase(request, categories, typeof(CategoryViewModel), typeof(ProductCategory));
-            s.Stop();
-            long mils = s.ElapsedMilliseconds;
             return result;
         }
 
@@ -64,11 +52,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Destroy([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<CategoryViewModel> categories)
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
             var result = DestroyBase(request, categories, typeof(CategoryViewModel), typeof(ProductCategory));
-            s.Stop();
-            long mils = s.ElapsedMilliseconds;
             return result;
         }
     }

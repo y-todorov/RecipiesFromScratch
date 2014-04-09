@@ -38,10 +38,6 @@ namespace RecipiesMVC.Extensions
             };
             vendors.Insert(0, fakeTotalVendor);
 
-
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
             builder.Series(series =>
             { 
                 bool isVisible = true;
@@ -71,10 +67,6 @@ namespace RecipiesMVC.Extensions
                 .AxisCrossingValue(32, 32, 0)
                 .Justify(true)
                 );
-
-
-            sw.Stop();
-            long mils = sw.ElapsedMilliseconds;
 
             return builder;
         }

@@ -20,6 +20,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Collections;
 using log4net;
+using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Controllers
 {
@@ -32,22 +33,24 @@ namespace RecipiesMVC.Controllers
      //[DonutOutputCache(Duration = 24 * 3600)] // NEVER EVER CACHE POST REQUESTS !!! That is deletes, updates and inserts
     public class ControllerBase : Controller
     {
+        //[StopWatchPostSharp]
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
         }
 
+        //[StopWatchPostSharp]
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
         }
-
+        //[StopWatchPostSharp]
         protected override void OnResultExecuting(ResultExecutingContext filterContext)
         {
             base.OnResultExecuting(filterContext);
         }
 
-
+        //[StopWatchPostSharp]
         protected override void OnResultExecuted(ResultExecutedContext filterContext)
         {
             base.OnResultExecuted(filterContext);
@@ -67,6 +70,7 @@ namespace RecipiesMVC.Controllers
             return jr;
         }
 
+        [StopWatchPostSharp]
         public ActionResult ReadBase([DataSourceRequest] DataSourceRequest request, Type modelType, Type entityType, IEnumerable<object> entities)
         {
             DbSet dbset = ContextFactory.Current.Set(entityType);
@@ -87,7 +91,7 @@ namespace RecipiesMVC.Controllers
             DataSourceResult dataSourceResult = result.ToDataSourceResult(request);
             return Json(dataSourceResult);
         }
-
+         [StopWatchPostSharp]
         public ActionResult CreateBase([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
             if (models != null && ModelState.IsValid)
@@ -121,7 +125,7 @@ namespace RecipiesMVC.Controllers
 
             return Json(dataSourceResult);
         }
-
+         [StopWatchPostSharp]
         public ActionResult UpdateBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -160,7 +164,8 @@ namespace RecipiesMVC.Controllers
             return Json(dataSourceResult);
 
         }
-        
+
+         [StopWatchPostSharp]
         public ActionResult DestroyBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -183,6 +188,7 @@ namespace RecipiesMVC.Controllers
             return Json(dataSourceResult);
         }
 
+         [StopWatchPostSharp]
         private List<object> GetEntitiesFromModels(IEnumerable<object> models, Type modelType, Type entityType)
         { 
             List<object> entities = new List<object>();
@@ -213,7 +219,7 @@ namespace RecipiesMVC.Controllers
 
             return entities;
         }
-
+         [StopWatchPostSharp]
         private bool AreObjectsWithTheSameId(object entity, object model)
         {
             Type modelType = model.GetType();

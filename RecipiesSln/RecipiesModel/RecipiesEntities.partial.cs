@@ -33,12 +33,8 @@ namespace RecipiesModelNS
         public override int SaveChanges()
         {
             saveChangesHits++;
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
             ChangeTracker.DetectChanges();
             IEnumerable<DbEntityEntry> entries = ChangeTracker.Entries();
-            sw.Stop();
-            long mils = sw.ElapsedMilliseconds;
 
             List<YordanBaseEntity> addedEntities = new List<YordanBaseEntity>();
             List<YordanBaseEntity> modifiedEntities = new List<YordanBaseEntity>();
