@@ -453,7 +453,7 @@ namespace RecipiesMVC.Extensions
                         }
                     })
                     .ServerOperation(false) // This must be false so aggregates can appear.
-                    .Events(events => events.Error("error_handler")));
+                    .Events(events => events.Error("onKendoGridDataSourceError")));
             return builder;
         }
 
@@ -461,21 +461,13 @@ namespace RecipiesMVC.Extensions
             bool showHiddenColumns = false, bool isCreateVisible = true)
             where T : class
         {
-            Stopwatch s = new Stopwatch();
-            s.Start();
-
             builder
-                // THIS WILL BE FOR SIGNAL R
-                //.Events(ev => ev.SaveChanges("saveChanges"))
+                .Events(ev => ev.Save("onKendoGridSave").SaveChanges("onKendoGridSaveChanges"))
                 .AddBaseOptions()
                 .Editable(editable => editable.Mode(GridEditMode.InCell))
                 .AddToolbarOptions(isCreateVisible)
                 .AddColumnOptions(isClient, true, false, false, showHiddenColumns)
                 .AddDataSourceOptions();
-
-            s.Stop();
-            var mils = s.ElapsedMilliseconds;
-
             return builder;
         }
 

@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("input[type=submit]").addClass("k-button");
 });
 
-function error_handler(e) {
+function onKendoGridDataSourceError(e) {
     if (e.errors) {
         var message = "Errors:\n";
         $.each(e.errors, function (key, value) {
@@ -19,6 +19,21 @@ function error_handler(e) {
         });
         alert(message);
     }
+}
+
+function onKendoGridSave(e) {
+    debugger;
+    var popupNotification = $("#popupNotification").data("kendoNotification");
+    for (var key in e.values) {
+        var value = e.values[key];
+        popupNotification.show("The value of '" + key + " 'changed to '" + value + "'!");
+    }
+}
+
+function onKendoGridSaveChanges(e) {
+    debugger;
+    var popupNotification = $("#popupNotification").data("kendoNotification");
+    popupNotification.show("All pending changes are successfully saved!");
 }
 
 function exportGridData(sender) {
