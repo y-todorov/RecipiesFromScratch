@@ -287,7 +287,9 @@
     <Compile Include="Helpers\LogentriesHelper.cs" />
     <Compile Include="Helpers\ModelHelper.cs" />
     <Compile Include="Helpers\ViewHelper.cs" />
+    <Compile Include="PostSharp\ExceptionPolicyPostSharpAttribute.cs" />
     <Compile Include="PostSharp\StopWatchPostSharpAttribute.cs" />
+    <Compile Include="PostSharp\VerboseTracePostSharpAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quartz\ActionsForScheduling\ActionsForScheduling.cs" />
     <Compile Include="Quartz\Jobs\CalculateProductsUnitPriceJob.cs" />

@@ -30,7 +30,7 @@ namespace RecipiesMVC.Controllers
     // when inserting new product it does not appear in product vendors becaouse of this cache
 
 
-     //[DonutOutputCache(Duration = 24 * 3600)] // NEVER EVER CACHE POST REQUESTS !!! That is deletes, updates and inserts
+    //[DonutOutputCache(Duration = 24 * 3600)] // NEVER EVER CACHE POST REQUESTS !!! That is deletes, updates and inserts
     public class ControllerBase : Controller
     {
         //[StopWatchPostSharp]
@@ -70,6 +70,7 @@ namespace RecipiesMVC.Controllers
             return jr;
         }
 
+        [VerboseTracePostSharp]
         [StopWatchPostSharp]
         public ActionResult ReadBase([DataSourceRequest] DataSourceRequest request, Type modelType, Type entityType, IEnumerable<object> entities)
         {
@@ -91,7 +92,9 @@ namespace RecipiesMVC.Controllers
             DataSourceResult dataSourceResult = result.ToDataSourceResult(request);
             return Json(dataSourceResult);
         }
-         [StopWatchPostSharp]
+
+        [VerboseTracePostSharp]
+        [StopWatchPostSharp]
         public ActionResult CreateBase([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
             if (models != null && ModelState.IsValid)
@@ -125,7 +128,9 @@ namespace RecipiesMVC.Controllers
 
             return Json(dataSourceResult);
         }
-         [StopWatchPostSharp]
+
+        [VerboseTracePostSharp]
+        [StopWatchPostSharp]
         public ActionResult UpdateBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -157,7 +162,7 @@ namespace RecipiesMVC.Controllers
                 foreach (dynamic entity in entitiesToUpdate)
                 {
                     dynamic model = entitiesHash[entity];
-                    model.ConvertFromEntity(entity); 
+                    model.ConvertFromEntity(entity);
                 }
             }
             DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
@@ -165,7 +170,8 @@ namespace RecipiesMVC.Controllers
 
         }
 
-         [StopWatchPostSharp]
+        [VerboseTracePostSharp]
+        [StopWatchPostSharp]
         public ActionResult DestroyBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -188,9 +194,9 @@ namespace RecipiesMVC.Controllers
             return Json(dataSourceResult);
         }
 
-         [StopWatchPostSharp]
+        [StopWatchPostSharp]
         private List<object> GetEntitiesFromModels(IEnumerable<object> models, Type modelType, Type entityType)
-        { 
+        {
             List<object> entities = new List<object>();
             if (models.Any())
             {
@@ -212,14 +218,14 @@ namespace RecipiesMVC.Controllers
                 {
                     object key = keyProperty.GetValue(model);
 
-                    object entity = dbset.Find(new[] {key});
+                    object entity = dbset.Find(new[] { key });
                     entities.Add(entity);
                 }
             }
 
             return entities;
         }
-         [StopWatchPostSharp]
+        [StopWatchPostSharp]
         private bool AreObjectsWithTheSameId(object entity, object model)
         {
             Type modelType = model.GetType();
