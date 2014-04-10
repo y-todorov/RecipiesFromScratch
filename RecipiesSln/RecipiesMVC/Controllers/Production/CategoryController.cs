@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -21,8 +22,12 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = ReadBase(request, typeof(CategoryViewModel), typeof(ProductCategory), ContextFactory.Current.ProductCategories.ToList());
-            return result;
+            //var result = ReadBase(request, typeof(CategoryViewModel), typeof(ProductCategory), ContextFactory.Current.ProductCategories.ToList());
+            //return result;
+
+            var res = ContextFactory.Current.ProductCategories.Project().To<CategoryViewModel>();
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
         public ActionResult ReadProducts(int categoryId, [DataSourceRequest] DataSourceRequest request)

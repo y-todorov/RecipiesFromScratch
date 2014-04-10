@@ -56,6 +56,12 @@
     <Reference Include="Autofac">
       <HintPath>..\Libs\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Blitline.Net">
       <HintPath>..\Libs\Blitline.Net.dll</HintPath>
     </Reference>
@@ -284,6 +290,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseTableChangeWatcher.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -361,6 +368,10 @@
     <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
+      <Link>AutoMapper.Net4.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\BlueOpal\editor.png" />
     <Content Include="Content\BlueOpal\imagebrowser.png" />
     <Content Include="Content\BlueOpal\indeterminate.gif" />

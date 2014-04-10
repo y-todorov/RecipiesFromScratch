@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System.Data.Entity;
+using RecipiesPlatform.PostSharp;
 using RecipiesWebFormApp;
 using System.Web;
 using System.Web.Caching;
@@ -23,12 +25,16 @@ namespace RecipiesMVC.Controllers
             return View();
         }
 
+       [StopWatchPostSharp]
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
             
-            var result = ReadBase(request, typeof (ProductViewModel), typeof (Product),
-                ContextFactory.Current.Products.ToList());
-            return result;
+            //var result = ReadBase(request, typeof (ProductViewModel), typeof (Product),
+            //    ContextFactory.Current.Products.ToList());
+            //return result;
+            var res = ContextFactory.Current.Products.Project().To<ProductViewModel>();
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

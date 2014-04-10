@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Kendo.Mvc;
 using RecipiesWebFormApp;
+using RecipiesMVC.App_Start;
 
 namespace RecipiesMVC
 {
@@ -24,6 +25,8 @@ namespace RecipiesMVC
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutoMapperConfig.Execute();
         }
     }
 }
