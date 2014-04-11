@@ -25,8 +25,7 @@ namespace RecipiesMVC.Controllers
         {
             return View();
         }
-
-       [StopWatchPostSharp]
+        
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
             

@@ -33,3 +33,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// apply the aspect on every type that is the namespace RecipiesMVC.*
+//[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
+//                       AttributeTargetTypes = "RecipiesMVC.*")] // THIS IS FUCKING SLOWLY, at least 100 times slower !!!

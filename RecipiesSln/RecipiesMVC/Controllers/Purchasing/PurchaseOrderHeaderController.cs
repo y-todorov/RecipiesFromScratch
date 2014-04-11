@@ -1,4 +1,5 @@
-﻿using Helpers;
+﻿using AutoMapper.QueryableExtensions;
+using Helpers;
 using RecipiesMVC.Models.Purchasing;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
@@ -28,13 +29,17 @@ namespace RecipiesMVC.Controllers.Purchasing
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            List<PurchaseOrderHeaderViewModel> purchaseOrderHeaderViewModels =
-                ContextFactory.Current.PurchaseOrderHeaders
-                    .ToList().Select
-                    (pod =>
-                        PurchaseOrderHeaderViewModel.ConvertFromPurchaseOrderHeaderEntity(pod,
-                            new PurchaseOrderHeaderViewModel())).ToList();
-            return Json(purchaseOrderHeaderViewModels.ToDataSourceResult(request));
+            //List<PurchaseOrderHeaderViewModel> purchaseOrderHeaderViewModels =
+            //    ContextFactory.Current.PurchaseOrderHeaders
+            //        .ToList().Select
+            //        (pod =>
+            //            PurchaseOrderHeaderViewModel.ConvertFromPurchaseOrderHeaderEntity(pod,
+            //                new PurchaseOrderHeaderViewModel())).ToList();
+            //return Json(purchaseOrderHeaderViewModels.ToDataSourceResult(request));
+            var res = ContextFactory.Current.PurchaseOrderHeaders.Project().To<PurchaseOrderHeaderViewModel>();
+
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

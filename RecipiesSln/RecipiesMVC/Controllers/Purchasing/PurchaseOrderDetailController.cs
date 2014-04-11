@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using RecipiesMVC.Models;
 using RecipiesMVC.Models.Purchasing;
 using Kendo.Mvc.Extensions;
@@ -10,9 +11,11 @@ using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System.Data.Entity;
 using DevTrends.MvcDonutCaching; // .Include !!!!!!! THIS IS SO IMPROTANT
+using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Controllers
 {
+     [StopWatchPostSharp]
     public class PurchaseOrderDetailController : ControllerBase
     {
         public ActionResult Index()
@@ -22,29 +25,35 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read(int? purchaseOrderHeaderId, [DataSourceRequest] DataSourceRequest request)
         {
-            List<PurchaseOrderDetail> purchaseOrderDetailViewModels =
-                ContextFactory.Current.PurchaseOrderDetails.Where(
-                     pod => purchaseOrderHeaderId.HasValue ? pod.PurchaseOrderId == purchaseOrderHeaderId.Value : true &&
-                         ((pod.ReceivedQuantity.HasValue && pod.ReceivedQuantity != 0) || (pod.OrderQuantity.HasValue &&  pod.OrderQuantity != 0) || pod.LineTotal != 0 || pod.StockedQuantity != 0))
-                    .Include(pod => pod.PurchaseOrderHeader.Vendor)
-                    .Include(pod => pod.Product.ProductCategory)
-                    .ToList();
-            // remove empty PurchaseOrderDetails
-            purchaseOrderDetailViewModels =
-                purchaseOrderDetailViewModels.Where(
-                    pod =>
-                        Math.Round(pod.ReceivedQuantity.GetValueOrDefault(), 4) != 0 ||
-                        Math.Round(pod.OrderQuantity.GetValueOrDefault(), 4) != 0 ||
-                         Math.Round(pod.StockedQuantity, 4) != 0 ||
-                         Math.Round(pod.ReturnedQuantity.GetValueOrDefault(), 4) != 0
-                        ).ToList();
+            //List<PurchaseOrderDetail> purchaseOrderDetailViewModels =
+            //    ContextFactory.Current.PurchaseOrderDetails.Where(
+            //         pod => purchaseOrderHeaderId.HasValue ? pod.PurchaseOrderId == purchaseOrderHeaderId.Value : true &&
+            //             ((pod.ReceivedQuantity.HasValue && pod.ReceivedQuantity != 0) || (pod.OrderQuantity.HasValue &&  pod.OrderQuantity != 0) || pod.LineTotal != 0 || pod.StockedQuantity != 0))
+            //        .Include(pod => pod.PurchaseOrderHeader.Vendor)
+            //        .Include(pod => pod.Product.ProductCategory)
+            //        .ToList();
+            //// remove empty PurchaseOrderDetails
+            //purchaseOrderDetailViewModels =
+            //    purchaseOrderDetailViewModels.Where(
+            //        pod =>
+            //            Math.Round(pod.ReceivedQuantity.GetValueOrDefault(), 4) != 0 ||
+            //            Math.Round(pod.OrderQuantity.GetValueOrDefault(), 4) != 0 ||
+            //             Math.Round(pod.StockedQuantity, 4) != 0 ||
+            //             Math.Round(pod.ReturnedQuantity.GetValueOrDefault(), 4) != 0
+            //            ).ToList();
 
 
 
-            var result = ReadBase(request, typeof(PurchaseOrderDetailViewModel), typeof(PurchaseOrderDetail),
-                purchaseOrderDetailViewModels);
+            //var result = ReadBase(request, typeof(PurchaseOrderDetailViewModel), typeof(PurchaseOrderDetail),
+            //    purchaseOrderDetailViewModels);
 
-            return result;
+            //return result;
+            var res = ContextFactory.Current.PurchaseOrderDetails.Where(pod => pod.ReceivedQuantity != null && pod.OrderQuantity != null)
+
+                .Project().To<PurchaseOrderDetailViewModel>();
+
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

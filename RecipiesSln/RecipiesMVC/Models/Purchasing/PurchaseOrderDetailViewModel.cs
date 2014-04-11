@@ -23,11 +23,11 @@ namespace RecipiesMVC.Models
         [HiddenInput(DisplayValue = false)]
         public int? PurchaseOrderHeaderId { get; set; }
 
-        [Relation(EntityType = typeof (Product), DataFieldValue = "ProductId", DataFieldText = "Name")]
+        [Relation(EntityType = typeof(Product), DataFieldValue = "ProductId", DataFieldText = "Name")]
         [Display(Name = "Product")]
         public int? ProductId { get; set; }
 
-        [Relation(EntityType = typeof (UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
+        [Relation(EntityType = typeof(UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
         [Display(Name = "Unit Measure")]
         public int? UnitMeasureId { get; set; }
 
@@ -37,7 +37,24 @@ namespace RecipiesMVC.Models
         public decimal? UnitPrice { get; set; }
 
         [ReadOnly(true)]
-        public decimal LineTotal { get; set; }
+        public decimal LineTotal
+        {
+            get
+            {
+                if (!ReceivedQuantity.HasValue || !UnitPrice.HasValue)
+                {
+                    return 0m;
+                }
+                else
+                {
+                    decimal result = (decimal)ReceivedQuantity.GetValueOrDefault() * UnitPrice.GetValueOrDefault();
+                    return result;
+                }
+            }
+            set { }
+        }
+
+
 
         [Display(Name = "Received QTY")]
         public double? ReceivedQuantity { get; set; }
@@ -47,7 +64,14 @@ namespace RecipiesMVC.Models
 
         [ReadOnly(true)]
         [Display(Name = "Stocked QTY")]
-        public double StockedQuantity { get; set; }
+        public double StockedQuantity {
+            get
+            {
+                double result = ReceivedQuantity.GetValueOrDefault() - ReturnedQuantity.GetValueOrDefault();
+                return result;
+            }
+            set { }
+        }
 
         //[ReadOnly(true)]
         //[Display(Name = "PO Total")]
@@ -74,7 +98,7 @@ namespace RecipiesMVC.Models
         [ReadOnly(true)]
         [HiddenInput(DisplayValue = false)]
         public DateTime? PurchaseOrderHeaderOrderDate { get; set; }
-        
+
         [HiddenInput(DisplayValue = false)]
         [ReadOnly(true)]
         public string Status { get; set; }
@@ -93,7 +117,7 @@ namespace RecipiesMVC.Models
                     "PurchaseOrderDetailViewModel is null in method ConvertFromPurchaseOrderDetailEntity!");
             }
 
-            model.LineTotal = (decimal) entity.LineTotal;
+            model.LineTotal = (decimal)entity.LineTotal;
             model.ModifiedByUser = entity.ModifiedByUser;
             model.ModifiedDate = entity.ModifiedDate;
             model.OrderQuantity = entity.OrderQuantity;

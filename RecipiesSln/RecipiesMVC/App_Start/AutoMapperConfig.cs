@@ -5,6 +5,7 @@ using System.Web;
 using AutoMapper;
 using RecipiesModelNS;
 using RecipiesMVC.Models;
+using RecipiesMVC.Models.Purchasing;
 
 namespace RecipiesMVC.App_Start
 {
@@ -13,18 +14,25 @@ namespace RecipiesMVC.App_Start
         public static void Execute()
         {
             Mapper.CreateMap<ProductCategory, CategoryViewModel>();
-            //Mapper.CreateMap<double?, decimal?>().ConvertUsing<NullableDoubleToNullableDecimalTypeConverter>();
-            //Mapper.CreateMap<double, decimal?>().ConvertUsing<DoubleToNullableDecimalTypeConverter>();
+            Mapper.CreateMap<double?, decimal?>().ConvertUsing<NullableDoubleToNullableDecimalTypeConverter>();
+            Mapper.CreateMap<double, decimal?>().ConvertUsing<DoubleToNullableDecimalTypeConverter>();
             Mapper.CreateMap<Product, ProductViewModel>().
                 ForMember(m => m.StockValue, opt => opt.Ignore());
-            //    opt.MapFrom(p => p.StockValue));// .MapFrom(p => p.StockValue));
+            Mapper.CreateMap<PurchaseOrderHeader, PurchaseOrderHeaderViewModel>().
+                   ForMember(m => m.PurchaseOrderHeaderId, opt => opt.MapFrom(poh => poh.PurchaseOrderId));
+
+            Mapper.CreateMap<PurchaseOrderDetail, PurchaseOrderDetailViewModel>().
+                ForMember(m => m.Category, opt => opt.MapFrom(o => o.Product.ProductCategory.Name)).
+                  ForMember(m => m.LineTotal, opt => opt.Ignore()).
+              ForMember(m => m.StockedQuantity, opt => opt.Ignore()); ;
+
         }
 
         private class NullableDoubleToNullableDecimalTypeConverter : TypeConverter<double?, decimal?>
         {
             protected override decimal? ConvertCore(double? source)
             {
-                decimal? result = (decimal?) source;
+                decimal? result = (decimal?)source;
                 return result;
             }
         }
