@@ -45,7 +45,22 @@ namespace RecipiesMVC.Models
 
         [ReadOnly(true)]
         [Range(0, int.MaxValue)]
-        public decimal? StockValue { get; set; }
+        public decimal? StockValue
+        {
+            get
+            {
+                if (!UnitsInStock.HasValue || !UnitPrice.HasValue)
+                {
+                    return null;
+                }
+                else
+                {
+                    decimal? result = (decimal) UnitsInStock.GetValueOrDefault()*UnitPrice.GetValueOrDefault();
+                    return result;
+                }
+            }
+            set { }
+        }
 
         [Range(0, int.MaxValue)]
         [ReadOnly(true)]

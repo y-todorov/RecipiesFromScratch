@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
@@ -32,7 +33,12 @@ namespace RecipiesMVC.Controllers
             //var result = ReadBase(request, typeof (ProductViewModel), typeof (Product),
             //    ContextFactory.Current.Products.ToList());
             //return result;
-            var res = ContextFactory.Current.Products.Project().To<ProductViewModel>();
+           // THIS IS VERY SLOW !!!!!!!!!
+            //var res = ContextFactory.Current.Products.AsEnumerable().Select(p => Mapper.Map<Product, ProductViewModel>(p)).ToList(); // .Project().To<ProductViewModel>();
+
+           // this is faster
+           var res = ContextFactory.Current.Products.Project().To<ProductViewModel>();
+
             DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
             return Json(dataSourceResult);
         }
