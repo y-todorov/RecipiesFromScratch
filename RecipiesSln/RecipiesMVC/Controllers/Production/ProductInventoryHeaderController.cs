@@ -1,4 +1,5 @@
-﻿using RecipiesMVC.Models;
+﻿using AutoMapper.QueryableExtensions;
+using RecipiesMVC.Models;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System;
@@ -20,9 +21,9 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = ReadBase(request, typeof (ProductInventoryHeaderViewModel), typeof (ProductInventoryHeader),
-                ContextFactory.Current.ProductInventoryHeaders.ToList());
-            return result;
+            var res = ContextFactory.Current.ProductInventoryHeaders.Project().To<ProductInventoryHeaderViewModel>();
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

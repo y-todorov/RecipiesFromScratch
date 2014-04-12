@@ -33,7 +33,6 @@ namespace RecipiesMVC.Controllers
 
            // this is faster
            var res = ContextFactory.Current.Products.Project().To<ProductViewModel>();
-
             DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
             return Json(dataSourceResult);
         }

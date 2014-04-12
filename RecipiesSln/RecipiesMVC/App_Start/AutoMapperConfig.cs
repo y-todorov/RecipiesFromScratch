@@ -19,6 +19,22 @@ namespace RecipiesMVC.App_Start
             
             Mapper.CreateMap<ProductCategory, CategoryViewModel>();
             Mapper.CreateMap<ProductIngredient, ProductIngredientViewModel>();
+            Mapper.CreateMap<ProductInventoryHeader, ProductInventoryHeaderViewModel>();
+            Mapper.CreateMap<ProductInventory, ProductInventoryViewModel>().
+                ForMember(m => m.UnitMeasure, opt => opt.MapFrom(poh => poh.Product.UnitMeasure.Name)).
+                ForMember(m => m.Category, opt => opt.MapFrom(poh => poh.Product.ProductCategory.Name)).
+                ForMember(m => m.InventoryHeaderForDate, opt => opt.MapFrom(poh => poh.ProductInventoryHeader.ForDate));
+                  
+
+
+
+            Mapper.CreateMap<Inventory, InventoryViewModel>().
+                ForMember(m => m.ValueByDocuments, opt => opt.Ignore()).
+                ForMember(m => m.StocktakeQuantity, opt => opt.Ignore()).
+                ForMember(m => m.DeficiencyQuantity, opt => opt.Ignore()).
+                ForMember(m => m.DeficiencyValue, opt => opt.Ignore()).
+                ForMember(m => m.SurplusQuantity, opt => opt.Ignore()).
+                ForMember(m => m.SurplusValue, opt => opt.Ignore());
 
 
             Mapper.CreateMap<Product, ProductViewModel>().

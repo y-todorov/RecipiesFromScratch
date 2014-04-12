@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
 using RecipiesMVC.Models;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
@@ -29,13 +30,17 @@ namespace RecipiesMVC.Controllers
                 ProductInventoryHeader.InsertMissingProductInventories(pih2);
             }
 
-            var allPis = ContextFactory.Current.Inventories.OfType<ProductInventory>()
-                .Include(pi => pi.Product.ProductCategory)
-                .Include(pi => pi.Product.UnitMeasure)
-                .Where(pih =>pih.ProductInventoryHeaderId == productInventoryHeaderId.Value).ToList();
+            //var allPis = ContextFactory.Current.Inventories.OfType<ProductInventory>()
+            //    .Include(pi => pi.Product.ProductCategory)
+            //    .Include(pi => pi.Product.UnitMeasure)
+            //    .Where(pih =>pih.ProductInventoryHeaderId == productInventoryHeaderId.Value).ToList();
 
-            var result = ReadBase(request, typeof (ProductInventoryViewModel), typeof (ProductInventory), allPis);
-            return result;
+            //var result = ReadBase(request, typeof (ProductInventoryViewModel), typeof (ProductInventory), allPis);
+            //return result;
+            var res = ContextFactory.Current.Inventories.OfType<ProductInventory>().Where(pih =>pih.ProductInventoryHeaderId == productInventoryHeaderId.Value).
+                Project().To<ProductInventoryViewModel>();
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
 

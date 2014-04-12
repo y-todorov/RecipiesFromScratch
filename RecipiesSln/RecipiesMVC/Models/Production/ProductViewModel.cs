@@ -59,7 +59,6 @@ namespace RecipiesMVC.Models
                     return result;
                 }
             }
-            set { }
         }
 
         [Range(0, int.MaxValue)]
@@ -85,7 +84,7 @@ namespace RecipiesMVC.Models
             UnitsInStock = Math.Round(entity.UnitsInStock.GetValueOrDefault(), 3);
             UnitsOnOrder = Math.Round(entity.UnitsOnOrder.GetValueOrDefault(), 3);
             ReorderLevel = Math.Round(entity.ReorderLevel.GetValueOrDefault(), 3);
-            StockValue = (decimal) entity.StockValue;
+            //StockValue = (decimal) entity.StockValue;
             ModifiedDate = entity.ModifiedDate;
             ModifiedByUser = entity.ModifiedByUser;
 

@@ -25,27 +25,94 @@ namespace RecipiesMVC.Models
         public double? QuantityByDocuments { get; set; }
 
         [ReadOnly(true)]
-        public decimal? ValueByDocuments { get; set; }
+        public decimal? ValueByDocuments
+        {
+            get
+            {
+                if (!AverageUnitPrice.HasValue || !QuantityByDocuments.HasValue)
+                {
+                    return null;
+                }
+                decimal? result = AverageUnitPrice.GetValueOrDefault() * (decimal)QuantityByDocuments.GetValueOrDefault();
+                return result;
+            }
+        }
 
         [Display(Name = "Stocktake Qty")]
         public double? StocktakeQuantity { get; set; }
 
         [ReadOnly(true)]
-        public decimal? StocktakeValue { get; set; }
+        public decimal? StocktakeValue
+        {
+            get
+            {
+                if (!AverageUnitPrice.HasValue || !StocktakeQuantity.HasValue)
+                {
+                    return null;
+                }
+                decimal? result = AverageUnitPrice.GetValueOrDefault() * (decimal)StocktakeQuantity.GetValueOrDefault();
+                return result;
+            }
+        }
 
         [Display(Name = "Deficiency Qty")]
         [ReadOnly(true)]
-        public double? DeficiencyQuantity { get; set; }
+        public double? DeficiencyQuantity
+        {
+            get
+            {
+                if (QuantityByDocuments > StocktakeQuantity)
+                {
+                    double? result = QuantityByDocuments - StocktakeQuantity;
+                    return result;
+                }
+                return null;
+            }
+        }
 
         [ReadOnly(true)]
-        public decimal? DeficiencyValue { get; set; }
+        public decimal? DeficiencyValue
+        {
+            get
+            {
+                if (QuantityByDocuments > StocktakeQuantity)
+                {
+                    decimal? result = (decimal)DeficiencyQuantity.GetValueOrDefault() * AverageUnitPrice;
+                    return result;
+                }
+                return null;
+            }
+
+        }
 
         [Display(Name = "Surplus Qty")]
         [ReadOnly(true)]
-        public double? SurplusQuantity { get; set; }
+        public double? SurplusQuantity
+        {
+            get
+            {
+                if (QuantityByDocuments < StocktakeQuantity)
+                {
+                    double? result = StocktakeQuantity - QuantityByDocuments;
+                    return result;
+                }
+                return null;
+            }
+        }
 
         [ReadOnly(true)]
-        public decimal? SurplusValue { get; set; }
+        public decimal? SurplusValue
+        {
+            get
+            {
+                if (QuantityByDocuments < StocktakeQuantity)
+                {
+                    decimal? result = (decimal)SurplusQuantity.GetValueOrDefault() * AverageUnitPrice;
+                    return result;
+                }
+                return null;
+            }
+        }
 
         public DateTime? ModifiedDate { get; set; }
 
@@ -54,18 +121,18 @@ namespace RecipiesMVC.Models
         public InventoryViewModel ConvertFromEntity(Inventory entity)
         {
             AverageUnitPrice = entity.AverageUnitPrice;
-            DeficiencyQuantity = entity.DeficiencyQuantity;
-            DeficiencyValue = (decimal?) entity.DeficiencyValue;
+            //DeficiencyQuantity = entity.DeficiencyQuantity;
+            //DeficiencyValue = (decimal?)entity.DeficiencyValue;
             //ForDate = newOrExistingInventoryEntity.ForDate;
             InventoryId = entity.InventoryId;
             ModifiedByUser = entity.ModifiedByUser;
             ModifiedDate = entity.ModifiedDate;
             QuantityByDocuments = entity.QuantityByDocuments;
             StocktakeQuantity = entity.StocktakeQuantity;
-            StocktakeValue = (decimal?) entity.StocktakeValue;
-            SurplusQuantity = entity.SurplusQuantity;
-            SurplusValue = (decimal?) entity.SurplusValue;
-            ValueByDocuments = (decimal?) entity.ValueByDocuments;
+            //StocktakeValue = (decimal?)entity.StocktakeValue;
+            //SurplusQuantity = entity.SurplusQuantity;
+            //SurplusValue = (decimal?)entity.SurplusValue;
+            //ValueByDocuments = (decimal?)entity.ValueByDocuments;
 
             return this;
         }
@@ -74,17 +141,17 @@ namespace RecipiesMVC.Models
         {
             entity.AverageUnitPrice = AverageUnitPrice;
             entity.DeficiencyQuantity = DeficiencyQuantity;
-            entity.DeficiencyValue = (double?) DeficiencyValue;
+            entity.DeficiencyValue = (double?)DeficiencyValue;
             //newOrExistingInventoryEntity.ForDate = ForDate;
             entity.InventoryId = InventoryId;
             entity.ModifiedByUser = ModifiedByUser;
             entity.ModifiedDate = ModifiedDate;
             entity.QuantityByDocuments = QuantityByDocuments;
             entity.StocktakeQuantity = StocktakeQuantity;
-            entity.StocktakeValue = (double?) StocktakeValue;
+            entity.StocktakeValue = (double?)StocktakeValue;
             entity.SurplusQuantity = SurplusQuantity;
-            entity.SurplusValue = (double?) SurplusValue;
-            entity.ValueByDocuments = (double?) ValueByDocuments;
+            entity.SurplusValue = (double?)SurplusValue;
+            entity.ValueByDocuments = (double?)ValueByDocuments;
 
             return entity;
         }
