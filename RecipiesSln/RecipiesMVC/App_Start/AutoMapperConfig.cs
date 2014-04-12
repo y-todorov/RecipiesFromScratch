@@ -13,9 +13,14 @@ namespace RecipiesMVC.App_Start
     {
         public static void Execute()
         {
-            Mapper.CreateMap<ProductCategory, CategoryViewModel>();
+         
             Mapper.CreateMap<double?, decimal?>().ConvertUsing<NullableDoubleToNullableDecimalTypeConverter>();
             Mapper.CreateMap<double, decimal?>().ConvertUsing<DoubleToNullableDecimalTypeConverter>();
+            
+            Mapper.CreateMap<ProductCategory, CategoryViewModel>();
+            Mapper.CreateMap<ProductIngredient, ProductIngredientViewModel>();
+
+
             Mapper.CreateMap<Product, ProductViewModel>().
                 ForMember(m => m.StockValue, opt => opt.Ignore());
             Mapper.CreateMap<PurchaseOrderHeader, PurchaseOrderHeaderViewModel>().

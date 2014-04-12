@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -13,13 +14,11 @@ namespace RecipiesMVC.Controllers
     {
         public ActionResult Read(int? recipeId, [DataSourceRequest] DataSourceRequest request)
         {
-            List<ProductIngredientViewModel> productIngredients = ContextFactory.Current.ProductIngredients
+            var res = ContextFactory.Current.ProductIngredients
                 .Where(
-                    pod => recipeId.HasValue ? pod.RecipeId == recipeId.Value : true)
-                .ToList().Select
-                (c => ProductIngredientViewModel.ConvertFromProductIngredientEntity(c, new ProductIngredientViewModel()))
-                .ToList();
-            return Json(productIngredients.ToDataSourceResult(request));
+                    pod => recipeId.HasValue ? pod.RecipeId == recipeId.Value : true).Project().To<ProductIngredientViewModel>();
+            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
+            return Json(dataSourceResult);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

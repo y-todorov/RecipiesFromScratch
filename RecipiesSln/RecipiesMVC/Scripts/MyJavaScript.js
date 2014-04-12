@@ -26,7 +26,7 @@ function onKendoGridSave(e) {
     var popupNotification = $("#popupNotification").data("kendoNotification");
     for (var key in e.values) {
         var value = e.values[key];
-        popupNotification.show("The value of '" + key + " 'changed to '" + value + "'!");
+        popupNotification.show("The value of '" + key + "' changed to '" + value + "'!");
     }
 }
 

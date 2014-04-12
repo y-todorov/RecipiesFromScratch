@@ -28,10 +28,6 @@ namespace RecipiesMVC.Controllers
         
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            
-            //var result = ReadBase(request, typeof (ProductViewModel), typeof (Product),
-            //    ContextFactory.Current.Products.ToList());
-            //return result;
            // THIS IS VERY SLOW !!!!!!!!!
             //var res = ContextFactory.Current.Products.AsEnumerable().Select(p => Mapper.Map<Product, ProductViewModel>(p)).ToList(); // .Project().To<ProductViewModel>();
 

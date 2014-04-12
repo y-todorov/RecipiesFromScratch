@@ -37,3 +37,6 @@ using System.Runtime.InteropServices;
 // apply the aspect on every type that is the namespace RecipiesMVC.*
 //[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
 //                       AttributeTargetTypes = "RecipiesMVC.*")] // THIS IS FUCKING SLOWLY, at least 100 times slower !!!
+
+[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
+                       AttributeTargetTypes = "RecipiesMVC.Controllers.*")]

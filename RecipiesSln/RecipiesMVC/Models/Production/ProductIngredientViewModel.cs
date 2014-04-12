@@ -31,7 +31,20 @@ namespace RecipiesMVC.Models
         public decimal? Cost { get; set; }
         
         [ReadOnly(true)]
-        public decimal? TotalValue { get; set; }
+        public decimal? TotalValue {
+            get
+            {
+                if (!QuantityPerPortion.HasValue || !Cost.HasValue)
+                {
+                    return null;
+                }
+                else
+                {
+                    decimal? result = (decimal)QuantityPerPortion.GetValueOrDefault() * Cost.GetValueOrDefault();
+                    return result;
+                }
+            }
+        }
 
         public DateTime? ModifiedDate { get; set; }
 
@@ -53,7 +66,7 @@ namespace RecipiesMVC.Models
                     model.Cost = entity.Product.UnitPrice;
                 }
             }
-            model.TotalValue = (decimal?) entity.TotalValue;
+            //model.TotalValue = (decimal?) entity.TotalValue;
 
             model.ModifiedDate = entity.ModifiedDate;
             model.ModifiedByUser = entity.ModifiedByUser;

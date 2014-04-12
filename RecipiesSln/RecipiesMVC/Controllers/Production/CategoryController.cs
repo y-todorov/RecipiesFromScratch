@@ -22,9 +22,6 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            //var result = ReadBase(request, typeof(CategoryViewModel), typeof(ProductCategory), ContextFactory.Current.ProductCategories.ToList());
-            //return result;
-
             var res = ContextFactory.Current.ProductCategories.Project().To<CategoryViewModel>();
             DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
             return Json(dataSourceResult);

@@ -32,7 +32,7 @@ namespace RecipiesMVC.Controllers
 
     //[DonutOutputCache(Duration = 24 * 3600)] // NEVER EVER CACHE POST REQUESTS !!! That is deletes, updates and inserts
     
-    public class ControllerBase : Controller
+    public abstract class ControllerBase : Controller
     {
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding,
             JsonRequestBehavior behavior)
