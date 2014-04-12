@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesModel", "RecipiesMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesPlatform", "RecipiesPlatform\RecipiesPlatform.csproj", "{C64D5533-F659-4121-AE8B-7F80B10AE7EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesWebJob", "RecipiesWebJob\RecipiesWebJob.csproj", "{77AFA779-6E53-4DAA-8AD5-535F07824668}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C64D5533-F659-4121-AE8B-7F80B10AE7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C64D5533-F659-4121-AE8B-7F80B10AE7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C64D5533-F659-4121-AE8B-7F80B10AE7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
