@@ -26,13 +26,13 @@ namespace RecipiesMVC.Controllers
             return View();
         }
         
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
            // THIS IS VERY SLOW !!!!!!!!!
             //var res = ContextFactory.Current.Products.AsEnumerable().Select(p => Mapper.Map<Product, ProductViewModel>(p)).ToList(); // .Project().To<ProductViewModel>();
 
            // this is faster
-           var res = ContextFactory.Current.Products.Project().To<ProductViewModel>();
+            var res = context.Products.Project().To<ProductViewModel>();
             DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
             return Json(dataSourceResult);
         }

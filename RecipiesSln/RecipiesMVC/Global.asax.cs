@@ -6,8 +6,10 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Kendo.Mvc;
+using Ninject;
 using RecipiesWebFormApp;
 using RecipiesMVC.App_Start;
+using RecipiesMVC.Infrastructure;
 
 namespace RecipiesMVC
 {
@@ -27,6 +29,8 @@ namespace RecipiesMVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AutoMapperConfig.Execute();
+
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(new StandardKernel()));
         }
     }
 }
