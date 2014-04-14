@@ -150,10 +150,14 @@ namespace RecipiesMVC.Controllers.Purchasing
             if (defaultTemplate != null)
             {
                 byte[] documentBytes = (new DownloadController()).DownloadPurchaseOrderDetailsReportAsPdf(purchaseOrderHeaderId); ;
-                RestResponse restResponse = EmailHelper.SendComplexMessage(defaultTemplate.From,
-                    purchaseOrder.Vendor.Email, defaultTemplate.Cc,
+                ContentResult contentResult = EmailHelper.SendComplexMessage(defaultTemplate.From, "BlueBar mailing system", // This must be configurable
+                    purchaseOrder.Vendor.Email, purchaseOrder.Vendor.Name, defaultTemplate.Cc,
                     defaultTemplate.Bcc, defaultTemplate.Subject, defaultTemplate.TextBody, defaultTemplate.HtmlBody,
                     documentBytes, defaultTemplate.AttachmentName + "." + "pdf"); // was result.Extension. It will be replaced by pdf
+                if (contentResult != null)
+                {
+                    return contentResult;
+                }
             }
             else
             {
