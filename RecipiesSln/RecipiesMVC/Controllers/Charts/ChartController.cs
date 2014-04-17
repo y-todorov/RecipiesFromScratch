@@ -55,15 +55,15 @@ namespace RecipiesMVC.Controllers
             //return res;
         }
 
-        public void VendorPurchasesByWeek( List<string> weeksResult,List<Dictionary<int, double>> listResult)
+        public void VendorPurchasesByWeek(List<string> weeksResult, List<Dictionary<int, double>> listResult)
         {
             try
             {
                 List<PurchaseOrderDetail> pods =
                     ContextFactory.Current
                         .PurchaseOrderDetails.Include(p => p.PurchaseOrderHeader).ToList().Where(
-                            pod => pod.PurchaseOrderHeader.StatusId == (int) PurchaseOrderStatusEnum.Completed).ToList();
-            
+                            pod => pod.PurchaseOrderHeader.StatusId == (int)PurchaseOrderStatusEnum.Completed).ToList();
+
                 var grouping =
                     pods.OrderBy(pod => pod.PurchaseOrderHeader.ShipDate)
                         .GroupBy(
@@ -86,12 +86,12 @@ namespace RecipiesMVC.Controllers
 
                 foreach (var item in grouping)
                 {
-                    weeks.Add(string.Format("{0}-{1}", item.Key/100, item.Key % 100));
+                    weeks.Add(string.Format("{0}-{1}", item.Key / 100, item.Key % 100));
 
 
                     Dictionary<int, double> entry = new Dictionary<int, double>();
-                  
-                   
+
+
 
                     entry.Add(fakeTotalVendor.VendorId,
                         Math.Round(item.Sum(pod => pod.LineTotal), 3));
@@ -109,7 +109,7 @@ namespace RecipiesMVC.Controllers
                 listResult.AddRange(list);
                 return;
             }
-               
+
             catch (Exception ex)
             {
                 Debugger.Break();
@@ -147,7 +147,7 @@ namespace RecipiesMVC.Controllers
             int lastNdays = 15;
 
             List<GpPerDay> list = new List<GpPerDay>();
-            
+
             for (int i = lastNdays; i >= 0; i--)
             {
                 DateTime fromDate = DateTime.Now.Date.AddDays(-i * 7);
@@ -210,9 +210,7 @@ namespace RecipiesMVC.Controllers
                     vendor =>
                         new TotalPoByVendor
                         {
-                            VendorName =
-                                vendor.Name.Substring(0,
-                                    vendor.Name.Length >= maxXLabelTextLenght ? maxXLabelTextLenght : vendor.Name.Length),
+                            VendorName = vendor.Name,
                             PoTotalValue = allPos.Where(pod => pod.VendorId == vendor.VendorId)
                                 .Sum(pod => pod.TotalDue)
                         }).ToList();

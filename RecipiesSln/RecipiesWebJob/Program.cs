@@ -13,7 +13,7 @@ namespace RecipiesWebJob
     {
         static void Main(string[] args)
         {
-            Timer timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
+            Timer timer = new Timer(TimeSpan.FromMinutes(10).TotalMilliseconds);
             timer.Start();
             timer.Elapsed += timer_Elapsed;
 

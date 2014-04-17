@@ -30,7 +30,6 @@ namespace RecipiesMVC.Controllers
         {
            // THIS IS VERY SLOW !!!!!!!!!
             //var res = ContextFactory.Current.Products.AsEnumerable().Select(p => Mapper.Map<Product, ProductViewModel>(p)).ToList(); // .Project().To<ProductViewModel>();
-
            // this is faster
             var res = context.Products.Project().To<ProductViewModel>();
             DataSourceResult dataSourceResult = res.ToDataSourceResult(request);

@@ -10,6 +10,7 @@ using Ninject;
 using RecipiesWebFormApp;
 using RecipiesMVC.App_Start;
 using RecipiesMVC.Infrastructure;
+using RecipiesWebFormApp.Shared;
 
 namespace RecipiesMVC
 {
@@ -31,6 +32,8 @@ namespace RecipiesMVC
             AutoMapperConfig.Execute();
 
             DependencyResolver.SetResolver(new NinjectDependencyResolver(new StandardKernel()));
+
+            LogentriesHelper.ApplicationLog.Debug("TEST Application_Start");
         }
     }
 }

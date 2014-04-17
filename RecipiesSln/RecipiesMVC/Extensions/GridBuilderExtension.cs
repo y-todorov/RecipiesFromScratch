@@ -19,22 +19,6 @@ namespace RecipiesMVC.Extensions
 {
     public static class GridBuilderExtension
     {
-        public static IHtmlString ToMvcClientTemplate(this MvcHtmlString mvcString)
-        {
-            if (HttpEncoder.Current.GetType() == typeof (AntiXssEncoder))
-            {
-                var initial = mvcString.ToHtmlString();
-                var corrected = initial.Replace("\\u0026", "&")
-                    .Replace("%23", "#")
-                    .Replace("%3D", "=")
-                    .Replace("&#32;", " ");
-                return new HtmlString(corrected);
-            }
-
-            return mvcString;
-        }
-
-
         public static GridBuilder<T> AddReadOnlyOptions<T>(this GridBuilder<T> builder, bool isClient = false)
             where T : class
         {
@@ -51,8 +35,6 @@ namespace RecipiesMVC.Extensions
         // It is EXTREMELY important NOT to set the name here. This is because of details grids. There name MUST be  .Name("ProductInventoryViewModelGrid_#=ProductInventoryHeaderId#")
         public static GridBuilder<T> AddBaseOptions<T>(this GridBuilder<T> builder) where T : class
         {
-            Type modelEntityType = typeof (T);
-
             builder
                 .Groupable(
                     gsb =>
@@ -144,15 +126,15 @@ namespace RecipiesMVC.Extensions
                             {
                                 columns.ForeignKey(propertyInfo.Name,
                                     objects, rellAttribute.DataFieldValue, rellAttribute.DataFieldText)
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#")
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#");
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
                             }
                             else
                             {
                                 columns.ForeignKey(propertyInfo.Name,
                                     objects, rellAttribute.DataFieldValue, rellAttribute.DataFieldText)
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#",
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
                                         "\\#"));
                             }
                         }
@@ -161,15 +143,15 @@ namespace RecipiesMVC.Extensions
                         {
                             if (!isClient)
                             {
-                                columns.Bound(propertyInfo.Name).Format("{0}").Title("Id")
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#")
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#");
+                                columns.Bound(propertyInfo.Name).Title("Id")
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
                             }
                             else
                             {
                                 columns.Bound(propertyInfo.Name).Title("Id")
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#",
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
                                         "\\#"));
                             }
                         }
@@ -195,14 +177,14 @@ namespace RecipiesMVC.Extensions
                             if (!isClient)
                             {
                                 columns.Bound(propertyInfo.Name)
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#")
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#");
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
                             }
                             else
                             {
                                 columns.Bound(propertyInfo.Name)
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#",
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
                                         "\\#"));
                             }
                         }
@@ -217,14 +199,14 @@ namespace RecipiesMVC.Extensions
                             if (!isClient)
                             {
                                 bldr
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#")
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#");
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
                             }
                             else
                             {
                                 bldr
-                                    .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#",
+                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
                                         "\\#"));
                             }
                         }
@@ -235,15 +217,15 @@ namespace RecipiesMVC.Extensions
                             {
                                 columns.Bound(propertyInfo.Name)
                                     .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:N3}")
-                                    .ClientFooterTemplate("Sum: #= kendo.format('{0:N3}', sum)#")
-                                    .ClientGroupFooterTemplate("Sum: #= kendo.format('{0:N3}', sum)#");
+                                    .ClientFooterTemplate("Σ: #= kendo.format('{0:N3}', sum)#")
+                                    .ClientGroupFooterTemplate("Σ: #= kendo.format('{0:N3}', sum)#");
                             }
                             else
                             {
                                 columns.Bound(propertyInfo.Name)
                                     .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:N3}")
-                                    .ClientFooterTemplate("Sum: #= kendo.format('{0:N3}', sum)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Sum: #= kendo.format('{0:N3}', sum)#".Replace("#", "\\#"));
+                                    .ClientFooterTemplate("Σ: #= kendo.format('{0:N3}', sum)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("Σ: #= kendo.format('{0:N3}', sum)#".Replace("#", "\\#"));
                             }
                         }
                         if (propertyInfo.PropertyType == typeof (decimal) ||
@@ -254,16 +236,16 @@ namespace RecipiesMVC.Extensions
                                 columns.Bound(propertyInfo.Name)
                                     .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:C3}")
                                     .EditorTemplateName("Currency")
-                                    .ClientFooterTemplate("Sum: #= kendo.format('{0:C3}', sum)#")
-                                    .ClientGroupFooterTemplate("Sum: #= kendo.format('{0:C3}', sum)#");
+                                    .ClientFooterTemplate("Σ: #= kendo.format('{0:C3}', sum)#")
+                                    .ClientGroupFooterTemplate("Σ: #= kendo.format('{0:C3}', sum)#");
                             }
                             else
                             {
                                 columns.Bound(propertyInfo.Name)
                                     .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:C3}")
                                     .EditorTemplateName("Currency")
-                                    .ClientFooterTemplate("Sum: #= kendo.format('{0:C3}', sum)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Sum: #= kendo.format('{0:C3}', sum)#".Replace("#", "\\#"));
+                                    .ClientFooterTemplate("Σ: #= kendo.format('{0:C3}', sum)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("Σ: #= kendo.format('{0:C3}', sum)#".Replace("#", "\\#"));
                             }
                         }
                         if (propertyInfo.PropertyType == typeof (int) ||
@@ -273,15 +255,15 @@ namespace RecipiesMVC.Extensions
                             {
                                 columns.Bound(propertyInfo.Name)
                                     .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:N}")
-                                    .ClientFooterTemplate("Sum: #= kendo.format('{0:N}', sum)#")
-                                    .ClientGroupFooterTemplate("Sum: #= kendo.format('{0:N}', sum)#");
+                                    .ClientFooterTemplate("Σ: #= kendo.format('{0:N}', sum)#")
+                                    .ClientGroupFooterTemplate("Σ: #= kendo.format('{0:N}', sum)#");
                             }
                             else
                             {
                                 columns.Bound(propertyInfo.Name)
                                     .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:N}")
-                                    .ClientFooterTemplate("Sum: #= kendo.format('{0:N}', sum)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("Sum: #= kendo.format('{0:N}', sum)#".Replace("#", "\\#"));
+                                    .ClientFooterTemplate("Σ: #= kendo.format('{0:N}', sum)#".Replace("#", "\\#"))
+                                    .ClientGroupFooterTemplate("Σ: #= kendo.format('{0:N}', sum)#".Replace("#", "\\#"));
                             }
                         }
                         if (propertyInfo.PropertyType == typeof (DateTime) ||
@@ -301,16 +283,16 @@ namespace RecipiesMVC.Extensions
                                         .Format(!string.IsNullOrEmpty(customFormat)
                                             ? customFormat
                                             : "{0:dd/MM/yyyy HH:mm:ss}")
-                                        .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#")
-                                        .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#");
+                                        .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                        .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
                                 }
                                 else
                                 {
                                     bldr
                                         .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:dd/MM/yyyy}")
                                         .EditorTemplateName("Date")
-                                        .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#")
-                                        .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#");
+                                        .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                        .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
                                 }
                             }
                             else
@@ -321,8 +303,8 @@ namespace RecipiesMVC.Extensions
                                         .Format(!string.IsNullOrEmpty(customFormat)
                                             ? customFormat
                                             : "{0:dd/MM/yyyy HH:mm:ss}")
-                                        .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                        .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#",
+                                        .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                        .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
                                             "\\#"));
                                 }
                                 else
@@ -330,8 +312,8 @@ namespace RecipiesMVC.Extensions
                                     bldr
                                         .Format(!string.IsNullOrEmpty(customFormat) ? customFormat : "{0:dd/MM/yyyy}")
                                         .EditorTemplateName("Date")
-                                        .ClientFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                        .ClientGroupFooterTemplate("Count: #= kendo.format('{0}', count)#".Replace("#",
+                                        .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                        .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
                                             "\\#"));
                                 }
                             }

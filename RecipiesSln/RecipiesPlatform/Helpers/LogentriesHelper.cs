@@ -14,7 +14,7 @@ namespace RecipiesWebFormApp.Shared
 
         static LogentriesHelper()
         {
-            ApplicationLog = LogManager.GetLogger(typeof(HttpApplication));
+            ApplicationLog = LogManager.GetLogger(typeof(object));
             QuartzJobLog = LogManager.GetLogger(typeof(IJob));
         }
     }

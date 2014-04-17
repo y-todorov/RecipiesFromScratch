@@ -16,6 +16,8 @@ namespace RecipiesMVC.App_Start
          
             Mapper.CreateMap<double?, decimal?>().ConvertUsing<NullableDoubleToNullableDecimalTypeConverter>();
             Mapper.CreateMap<double, decimal?>().ConvertUsing<DoubleToNullableDecimalTypeConverter>();
+
+          
             
             Mapper.CreateMap<ProductCategory, CategoryViewModel>();
             Mapper.CreateMap<ProductIngredient, ProductIngredientViewModel>();
@@ -39,7 +41,9 @@ namespace RecipiesMVC.App_Start
 
             Mapper.CreateMap<Product, ProductViewModel>().
                 ForMember(m => m.StockValue, opt => opt.Ignore());
+
             Mapper.CreateMap<PurchaseOrderHeader, PurchaseOrderHeaderViewModel>().
+                ForMember(m => m.SubTotal, opt => opt.MapFrom(poh => poh.PurchaseOrderDetails.Sum(pod => (double?)pod.UnitPrice * pod.ReceivedQuantity))).
                    ForMember(m => m.PurchaseOrderHeaderId, opt => opt.MapFrom(poh => poh.PurchaseOrderId));
 
             Mapper.CreateMap<PurchaseOrderDetail, PurchaseOrderDetailViewModel>().
@@ -57,6 +61,10 @@ namespace RecipiesMVC.App_Start
                 return result;
             }
         }
+
+
+
+     
 
         private class DoubleToNullableDecimalTypeConverter : TypeConverter<double, decimal?>
         {

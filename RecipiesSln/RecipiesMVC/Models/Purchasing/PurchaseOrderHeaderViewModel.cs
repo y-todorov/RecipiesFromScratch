@@ -14,20 +14,20 @@ namespace RecipiesMVC.Models.Purchasing
         [Key]
         public int PurchaseOrderHeaderId { get; set; }
 
-        [Relation(EntityType = typeof (PurchaseOrderStatu), DataFieldValue = "PurchaseOrderStatusId",
+        [Relation(EntityType = typeof(PurchaseOrderStatu), DataFieldValue = "PurchaseOrderStatusId",
             DataFieldText = "Name")]
         [Display(Name = "Status")]
         public int? StatusId { get; set; }
 
-        [Relation(EntityType = typeof (Employee), DataFieldValue = "EmployeeId", DataFieldText = "FirstName")]
+        [Relation(EntityType = typeof(Employee), DataFieldValue = "EmployeeId", DataFieldText = "FirstName")]
         [Display(Name = "Employee")]
         public int? EmployeeId { get; set; }
 
-        [Relation(EntityType = typeof (Vendor), DataFieldValue = "VendorId", DataFieldText = "Name")]
+        [Relation(EntityType = typeof(Vendor), DataFieldValue = "VendorId", DataFieldText = "Name")]
         [Display(Name = "Vendor")]
         public int? VendorId { get; set; }
 
-        [Relation(EntityType = typeof (ShipMethod), DataFieldValue = "ShipMethodId", DataFieldText = "Name")]
+        [Relation(EntityType = typeof(ShipMethod), DataFieldValue = "ShipMethodId", DataFieldText = "Name")]
         [Display(Name = "Ship Method")]
         public int? ShipMethodId { get; set; }
 
@@ -40,14 +40,25 @@ namespace RecipiesMVC.Models.Purchasing
         public DateTime? ShipDate { get; set; }
 
         [ReadOnly(true)]
-        public decimal? SubTotal { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C3}")]
+        public double? SubTotal { get; set; }
+
 
         public decimal? VAT { get; set; }
 
         public decimal? Freight { get; set; }
 
         [ReadOnly(true)]
-        public decimal? TotalDue { get; set; }
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C3}")]
+        public double? TotalDue
+        {
+            get
+            {
+                double? result = (double)SubTotal.GetValueOrDefault() + (double)VAT.GetValueOrDefault() + (double)Freight.GetValueOrDefault();
+                return result;
+            }
+        }
 
         [StringLength(1000)]
         public string InvoiceNumber { get; set; }
@@ -75,14 +86,14 @@ namespace RecipiesMVC.Models.Purchasing
             pohViewModel.StatusId = pohEntity.StatusId;
             //pohViewModel.SubTotal = pohEntity.SubTotal;
 
-            pohViewModel.SubTotal = (decimal)pohEntity.PurchaseOrderDetails.Sum(d => d.LineTotal);
+            //pohViewModel.SubTotal = (decimal)pohEntity.PurchaseOrderDetails.Sum(d => d.LineTotal);
 
-          
+
             pohViewModel.VAT = pohEntity.VAT;
-            pohViewModel.VendorId = pohEntity.VendorId; 
-            
+            pohViewModel.VendorId = pohEntity.VendorId;
+
             //((isnull([SubTotal],(0))+isnull([VAT],(0)))+isnull([Freight],(0)))
-            pohViewModel.TotalDue = pohViewModel.SubTotal + pohViewModel.VAT + pohViewModel.Freight;
+            //pohViewModel.TotalDue = pohViewModel.SubTotal + pohViewModel.VAT + pohViewModel.Freight;
             //pohViewModel.TotalDue = pohEntity.TotalDue;
 
             return pohViewModel;
