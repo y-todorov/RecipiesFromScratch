@@ -13,8 +13,8 @@ namespace RecipiesWebFormApp.Quartz.Jobs
         {
             if (context != null && context.JobDetail != null)
             {
-                LogentriesHelper.QuartzJobLog.InfoFormat("Started job with key '{0}' and description '{1}'",
-                    context.JobDetail.Key, context.JobDetail.Description);
+                LogentriesHelper.WriteMessage(string.Format("Started job with key '{0}' and description '{1}'",
+                    context.JobDetail.Key, context.JobDetail.Description), LogentriesMessageType.Info);
             }
         }
     }

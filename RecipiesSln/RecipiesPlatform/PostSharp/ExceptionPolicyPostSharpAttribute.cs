@@ -56,9 +56,7 @@ namespace RecipiesPlatform.PostSharp
             string exDescription = string.Format("{6:yyyy/MM/dd hh:mm:ss fff} Exception {0} in {1}.{2} invoked with arguments {3}. Message: {4} Stacktrace: {5} \n", args.Exception.GetType().Name,
                 args.Method.DeclaringType.FullName, args.Method.Name, parameterValues, args.Exception.Message, args.Exception.StackTrace, DateTime.Now);
 
-            LogentriesHelper.ApplicationLog.Error(exDescription, args.Exception);
-
-            LogentriesHelper.ApplicationLog.Debug("testtest DANCHO   DANCHO   DANCHO   DANCHO   DANCHO   DANCHO   ");
+            LogentriesHelper.WriteMessage(exDescription, LogentriesMessageType.Exception);
         }
     } 
 }

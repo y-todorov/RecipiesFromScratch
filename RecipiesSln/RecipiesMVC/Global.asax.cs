@@ -33,7 +33,7 @@ namespace RecipiesMVC
 
             DependencyResolver.SetResolver(new NinjectDependencyResolver(new StandardKernel()));
 
-            LogentriesHelper.ApplicationLog.Debug("TEST Application_Start");
+            LogentriesHelper.WriteMessage("public class MvcApplication : System.Web.HttpApplication START", LogentriesMessageType.Info);
         }
     }
 }

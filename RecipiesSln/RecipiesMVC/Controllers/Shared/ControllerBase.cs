@@ -19,7 +19,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Collections;
-using log4net;
 using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Controllers
