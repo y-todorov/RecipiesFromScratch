@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using PostSharp.Aspects;
+using RecipiesWebFormApp.Shared;
 
 namespace RecipiesPlatform.PostSharp
 {
@@ -39,6 +40,7 @@ namespace RecipiesPlatform.PostSharp
 
             string output = string.Format("{0} executed in {1} milliseconds!" ,methodName, sw.ElapsedMilliseconds);
 
+            LogentriesHelper.WriteMessage(output, LogentriesMessageType.Info);
             Console.WriteLine(output);
             Trace.WriteLine(output);
         }
