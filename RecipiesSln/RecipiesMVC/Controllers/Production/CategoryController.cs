@@ -22,9 +22,22 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            var res = ContextFactory.Current.ProductCategories.Project().To<CategoryViewModel>();
-            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
-            return Json(dataSourceResult);
+            //JsonResult cachedResult = HttpContext.Cache["categories"] as JsonResult;
+            //if (cachedResult != null)
+            //{
+            //    return cachedResult;
+            //}
+            //else
+            //{
+                IQueryable<CategoryViewModel> categories =
+                    ContextFactory.Current.ProductCategories.Project().To<CategoryViewModel>();
+                DataSourceResult dataSourceResult = categories.ToDataSourceResult(request);
+                JsonResult jresult = Json(dataSourceResult);
+                //HttpContext.Cache.Add("categories", jresult,
+                //null, DateTime.Now.AddMinutes(10),
+                //TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
+                return jresult;
+            //}
         }
 
         public ActionResult ReadProducts(int categoryId, [DataSourceRequest] DataSourceRequest request)

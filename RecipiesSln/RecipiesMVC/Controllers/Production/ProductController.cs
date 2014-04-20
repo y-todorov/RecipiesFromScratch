@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -31,9 +32,21 @@ namespace RecipiesMVC.Controllers
            // THIS IS VERY SLOW !!!!!!!!!
             //var res = ContextFactory.Current.Products.AsEnumerable().Select(p => Mapper.Map<Product, ProductViewModel>(p)).ToList(); // .Project().To<ProductViewModel>();
            // this is faster
-            var res = context.Products.Project().To<ProductViewModel>();
-            DataSourceResult dataSourceResult = res.ToDataSourceResult(request);
-            return Json(dataSourceResult);
+            //JsonResult cachedResult = HttpContext.Cache["products"] as JsonResult;
+            //if (cachedResult != null)
+            //{
+            //    return cachedResult;
+            //}
+            //else
+            //{
+                IQueryable<ProductViewModel> products = context.Products.Project().To<ProductViewModel>();
+                DataSourceResult dataSourceResult = products.ToDataSourceResult(request);
+                JsonResult jresult = Json(dataSourceResult);
+                //HttpContext.Cache.Add("products", jresult,
+                //    null, DateTime.Now.AddMinutes(10),
+                //    TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
+                return jresult;
+            //}
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -48,6 +61,8 @@ namespace RecipiesMVC.Controllers
         public ActionResult Update([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
+            //HttpRuntime.Close(); .. THIS IS God Damn fucking slow. NEVER EVER use it!
+
             var result = UpdateBase(request, products, typeof (ProductViewModel), typeof (Product));
             return result;
         }
