@@ -43,24 +43,29 @@ namespace RecipiesMVC.Models
         [ReadOnly(true)]
         public double? UnitsInStock { get; set; }
 
+        /// <summary>
+        /// DA FUCK !!! SO SLOW !!!
+        /// </summary>
         [ReadOnly(true)]
         [Range(0, int.MaxValue)]
-        public decimal? StockValue
-        {
-            get
-            {
-                if (!UnitsInStock.HasValue || !UnitPrice.HasValue)
-                {
-                    return null;
-                }
-                else
-                {
-                    decimal? result = (decimal) UnitsInStock.GetValueOrDefault()*UnitPrice.GetValueOrDefault();
-                    return result;
-                }
-            }
-        }
+        //public decimal? StockValue
+        //{
+        //    get
+        //    {
+        //        if (!UnitsInStock.HasValue || !UnitPrice.HasValue)
+        //        {
+        //            return null;
+        //        }
+        //        else
+        //        {
+        //            decimal? result = (decimal) UnitsInStock.GetValueOrDefault()*UnitPrice.GetValueOrDefault();
+        //            return result;
+        //        }
+        //    }
+        //}
 
+        public double StockValue  { get; set; }
+        
         [Range(0, int.MaxValue)]
         [ReadOnly(true)]
         public double? UnitsOnOrder { get; set; }
@@ -84,7 +89,7 @@ namespace RecipiesMVC.Models
             UnitsInStock = Math.Round(entity.UnitsInStock.GetValueOrDefault(), 3);
             UnitsOnOrder = Math.Round(entity.UnitsOnOrder.GetValueOrDefault(), 3);
             ReorderLevel = Math.Round(entity.ReorderLevel.GetValueOrDefault(), 3);
-            //StockValue = (decimal) entity.StockValue;
+            StockValue = entity.StockValue;
             ModifiedDate = entity.ModifiedDate;
             ModifiedByUser = entity.ModifiedByUser;
 

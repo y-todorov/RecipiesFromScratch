@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.UI;
+using AutoMapper.QueryableExtensions;
 using DevTrends.MvcDonutCaching;
 using DevTrends.MvcDonutCaching.Annotations;
 using RecipiesMVC.DataAnnotations;
@@ -48,6 +49,7 @@ namespace RecipiesMVC.Controllers
             return jr;
         }
 
+        [StopWatchPostSharp]
         public ActionResult ReadBase([DataSourceRequest] DataSourceRequest request, Type modelType, Type entityType, IEnumerable<object> entities)
         {
             DbSet dbset = ContextFactory.Current.Set(entityType);
@@ -69,6 +71,28 @@ namespace RecipiesMVC.Controllers
             return Json(dataSourceResult);
         }
 
+        [StopWatchPostSharp]
+        public JsonResult ReadBase<TSourceType, TDestinationType>([DataSourceRequest] DataSourceRequest request, IQueryable<TSourceType> query)
+        {
+            string cacheKey = "_Data_" + query;
+            JsonResult cachedJsonResult = HttpContext.Cache[cacheKey] as JsonResult;
+            if (cachedJsonResult != null)
+            {
+                return cachedJsonResult;
+            }
+
+            var stores = query.Project().To<TDestinationType>();
+            DataSourceResult dataSourceResult = stores.ToDataSourceResult(request);
+            JsonResult jresult = Json(dataSourceResult);
+
+            HttpContext.Cache.Add(cacheKey, jresult,
+                null, DateTime.Now.AddDays(10),
+                TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
+
+            return jresult;
+        }
+
+        [StopWatchPostSharp]
         public ActionResult CreateBase([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
             if (models != null && ModelState.IsValid)
@@ -99,10 +123,11 @@ namespace RecipiesMVC.Controllers
                 }
             }
             DataSourceResult dataSourceResult = models.ToList().ToDataSourceResult(request, ModelState);
-
+            RemoveAllDataItemsFromCache();
             return Json(dataSourceResult);
         }
 
+        [StopWatchPostSharp]
         public ActionResult UpdateBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -138,10 +163,12 @@ namespace RecipiesMVC.Controllers
                 }
             }
             DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
+            RemoveAllDataItemsFromCache();
             return Json(dataSourceResult);
 
         }
 
+        [StopWatchPostSharp]
         public ActionResult DestroyBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -161,6 +188,8 @@ namespace RecipiesMVC.Controllers
             }
 
             DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
+            RemoveAllDataItemsFromCache();
+
             return Json(dataSourceResult);
         }
 
@@ -231,6 +260,21 @@ namespace RecipiesMVC.Controllers
             }
             return false;
 
+        }
+
+        private void RemoveAllDataItemsFromCache()
+        {
+            IDictionaryEnumerator enumerator = HttpContext.Cache.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                string key = enumerator.Key as string;
+                if (!string.IsNullOrEmpty(key) && key.StartsWith("_Data_", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    HttpContext.Cache.Remove(key);
+                }
+
+            }
         }
 
     }

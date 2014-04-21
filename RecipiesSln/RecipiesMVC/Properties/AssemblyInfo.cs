@@ -38,7 +38,7 @@ using System.Runtime.InteropServices;
 //[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
 //                       AttributeTargetTypes = "RecipiesMVC.*")] // THIS IS FUCKING SLOWLY, at least 100 times slower !!!
 
-[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
-                       AttributeTargetTypes = "RecipiesMVC.Controllers.*")]
+//[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
+//                       AttributeTargetTypes = "RecipiesMVC.Controllers.*")]
 
 [assembly: RecipiesPlatform.PostSharp.ExceptionPolicyPostSharpAttribute()]

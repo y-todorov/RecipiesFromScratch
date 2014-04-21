@@ -20,24 +20,10 @@ namespace RecipiesMVC.Controllers
             return View();
         }
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
-            //JsonResult cachedResult = HttpContext.Cache["categories"] as JsonResult;
-            //if (cachedResult != null)
-            //{
-            //    return cachedResult;
-            //}
-            //else
-            //{
-                IQueryable<CategoryViewModel> categories =
-                    ContextFactory.Current.ProductCategories.Project().To<CategoryViewModel>();
-                DataSourceResult dataSourceResult = categories.ToDataSourceResult(request);
-                JsonResult jresult = Json(dataSourceResult);
-                //HttpContext.Cache.Add("categories", jresult,
-                //null, DateTime.Now.AddMinutes(10),
-                //TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
-                return jresult;
-            //}
+            JsonResult result = ReadBase<ProductCategory, CategoryViewModel>(request, context.ProductCategories);
+            return result;
         }
 
         public ActionResult ReadProducts(int categoryId, [DataSourceRequest] DataSourceRequest request)

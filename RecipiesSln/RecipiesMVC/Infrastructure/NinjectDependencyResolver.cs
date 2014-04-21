@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Ninject;
 using RecipiesMVC.Models;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RecipiesModelNS;
 
 namespace RecipiesMVC.Infrastructure
 {
@@ -22,7 +24,7 @@ namespace RecipiesMVC.Infrastructure
 
         private void AddBindings()
         {
-            //kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
+            kernel.Bind<DbContext>().To<RecipiesEntities>();
         }
 
         public object GetService(Type serviceType)

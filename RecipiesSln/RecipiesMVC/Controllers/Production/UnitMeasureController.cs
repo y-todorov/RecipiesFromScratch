@@ -16,9 +16,9 @@ namespace RecipiesMVC.Controllers
             return View();
         }
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
-            var result = ReadBase(request, typeof(UnitMeasureViewModel), typeof(UnitMeasure), ContextFactory.Current.UnitMeasures.ToList());
+            var result = ReadBase<UnitMeasure, UnitMeasureViewModel>(request, context.UnitMeasures);
             return result;
         }
 

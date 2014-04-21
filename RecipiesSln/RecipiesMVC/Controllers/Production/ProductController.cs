@@ -29,24 +29,8 @@ namespace RecipiesMVC.Controllers
         
         public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
-           // THIS IS VERY SLOW !!!!!!!!!
-            //var res = ContextFactory.Current.Products.AsEnumerable().Select(p => Mapper.Map<Product, ProductViewModel>(p)).ToList(); // .Project().To<ProductViewModel>();
-           // this is faster
-            //JsonResult cachedResult = HttpContext.Cache["products"] as JsonResult;
-            //if (cachedResult != null)
-            //{
-            //    return cachedResult;
-            //}
-            //else
-            //{
-                IQueryable<ProductViewModel> products = context.Products.Project().To<ProductViewModel>();
-                DataSourceResult dataSourceResult = products.ToDataSourceResult(request);
-                JsonResult jresult = Json(dataSourceResult);
-                //HttpContext.Cache.Add("products", jresult,
-                //    null, DateTime.Now.AddMinutes(10),
-                //    TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
-                return jresult;
-            //}
+            JsonResult result = ReadBase<Product, ProductViewModel>(request, context.Products);
+            return result;
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

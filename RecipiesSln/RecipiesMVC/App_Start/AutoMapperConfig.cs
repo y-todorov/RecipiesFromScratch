@@ -14,9 +14,14 @@ namespace RecipiesMVC.App_Start
         public static void Execute()
         {
          
+         
+
+
+            Mapper.CreateMap<decimal?, double?>().ConvertUsing<NullableDecimalToNullableDoubleTypeConverter>();
+            Mapper.CreateMap<decimal?, double>().ConvertUsing<NullableDecimalToDoubleTypeConverter>();
             Mapper.CreateMap<double?, decimal?>().ConvertUsing<NullableDoubleToNullableDecimalTypeConverter>();
             Mapper.CreateMap<double, decimal?>().ConvertUsing<DoubleToNullableDecimalTypeConverter>();
-
+            
           
             
             Mapper.CreateMap<ProductCategory, CategoryViewModel>();
@@ -39,9 +44,8 @@ namespace RecipiesMVC.App_Start
                 ForMember(m => m.SurplusValue, opt => opt.Ignore());
 
 
-            Mapper.CreateMap<Product, ProductViewModel>().
-                ForMember(m => m.StockValue, opt => opt.Ignore());
-
+            Mapper.CreateMap<Product, ProductViewModel>();
+              
             Mapper.CreateMap<PurchaseOrderHeader, PurchaseOrderHeaderViewModel>().
                 ForMember(m => m.SubTotal, opt => opt.MapFrom(poh => poh.PurchaseOrderDetails.Sum(pod => (double?)pod.UnitPrice * pod.ReceivedQuantity))).
                    ForMember(m => m.PurchaseOrderHeaderId, opt => opt.MapFrom(poh => poh.PurchaseOrderId));
@@ -51,6 +55,18 @@ namespace RecipiesMVC.App_Start
                   ForMember(m => m.LineTotal, opt => opt.Ignore()).
               ForMember(m => m.StockedQuantity, opt => opt.Ignore()); ;
 
+            Mapper.CreateMap<Store, StoreViewModel>();
+            Mapper.CreateMap<Recipe, RecipeViewModel>();
+            Mapper.CreateMap<UnitMeasure, UnitMeasureViewModel>();
+            
+        }
+
+        public class CustomResolver : ValueResolver<double, decimal>
+        {
+            protected override decimal ResolveCore(double source)
+            {
+                return (decimal) source;
+            }
         }
 
         private class NullableDoubleToNullableDecimalTypeConverter : TypeConverter<double?, decimal?>
@@ -63,8 +79,23 @@ namespace RecipiesMVC.App_Start
         }
 
 
+         private class NullableDecimalToNullableDoubleTypeConverter : TypeConverter<decimal?, double?>
+        {
+             protected override double? ConvertCore(decimal? source)
+            {
+                double? result = (double?)source;
+                return result;
+            }
+        }
 
-     
+         private class NullableDecimalToDoubleTypeConverter : TypeConverter<decimal?, double>
+         {
+             protected override double ConvertCore(decimal? source)
+             {
+                 double result = (double)source.GetValueOrDefault();
+                 return result;
+             }
+         }
 
         private class DoubleToNullableDecimalTypeConverter : TypeConverter<double, decimal?>
         {

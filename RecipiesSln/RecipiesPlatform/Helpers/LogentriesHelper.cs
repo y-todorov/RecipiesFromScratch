@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -95,24 +96,32 @@ namespace RecipiesWebFormApp.Shared
 
                 IPAddress[] addr = ipEntry.AddressList;
 
-                StringBuilder sbIpAddress = new StringBuilder();
-                for (int i = 0; i < addr.Length; i++)
+                // NO NEED FOR ALL ADDRESSES, TAKE JUST THE LAST ONE
+                //StringBuilder sbIpAddress = new StringBuilder();
+                //for (int i = 0; i < addr.Length; i++)
+                //{
+                //    sbIpAddress.AppendFormat("IP Address {0}: {1} ", i, addr[i].ToString());
+                //}
+                string lastIpAddress = string.Empty;
+                if (addr.Length > 0)
                 {
-                    sbIpAddress.AppendFormat("IP Address {0}: {1} ", i, addr[i].ToString());
+                    lastIpAddress = addr.Last().ToString();
                 }
 
+                //Trace.WriteLine(message); DO NOT DO THIS HERE!!! THIS IS VERY SLOW. THIS CAUSES THE THREAD TO WRITE TO THR CALLING THREAD!!! SLOW
                 // SO FUCKING IMPORTANT TO AND WITH \r\n
-                message = string.Format("{0} {1} {2} HostName: {3} IP: {4} {5}", token, message, messageTypeMarker, hostName, sbIpAddress, "\r\n");
-
+                message = message.Replace("\r\n", string.Empty).Replace("\n", string.Empty);
+                
+                message = string.Format("{0} {1} {2} HostName: {3} IP: {4} {5}", token, message, messageTypeMarker, hostName, lastIpAddress, "\r\n");
+             
 
                 using (TcpClient sslclient = new TcpClient(server, sslPort443))
                 {
                     sslclient.NoDelay = true;
-
                     // Translate the passed message into UTF8 and store it as a Byte array.
                     Byte[] data = Encoding.UTF8.GetBytes(message);
 
-                    using (SslStream sslStream = new SslStream(sslclient.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCertificate), null))
+                    using (SslStream sslStream = new SslStream(sslclient.GetStream(), false, ValidateServerCertificate, null))
                     {
                         try
                         {
@@ -123,6 +132,7 @@ namespace RecipiesWebFormApp.Shared
                         {
                             using (TcpClient client = new TcpClient(server, nonSecurePort80))
                             {
+                                client.NoDelay = true;
                                 using (NetworkStream stream = client.GetStream())
                                 {
                                     stream.WriteAsync(data, 0, data.Length);

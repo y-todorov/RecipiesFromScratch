@@ -31,7 +31,7 @@ namespace RecipiesMVC.Models
 
         [ReadOnly(true)]
         [DisplayFormat(DataFormatString = "{0:P2}")]
-        public double? GrossProfit { get; set; }
+        public decimal? GrossProfit { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
 
@@ -48,7 +48,7 @@ namespace RecipiesMVC.Models
             
 
             SellValuePerPortion = entity.SellValuePerPortion;
-            GrossProfit = ModelHelper.GetGp((double)ProductionValuePerPortion.GetValueOrDefault(), (double)SellValuePerPortion);
+            GrossProfit = (decimal)ModelHelper.GetGp((double)ProductionValuePerPortion.GetValueOrDefault(), (double)SellValuePerPortion);
             //GrossProfit = entity.GrossProfit;
             ModifiedDate = entity.ModifiedDate;
             ModifiedByUser = entity.ModifiedByUser;

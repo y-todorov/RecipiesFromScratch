@@ -15,7 +15,7 @@ using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Controllers
 {
-     [StopWatchPostSharp]
+    
     public class PurchaseOrderDetailController : ControllerBase
     {
         public ActionResult Index()

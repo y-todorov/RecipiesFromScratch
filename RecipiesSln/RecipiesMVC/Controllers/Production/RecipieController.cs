@@ -16,9 +16,9 @@ namespace RecipiesMVC.Controllers
             return View();
         }
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
-            var result = ReadBase(request, typeof(RecipeViewModel), typeof(Recipe), ContextFactory.Current.Recipes.ToList());
+            JsonResult result = ReadBase<Recipe, RecipeViewModel>(request,context.Recipes);
             return result;
         }
 
