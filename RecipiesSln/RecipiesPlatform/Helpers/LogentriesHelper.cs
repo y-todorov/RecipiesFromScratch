@@ -126,7 +126,7 @@ namespace RecipiesWebFormApp.Shared
                         try
                         {
                             sslStream.AuthenticateAsClient(server);
-                            sslStream.WriteAsync(data, 0, data.Length);
+                            sslStream.Write(data, 0, data.Length);
                         }
                         catch (AuthenticationException e)
                         {
@@ -135,7 +135,7 @@ namespace RecipiesWebFormApp.Shared
                                 client.NoDelay = true;
                                 using (NetworkStream stream = client.GetStream())
                                 {
-                                    stream.WriteAsync(data, 0, data.Length);
+                                    stream.Write(data, 0, data.Length);
                                 }
                             }
                         }
