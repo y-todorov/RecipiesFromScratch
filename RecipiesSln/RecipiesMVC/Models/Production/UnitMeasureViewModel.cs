@@ -13,7 +13,7 @@ namespace RecipiesMVC.Models
         [Required]
         public string Name { get; set; }
 
-        public bool IsBaseUnit { get; set; }
+        public bool? IsBaseUnit { get; set; }
 
         [Relation(EntityType = typeof (UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
         [Display(Name = "Unit Measure")]
