@@ -9,6 +9,7 @@ namespace RecipiesWebFormApp
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{resource}.aspx/{*pathInfo}");
+
             routes.MapRoute(
                 "Default",
                 // Route name
@@ -17,6 +18,8 @@ namespace RecipiesWebFormApp
                 new {controller = "Home", action = "Index", id = ""}
                 // Parameter defaults
                 );
+
+          
         }
     }
 }

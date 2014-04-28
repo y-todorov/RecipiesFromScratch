@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecipiesModelNS;
+using RecipiesMVC.Controllers.WebApis;
 
 namespace RecipiesMVC.Infrastructure
 {
@@ -25,6 +26,8 @@ namespace RecipiesMVC.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<DbContext>().To<RecipiesEntities>();
+
+            kernel.Bind<SendGridMailEventController>().To<SendGridMailEventController>();
         }
 
         public object GetService(Type serviceType)

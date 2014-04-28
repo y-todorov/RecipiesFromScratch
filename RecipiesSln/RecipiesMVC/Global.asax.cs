@@ -11,6 +11,8 @@ using RecipiesWebFormApp;
 using RecipiesMVC.App_Start;
 using RecipiesMVC.Infrastructure;
 using RecipiesWebFormApp.Shared;
+using System.Web.Http;
+using System.Web.Routing;
 
 namespace RecipiesMVC
 {
@@ -23,6 +25,7 @@ namespace RecipiesMVC
                 SiteMapManager.SiteMaps.Register<XmlSiteMap>("sitemap", sitemap =>
                     sitemap.LoadFrom("~/sitemap.sitemap"));
             }
+            GlobalConfiguration.Configure(WebApiConfig.Register); // web api registration for api contrllers
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -32,6 +35,9 @@ namespace RecipiesMVC
             AutoMapperConfig.Execute();
 
             DependencyResolver.SetResolver(new NinjectDependencyResolver(new StandardKernel()));
+
+
+           
 
             LogentriesHelper.WriteMessage("public class MvcApplication : System.Web.HttpApplication START", LogentriesMessageType.Info);
         }
