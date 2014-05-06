@@ -11,12 +11,6 @@ namespace RecipiesModelNS
 {
     public partial class RecipiesEntities : DbContext
     {
-        public RecipiesEntities(bool contextOwnsConnection)
-            : base("RecipiesEntities")
-        {
-            this.Configuration.AutoDetectChangesEnabled = false;
-        }
-
         protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(
             System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, IDictionary<object, object> items)
         {

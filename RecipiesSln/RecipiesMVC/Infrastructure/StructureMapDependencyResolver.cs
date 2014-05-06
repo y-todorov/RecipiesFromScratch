@@ -40,7 +40,16 @@ namespace RecipiesMVC.Infrastructure
             }
             else
             {
-                result = container.GetInstance(serviceType);
+                //try
+                //{
+                    result = container.GetInstance(serviceType);
+                //}
+                //catch (Exception ex)
+                //{
+
+                //}
+                //result = container.GetInstance(serviceType); // THIS IS STILL PROBLEMATIC
+               
             }
             return result;
 

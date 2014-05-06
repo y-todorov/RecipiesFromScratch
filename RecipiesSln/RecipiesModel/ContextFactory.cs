@@ -16,7 +16,7 @@ namespace RecipiesModelNS
                 // we should go here in unit tests ONLY !!!
                 if (unitTestsContext == null)
                 {
-                    unitTestsContext = new RecipiesEntities(false);
+                    unitTestsContext = new RecipiesEntities();
                     return unitTestsContext;
                 }
                 else
@@ -32,7 +32,7 @@ namespace RecipiesModelNS
 
                 if (context == null)
                 {
-                    context = new RecipiesEntities(false);
+                    context = new RecipiesEntities();
                     httpContext.Items[contextKey] = context;
                     //httpContext.Application[contextKey] = context; // This doesn't work 
                 }
