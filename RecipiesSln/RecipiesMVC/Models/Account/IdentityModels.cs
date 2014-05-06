@@ -13,5 +13,10 @@ namespace RecipiesMVC.Models
             : base("DefaultConnection")
         {
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
     }
 }
