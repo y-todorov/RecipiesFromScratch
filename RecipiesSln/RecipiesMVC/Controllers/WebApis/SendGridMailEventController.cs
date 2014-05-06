@@ -8,7 +8,9 @@ using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using RecipiesMVC.Models.Api;
+using RecipiesModelNS;
+using RecipiesMVC.Helpers;
+using RecipiesMVC.Models;
 
 namespace RecipiesMVC.Controllers.WebApis
 {
@@ -16,15 +18,12 @@ namespace RecipiesMVC.Controllers.WebApis
     public class SendGridMailEventController : ApiController
     {
         // http://stackoverflow.com/questions/14588397/disable-windows-authentication-for-webapi
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         [HttpGet]
-        public void ProcessEmailEvent2([FromBody]string value)
+        public string ProcessEmailEvent2([FromBody]string value)
         {
             var currRequest = HttpContext.Current.Request;
+            return "Everything is OK";
         }
 
         [HttpPost]
@@ -36,20 +35,92 @@ namespace RecipiesMVC.Controllers.WebApis
             {
                 string jsonArrayAsString = reader.ReadToEnd();
 
-                var result = JsonConvert.DeserializeObject<List<SendGridMailViewModel>>(jsonArrayAsString);
+                List<SendGridMailViewModel> listOfModels = JsonConvert.DeserializeObject<List<SendGridMailViewModel>>(jsonArrayAsString);
 
-                JArray a = JArray.Parse(jsonArrayAsString);
-
-                foreach (JObject o in a.Children<JObject>())
+                foreach (SendGridMailViewModel sendGridMailViewModel in listOfModels)
                 {
-                    foreach (JProperty p in o.Properties())
+                    SendGridMail sgm = null;
+                    // save only the last open
+
+                    //When using LINQ to Entities, it will automatically convert it to LINQ to SQL. And if the database field you are doing a .Equals on does not have a collate of
+                    //NOCASE (SQLite in my example) then it will always be case-sensitive. In otherwords, the database defines how to do the string comparison rather than code.
+                    // this is the error if you use Enum.GetName(typeof(SendGridEmailEvent), SendGridEmailEvent.Open), StringComparison.InvariantCultureIgnoreCase));
+                    string openEventName = Enum.GetName(typeof(SendGridEmailEvent), SendGridEmailEvent.open);
+
+                    if (string.Equals(openEventName, sendGridMailViewModel.Event, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        string name = p.Name;
-                        string value = p.Value.ToString();
+                        sgm =
+                            ContextFactory.Current.SendGridMails.FirstOrDefault(
+                                s => s.Guid == sendGridMailViewModel.Guid && string.Equals(s.Event, openEventName));
+                        if (sgm != null)
+                        {
+                            sgm.ModifiedDate = DateTime.Now;
+                            // no need for this actually, this will be set in YordanBaseEntity, but only if the entity is modified, so we HAVE TO 'touch it'
+                        }
+                        else
+                        {
+                            sgm = new SendGridMail()
+                            {
+                                Email = sendGridMailViewModel.Email,
+                                Event = sendGridMailViewModel.Event,
+                                Id = sendGridMailViewModel.Id,
+                                PrimaryKey = sendGridMailViewModel.PrimaryKey,
+                                Reason = sendGridMailViewModel.Reason,
+                                Sg_event_id = sendGridMailViewModel.Sg_event_id,
+                                Sg_message_id = sendGridMailViewModel.Sg_message_id,
+                                Smtp_id = sendGridMailViewModel.Smtp_id,
+                                Timestamp = sendGridMailViewModel.Timestamp,
+                                Type = sendGridMailViewModel.Type,
+                                Uid = sendGridMailViewModel.Uid,
+                                Url = sendGridMailViewModel.Url,
+                                UserAgent = sendGridMailViewModel.Useragent,
+                                Guid = sendGridMailViewModel.Guid,
+                                ModifiedByUser = sendGridMailViewModel.ModifiedByUser,
+                                ModifiedDate = sendGridMailViewModel.ModifiedDate
+                            };
+                            ContextFactory.Current.SendGridMails.Add(sgm);
+                        }
                     }
+                    else
+                    {
+                        sgm = new SendGridMail()
+                        {
+                            Email = sendGridMailViewModel.Email,
+                            Event = sendGridMailViewModel.Event,
+                            Id = sendGridMailViewModel.Id,
+                            PrimaryKey = sendGridMailViewModel.PrimaryKey,
+                            Reason = sendGridMailViewModel.Reason,
+                            Sg_event_id = sendGridMailViewModel.Sg_event_id,
+                            Sg_message_id = sendGridMailViewModel.Sg_message_id,
+                            Smtp_id = sendGridMailViewModel.Smtp_id,
+                            Timestamp = sendGridMailViewModel.Timestamp,
+                            Type = sendGridMailViewModel.Type,
+                            Uid = sendGridMailViewModel.Uid,
+                            Url = sendGridMailViewModel.Url,
+                            UserAgent = sendGridMailViewModel.Useragent,
+                            Guid = sendGridMailViewModel.Guid,
+                            ModifiedByUser = sendGridMailViewModel.ModifiedByUser,
+                            ModifiedDate = sendGridMailViewModel.ModifiedDate
+                        };
+                        ContextFactory.Current.SendGridMails.Add(sgm);
+                    }
+
                 }
+                ContextFactory.Current.SaveChanges();
+                ControllerHelper.RemoveAllDataItemsFromCache();
             }
-            
+        }
+
+        enum SendGridEmailEvent
+        {
+            processed,
+            dropped,
+            deferred,
+            bounce,
+            open,
+            click,
+            spamReport,
+            unsubscribe,
 
         }
     }

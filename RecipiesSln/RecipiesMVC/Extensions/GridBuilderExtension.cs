@@ -141,18 +141,21 @@ namespace RecipiesMVC.Extensions
 
                         if (propertyInfo.GetCustomAttributes<KeyAttribute>().Any()) // The primary key
                         {
-                            if (!isClient)
+                            if (!propertyInfo.GetCustomAttributes<HiddenInputAttribute>().Any() || (propertyInfo.GetCustomAttributes<HiddenInputAttribute>().Any() && showHiddenColumns))
                             {
-                                columns.Bound(propertyInfo.Name).Title("Id")
-                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
-                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
-                            }
-                            else
-                            {
-                                columns.Bound(propertyInfo.Name).Title("Id")
-                                    .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
-                                    .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
-                                        "\\#"));
+                                if (!isClient)
+                                {
+                                    columns.Bound(propertyInfo.Name).Title("Id") // propertyInfo.Name do not use this - it is too long for the UI
+                                        .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#")
+                                        .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#");
+                                }
+                                else
+                                {
+                                    columns.Bound(propertyInfo.Name).Title("Id")
+                                        .ClientFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#", "\\#"))
+                                        .ClientGroupFooterTemplate("CT: #= kendo.format('{0}', count)#".Replace("#",
+                                            "\\#"));
+                                }
                             }
                         }
                         // do not show foreign key columns

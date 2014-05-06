@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
@@ -13,6 +15,21 @@ namespace RecipiesMVC.Helpers
 {
     public static class ControllerHelper
     {
+        public static void RemoveAllDataItemsFromCache()
+        {
+            IDictionaryEnumerator enumerator = HttpContext.Current.Cache.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                string key = enumerator.Key as string;
+                if (!string.IsNullOrEmpty(key) && key.StartsWith("_Data_", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    HttpContext.Current.Cache.Remove(key);
+                }
+
+            }
+        }
+
         // This presumes that weeks start with Monday.
         // Week 1 is the 1st week of the year with a Thursday in it.
         public static string GetIso8601WeekOfYear(DateTime time)

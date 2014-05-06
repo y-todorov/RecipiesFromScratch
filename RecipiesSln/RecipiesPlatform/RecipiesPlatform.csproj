@@ -199,6 +199,12 @@
     <Reference Include="RestSharp">
       <HintPath>..\Libs\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SendGridMail">
+      <HintPath>..\Libs\SendGridMail.dll</HintPath>
+    </Reference>
+    <Reference Include="Smtpapi">
+      <HintPath>..\Libs\Smtpapi.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />

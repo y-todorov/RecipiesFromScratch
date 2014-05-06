@@ -10,8 +10,6 @@ namespace RecipiesModelNS
     {
         public virtual void Adding(DbEntityEntry e = null)
         {
-            //object att = ContextFactory.Current.Set(this.GetType()).Attach(this);
-            //DbEntityEntry dbEntry = ContextFactory.Current.Entry(att);
             SetModifiedDateAndModifiedByUserFields();
         }
 
@@ -39,12 +37,11 @@ namespace RecipiesModelNS
         private void SetModifiedDateAndModifiedByUserFields()
         {
             string userName = null;
-            if (HttpContext.Current != null && HttpContext.Current.User != null &&
-                HttpContext.Current.User.Identity != null)
+            if (HttpContext.Current != null && HttpContext.Current.User != null)
             {
                 userName = HttpContext.Current.User.Identity.Name;
             }
-            Type type = this.GetType();
+            Type type = GetType();
             PropertyInfo piModifiedDate = type.GetProperties().FirstOrDefault(p => p.Name.Equals("ModifiedDate"));
             if (piModifiedDate != null)
             {
@@ -62,58 +59,5 @@ namespace RecipiesModelNS
             }
         }
 
-        private void PopulateHistoryTables()
-        {
-            //object historyEntity = GetHistoryObjectForEntity(this);
-            //if (historyEntity != null)
-            //{
-            //    var productFields = this.GetType().GetProperties(BindingFlags.Instance |
-            //           BindingFlags.Static |
-            //           BindingFlags.NonPublic |
-            //           BindingFlags.Public);
-            //    var productProperties = this.GetType().GetProperties();
-
-            //    var productHistoryFields = historyEntity.GetType().GetFields(BindingFlags.Instance |
-            //           BindingFlags.Static |
-            //           BindingFlags.NonPublic |
-            //           BindingFlags.Public);
-            //    var productHistoryProperties = historyEntity.GetType().GetProperties();
-
-            //    ContextFactory.Current.ProductHistories.Add((ProductHistory)historyEntity);
-
-            //    foreach (prop field in productFields)
-            //    {
-            //        // Check if this is actual property
-            //        if (productProperties.Any(p => ("_" + p.Name).Equals(field.Name, StringComparison.InvariantCultureIgnoreCase)))
-            //        {
-            //            //object theValue = prop.GetValue(product); This is property and we get exception when deleting products
-            //            var field2 = productHistoryFields.FirstOrDefault(f => f.Name.Equals(field.Name));
-            //            if (field2 != null)
-            //            {
-            //                try
-            //                {
-            //                    object theValue = field.GetValue(this);
-            //                    field2.setf .SetFieldValue(field.Name, theValue);
-            //                }
-            //                catch (Exception)
-            //                {
-
-            //                }
-            //            }
-            //        }
-
-            //    }
-            //}
-        }
-
-
-        private object GetHistoryObjectForEntity(object obj)
-        {
-            if (obj is Product)
-            {
-                return new ProductHistory();
-            }
-            return null;
-        }
     }
 }

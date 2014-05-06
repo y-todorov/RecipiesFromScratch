@@ -51,6 +51,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>RecipiesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SendGridMail.partial.cs" />
     <Compile Include="Customer.partial.cs" />
     <Compile Include="C__RecipiesDataBase.cs">
       <DependentUpon>RecipiesModel.tt</DependentUpon>
@@ -169,6 +170,9 @@
       <DependentUpon>RecipiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SalesOrderStatus.partial.cs" />
+    <Compile Include="SendGridMail.cs">
+      <DependentUpon>RecipiesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Shift.cs">
       <DependentUpon>RecipiesModel.tt</DependentUpon>
     </Compile>

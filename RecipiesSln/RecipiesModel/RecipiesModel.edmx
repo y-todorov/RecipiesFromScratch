@@ -5,7 +5,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="RecipiesModelNS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RecipiesModelNS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EmailTemplate">
           <Key>
             <PropertyRef Name="EmailTemplateId" />
@@ -21,6 +21,27 @@
           <Property Name="IsDefault" Type="bit" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="ModifiedByUser" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="SendGridMail">
+          <Key>
+            <PropertyRef Name="PrimaryKey" />
+          </Key>
+          <Property Name="Sg_event_id" Type="nvarchar(max)" />
+          <Property Name="Event" Type="nvarchar(max)" />
+          <Property Name="Sg_message_id" Type="nvarchar(max)" />
+          <Property Name="Id" Type="nvarchar(max)" />
+          <Property Name="Timestamp" Type="bigint" />
+          <Property Name="Smtp_id" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Uid" Type="nvarchar(max)" />
+          <Property Name="PrimaryKey" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAgent" Type="nvarchar(max)" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="Guid" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedByUser" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="__RecipiesDataBase">
           <Key>
@@ -888,6 +909,7 @@
         </Association>
         <EntityContainer Name="RecipiesModelNSStoreContainer">
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="Admin" store:Type="Tables" />
+          <EntitySet Name="SendGridMail" EntityType="Self.SendGridMail" Schema="Admin" store:Type="Tables" />
           <EntitySet Name="__RecipiesDataBase" EntityType="Self.__RecipiesDataBase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="HumanResources" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="HumanResources" store:Type="Tables" />
@@ -1280,6 +1302,7 @@
             <End Role="ProductWasteHeader" EntitySet="ProductWasteHeaders" />
             <End Role="ProductWaste" EntitySet="Wastes" />
           </AssociationSet>
+          <EntitySet Name="SendGridMails" EntityType="RecipiesModelNS.SendGridMail" />
         </EntityContainer>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -2306,6 +2329,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SendGridMail">
+          <Key>
+            <PropertyRef Name="PrimaryKey" />
+          </Key>
+          <Property Name="Sg_event_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Event" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sg_message_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timestamp" Type="Int64" />
+          <Property Name="Smtp_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Uid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAgent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Guid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedByUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2759,6 +2803,28 @@
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ForDate" ColumnName="ForDate" />
                 <ScalarProperty Name="ProductWasteHeaderId" ColumnName="ProductWasteHeaderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SendGridMails">
+            <EntityTypeMapping TypeName="RecipiesModelNS.SendGridMail">
+              <MappingFragment StoreEntitySet="SendGridMail">
+                <ScalarProperty Name="ModifiedByUser" ColumnName="ModifiedByUser" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
+                <ScalarProperty Name="Uid" ColumnName="Uid" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Smtp_id" ColumnName="Smtp_id" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sg_message_id" ColumnName="Sg_message_id" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="Sg_event_id" ColumnName="Sg_event_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

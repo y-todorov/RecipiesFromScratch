@@ -58,6 +58,9 @@ namespace RecipiesMVC.App_Start
             Mapper.CreateMap<Store, StoreViewModel>();
             Mapper.CreateMap<Recipe, RecipeViewModel>();
             Mapper.CreateMap<UnitMeasure, UnitMeasureViewModel>();
+
+            Mapper.CreateMap<SendGridMail, SendGridMailViewModel>();
+            
             
         }
 

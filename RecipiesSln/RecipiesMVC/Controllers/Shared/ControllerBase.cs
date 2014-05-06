@@ -7,6 +7,7 @@ using AutoMapper.QueryableExtensions;
 using DevTrends.MvcDonutCaching;
 using DevTrends.MvcDonutCaching.Annotations;
 using RecipiesMVC.DataAnnotations;
+using RecipiesMVC.Helpers;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -123,7 +124,7 @@ namespace RecipiesMVC.Controllers
                 }
             }
             DataSourceResult dataSourceResult = models.ToList().ToDataSourceResult(request, ModelState);
-            RemoveAllDataItemsFromCache();
+            ControllerHelper.RemoveAllDataItemsFromCache();
             return Json(dataSourceResult);
         }
 
@@ -163,7 +164,7 @@ namespace RecipiesMVC.Controllers
                 }
             }
             DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
-            RemoveAllDataItemsFromCache();
+            ControllerHelper.RemoveAllDataItemsFromCache();
             return Json(dataSourceResult);
 
         }
@@ -188,7 +189,7 @@ namespace RecipiesMVC.Controllers
             }
 
             DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
-            RemoveAllDataItemsFromCache();
+            ControllerHelper.RemoveAllDataItemsFromCache();
 
             return Json(dataSourceResult);
         }
@@ -261,21 +262,7 @@ namespace RecipiesMVC.Controllers
             return false;
 
         }
-
-        private void RemoveAllDataItemsFromCache()
-        {
-            IDictionaryEnumerator enumerator = HttpContext.Cache.GetEnumerator();
-
-            while (enumerator.MoveNext())
-            {
-                string key = enumerator.Key as string;
-                if (!string.IsNullOrEmpty(key) && key.StartsWith("_Data_", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    HttpContext.Cache.Remove(key);
-                }
-
-            }
-        }
+        
 
     }
 }

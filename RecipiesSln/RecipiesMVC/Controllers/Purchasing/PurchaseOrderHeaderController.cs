@@ -150,17 +150,14 @@ namespace RecipiesMVC.Controllers.Purchasing
             if (defaultTemplate != null)
             {
                 byte[] documentBytes = (new DownloadController()).DownloadPurchaseOrderDetailsReportAsPdf(purchaseOrderHeaderId); ;
-                ContentResult contentResult = EmailHelper.SendComplexMessage(defaultTemplate.From, "BlueBar mailing system", // This must be configurable
+               EmailHelper.SendComplexMessage(defaultTemplate.From, "BlueBar mailing system", // This must be configurable
                     purchaseOrder.Vendor.Email, purchaseOrder.Vendor.Name, defaultTemplate.Cc,
                     defaultTemplate.Bcc, defaultTemplate.Subject, defaultTemplate.TextBody, defaultTemplate.HtmlBody,
                     documentBytes, defaultTemplate.AttachmentName + "." + "pdf"); // was result.Extension. It will be replaced by pdf
-                if (contentResult != null)
-                {
-                    return contentResult;
-                }
             }
             else
             {
+                throw new ApplicationException("Missing default email template. Emails cannot be processed!");
             }
 
             return RedirectToAction("Index");

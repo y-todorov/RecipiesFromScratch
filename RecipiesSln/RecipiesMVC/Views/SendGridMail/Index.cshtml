@@ -1,0 +1,14 @@
+﻿
+@using RecipiesMVC.Extensions
+@model IEnumerable<RecipiesMVC.Models.SendGridMailViewModel>
+
+@(
+        Html.Kendo().Grid(Model)
+            .Name("SendGridMailViewModelGrid")
+            .AddReadOnlyOptions()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Sort(s => s.Add(member => member.PrimaryKey).Descending())
+                .Read("Read", "SendGridMail")
+            )
+      )

@@ -15,7 +15,7 @@
     <AssemblyName>RecipiesMVC</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -299,6 +299,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
+    <Compile Include="Controllers\Admin\SendGridMailController.cs" />
     <Compile Include="Controllers\Charts\ChartController.cs" />
     <Compile Include="Controllers\ControllerHelper.cs">
       <SubType>Code</SubType>
@@ -337,7 +338,7 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\Account\AccountViewModels.cs" />
-    <Compile Include="Models\Api\SendGridMail.cs" />
+    <Compile Include="Models\Admin\SendGridMailViewModel.cs" />
     <Compile Include="Models\Chart\GpPerDay.cs" />
     <Compile Include="Models\Chart\LowProducts.cs" />
     <Compile Include="Models\Chart\ProductsPerCategory.cs" />
@@ -526,6 +527,9 @@
       <Name>RecipiesReports</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SendGridMail\Index.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -544,7 +548,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>45024</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:45024/</IISUrl>
+          <IISUrl>http://localhost/RecipiesMVC</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
