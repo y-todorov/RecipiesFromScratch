@@ -18,7 +18,6 @@ namespace RecipiesModelNS
         public RecipiesEntities()
             : base("name=RecipiesEntities")
         {
-            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

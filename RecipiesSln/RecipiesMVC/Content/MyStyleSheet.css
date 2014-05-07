@@ -4,3 +4,19 @@
     border: 0;
 }
 
+/*Disable selection of every element with CSS*/
+body {
+  -webkit-user-select: none;
+     -moz-user-select: -moz-none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+input,
+textarea {
+     
+     -webkit-user-select:text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+}

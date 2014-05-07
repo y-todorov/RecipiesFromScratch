@@ -1,4 +1,7 @@
-﻿kendo.culture("en-IE");
+﻿//Disable context menu with jQuery
+$(document).on("contextmenu", function (event) { event.preventDefault(); });
+
+kendo.culture("en-IE");
 
 $(document).ready(function () {
     $("label").addClass("k-label");
@@ -30,13 +33,13 @@ function onKendoGridSave(e) {
     }
 }
 
-function onKendoGridSaveChanges(e) {
+function onKendoGridSaveChanges() {
     debugger;
     var popupNotification = $("#popupNotification").data("kendoNotification");
     popupNotification.show("All pending changes are successfully saved!");
 }
 
-function onKendoGridRemove(e) {
+function onKendoGridRemove() {
     debugger;
     var popupNotification = $("#popupNotification").data("kendoNotification");
     popupNotification.show("Item removed! Press 'Save Changes' to delete the item from the database!");
@@ -54,7 +57,7 @@ function exportGridData(sender) {
         data: JSON.stringify({
             html: grid.table.context.innerHTML
         }),
-        success: function (data) {
+        success: function () {
         },
         error: function (result) {
             alert('Oh no: ' + result.responseText);
