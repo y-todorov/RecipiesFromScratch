@@ -16,17 +16,18 @@ namespace Helpers
         {
             SendGrid mailMsg = SendGrid.GetInstance();
 
-            mailMsg.To = new List<MailAddress> { new MailAddress(to, toDisplayName) }.ToArray();
-
+            mailMsg.AddTo(to); 
+            
             mailMsg.From = new MailAddress(from, fromDisplayName);
 
+            // https://github.com/sendgrid/sendgrid-php/issues/23
             if (cc != null)
             {
-                mailMsg.Cc = new List<MailAddress> { new MailAddress(cc) }.ToArray();
+                mailMsg.AddTo(cc);
             }
             if (bcc != null)
             {
-                mailMsg.Bcc = new List<MailAddress> { new MailAddress(bcc) }.ToArray();
+                mailMsg.AddBcc(bcc);
             }
 
             mailMsg.Subject = subject;

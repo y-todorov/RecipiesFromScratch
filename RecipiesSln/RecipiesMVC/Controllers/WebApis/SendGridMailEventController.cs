@@ -76,7 +76,9 @@ namespace RecipiesMVC.Controllers.WebApis
                                 UserAgent = sendGridMailViewModel.Useragent,
                                 Guid = sendGridMailViewModel.Guid,
                                 ModifiedByUser = sendGridMailViewModel.ModifiedByUser,
-                                ModifiedDate = sendGridMailViewModel.ModifiedDate
+                                // move this out !!! in some helper method
+                                ModifiedDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"))//sendGridMailViewModel.ModifiedDate
                             };
                             ContextFactory.Current.SendGridMails.Add(sgm);
                         }
@@ -100,7 +102,9 @@ namespace RecipiesMVC.Controllers.WebApis
                             UserAgent = sendGridMailViewModel.Useragent,
                             Guid = sendGridMailViewModel.Guid,
                             ModifiedByUser = sendGridMailViewModel.ModifiedByUser,
-                            ModifiedDate = sendGridMailViewModel.ModifiedDate
+                            // move this out !!! in some helper method
+                            ModifiedDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time")) // sendGridMailViewModel.ModifiedDate
                         };
                         ContextFactory.Current.SendGridMails.Add(sgm);
                     }
