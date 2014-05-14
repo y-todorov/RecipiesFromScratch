@@ -1,4 +1,5 @@
-﻿@using RecipiesMVC.Extensions
+﻿@using RecipiesMVC.Controllers
+@using RecipiesMVC.Extensions
 @using RecipiesMVC.Models;
 @using RecipiesModelNS;
 
@@ -12,8 +13,15 @@
             .AddToolbarOptions(isCreateVisible:false)
             .DataSource(dataSource => dataSource
                 .Ajax()
-                .Read("Read", "ProductWaste")
-                .Create("Create", "ProductWaste")
-                .Update("Update", "ProductWaste")
-                .Destroy("Destroy", "ProductWaste"))
+                //.Read("Read", "ProductWaste")
+                //.Create("Create", "ProductWaste")
+                //.Update("Update", "ProductWaste")
+                //.Destroy("Destroy", "ProductWaste")
+
+                        //.Create(cop => cop.Action<ProductWasteController>(cc => cc.CreateBase(null, null)))
+                        .Read(cop => cop.Action<ProductWasteController>(cc => cc.Read(null, null)))
+                        .Update(cop => cop.Action<ProductWasteController>(cc => cc.Update(null, null)))
+                        .Destroy(cop => cop.Action<ProductWasteController>(cc => cc.Destroy(null, null)))
+                
+                )
       )

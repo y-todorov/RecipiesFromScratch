@@ -1,4 +1,6 @@
-﻿@using RecipiesMVC.Models
+﻿@using RecipiesMVC.Controllers
+@using RecipiesMVC.Controllers.Purchasing
+@using RecipiesMVC.Models
 @using RecipiesMVC.Extensions
 
 @model IEnumerable<ProductVendorViewModel>
@@ -9,8 +11,9 @@
             .AddDefaultOptions()
             .DataSource(dataSource => dataSource
                 .Ajax()
-                .Create("Create", "ProductVendor")
-                .Read("Read", "ProductVendor")
-                .Update("Update", "ProductVendor")
-                .Destroy("Destroy", "ProductVendor"))
+                .Create(cop => cop.Action<ProductVendorController>(cc => cc.Create(null, null)))
+                .Read(cop => cop.Action<ProductVendorController>(cc => cc.Read(null)))
+                .Update(cop => cop.Action<ProductVendorController>(cc => cc.Update(null, null)))
+                .Destroy(cop => cop.Action<ProductVendorController>(cc => cc.Destroy(null, null)))
+            )
       )
