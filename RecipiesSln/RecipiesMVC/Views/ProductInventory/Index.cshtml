@@ -1,16 +1,20 @@
-﻿@using RecipiesMVC.Extensions
+﻿@using RecipiesMVC.Controllers
+@using RecipiesMVC.Controllers.Purchasing
+@using RecipiesMVC.Extensions
 @using RecipiesMVC.Models;
 
 @model IEnumerable<ProductInventoryViewModel>
 
 @(
-        Html.Kendo().Grid(Model)
+ Html.Kendo().Grid(Model)
             .Name("ProductInventoryViewModelGrid")
             .AddDefaultOptions()
             .DataSource(dataSource => dataSource
                 .Ajax()
-                .Create("Create", "ProductInventory")
-                .Read("Read", "ProductInventory")
-                .Update("Update", "ProductInventory")
-                .Destroy("Destroy", "ProductInventory"))
-      )
+                     .Create(cop => cop.Action<ProductInventoryController>(cc => cc.Create(null, null, null)))
+                            .Read(cop => cop.Action<ProductInventoryController>(cc => cc.Read(null, null)))
+                            .Update(cop => cop.Action<ProductInventoryController>(cc => cc.Update(null, null)))
+                            .Destroy(cop => cop.Action<ProductInventoryController>(cc => cc.Destroy(null, null))))
+
+)
+      

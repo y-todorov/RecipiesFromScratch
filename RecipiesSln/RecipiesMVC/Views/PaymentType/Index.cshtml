@@ -1,16 +1,18 @@
-﻿@using RecipiesMVC.Extensions
+﻿@using RecipiesMVC.Controllers.Purchasing
+@using RecipiesMVC.Extensions
 @using RecipiesMVC.Models;
 
 @model IEnumerable<PaymentTypeViewModel>
 
 @(
-        Html.Kendo().Grid(Model)
+ Html.Kendo().Grid(Model)
             .Name("PaymentTypeViewModelGrid")
             .AddDefaultOptions()
             .DataSource(dataSource => dataSource
                 .Ajax()
-                .Create("Create", "PaymentType")
-                .Read("Read", "PaymentType")
-                .Update("Update", "PaymentType")
-                .Destroy("Destroy", "PaymentType"))
-      )
+
+                     .Create(cop => cop.Action<PaymentTypeController>(cc => cc.Create(null, null)))
+                        .Read(cop => cop.Action<PaymentTypeController>(cc => cc.Read(null)))
+                        .Update(cop => cop.Action<PaymentTypeController>(cc => cc.Update(null, null)))
+                        .Destroy(cop => cop.Action<PaymentTypeController>(cc => cc.Destroy(null, null))))
+)

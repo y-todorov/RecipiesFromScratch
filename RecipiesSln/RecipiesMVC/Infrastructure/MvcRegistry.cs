@@ -13,7 +13,7 @@ namespace RecipiesMVC.Infrastructure
 		{
 			For<BundleCollection>().Use(BundleTable.Bundles);
 			For<RouteCollection>().Use(RouteTable.Routes);
-			For<IIdentity>().Use(() => HttpContext.Current.User.Identity);
+			For<IIdentity>().Use(() => HttpContext.Current.User.Identity); // lambda is very important
 			For<HttpSessionStateBase>()
 				.Use(() => new HttpSessionStateWrapper(HttpContext.Current.Session));
 			For<HttpContextBase>()

@@ -26,7 +26,7 @@ namespace RecipiesMVC.Controllers
             return result;
         }
 
-        public ActionResult ReadProducts(int categoryId, [DataSourceRequest] DataSourceRequest request)
+        public ActionResult ReadProducts(int? categoryId, [DataSourceRequest] DataSourceRequest request)
         {
             var result = ReadBase(request, typeof(ProductViewModel), typeof(Product), ContextFactory.Current.Products.Where(p => p.CategoryId == categoryId).ToList());
             return result;

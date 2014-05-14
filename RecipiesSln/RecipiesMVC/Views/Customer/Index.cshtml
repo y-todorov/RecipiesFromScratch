@@ -1,16 +1,18 @@
-﻿@using RecipiesMVC.Extensions
+﻿@using RecipiesMVC.Controllers.Purchasing
+@using RecipiesMVC.Extensions
 @using RecipiesMVC.Models;
 
 @model IEnumerable<CustomerViewModel>
 
 @(
-        Html.Kendo().Grid(Model)
+ Html.Kendo().Grid(Model)
             .Name("CustomerViewModelGrid")
             .AddDefaultOptions()
             .DataSource(dataSource => dataSource
                 .Ajax()
-                .Create("Create", "Customer")
-                .Read("Read", "Customer")
-                .Update("Update", "Customer")
-                .Destroy("Destroy", "Customer"))
-      )
+                    .Create(cop => cop.Action<CustomerController>(cc => cc.Create(null, null)))
+                    .Read(cop => cop.Action<CustomerController>(cc => cc.Read(null)))
+                    .Update(cop => cop.Action<CustomerController>(cc => cc.Update(null, null)))
+                    .Destroy(cop => cop.Action<CustomerController>(cc => cc.Destroy(null, null))))
+)
+      

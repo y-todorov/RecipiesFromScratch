@@ -1,4 +1,5 @@
-﻿@using RecipiesMVC.Extensions
+﻿@using RecipiesMVC.Controllers
+@using RecipiesMVC.Extensions
 @using RecipiesMVC.Models;
 
 @model IEnumerable<ProductInventoryHeaderViewModel>
@@ -12,7 +13,15 @@
                 .Create("Create", "ProductInventoryHeader")
                 .Read("Read", "ProductInventoryHeader")
                 .Update("Update", "ProductInventoryHeader")
-                .Destroy("Destroy", "ProductInventoryHeader")).ClientDetailTemplateId("template")
+                .Destroy("Destroy", "ProductInventoryHeader")
+
+                        //.Create(cop => cop.Action<ProductInventoryHeaderController>(cc => cc.Create(null, null)))
+                        //            .Read(cop => cop.Action<ProductInventoryHeaderController>(cc => cc.Read(null)))
+                        //            .Update(cop => cop.Action<ProductInventoryHeaderController>(cc => cc.(null, null)))
+                        //            .Destroy(cop => cop.Action<ProductInventoryHeaderController>(cc => cc.Destroy(null, null)))
+                
+                )
+                .ClientDetailTemplateId("template")
       )
 
 

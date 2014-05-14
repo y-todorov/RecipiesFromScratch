@@ -29,9 +29,14 @@
                 @(Html.Kendo().Grid<ProductViewModel>()
                       .Name("Products_#=CategoryId#")
                       .AddReadOnlyOptions(true)
-                      .DataSource(dataSource => dataSource
-                          .Ajax()
-                          .Read(read => read.Action("ReadProducts", "Category", new {categoryId = "#=CategoryId#"}))
+                      .DataSource(dataSource =>
+                      {
+                          var catId = new {categoryId = "#=CategoryId#"};
+                          dataSource
+                              .Ajax()
+                              //.Read(read => read.Action("ReadProducts", "Category", new { categoryId = "#=CategoryId#" }))
+                              .Read(cop => cop.Action<CategoryController>(cc => cc.ReadProducts(null, null)).Route("Default", new { categoryId = "#=CategoryId#" }));
+                      }
                       )
                       .ToClientTemplate()
                       )
