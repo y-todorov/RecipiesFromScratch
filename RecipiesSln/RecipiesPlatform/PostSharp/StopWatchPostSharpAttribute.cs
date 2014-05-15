@@ -38,9 +38,14 @@ namespace RecipiesPlatform.PostSharp
             Stopwatch sw = (Stopwatch)args.MethodExecutionTag;
             sw.Stop();
 
-            string output = string.Format("{0} executed in {1} milliseconds!" ,methodName, sw.ElapsedMilliseconds);
+            string output = string.Format("{0} executed in {1} milliseconds = {2} ticks!" ,methodName, sw.ElapsedMilliseconds, sw.ElapsedTicks);
 
             LogentriesHelper.WriteMessage(output, LogentriesMessageType.Info);
+
+#if DEBUG
+            Debug.WriteLine(output);
+#endif
+           
         }
     }
 }

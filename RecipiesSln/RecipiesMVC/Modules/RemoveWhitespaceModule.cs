@@ -4,6 +4,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Web;
 using RecipiesMVC.Filters;
+using RecipiesPlatform.PostSharp;
 
 #endregion
 
@@ -35,6 +36,10 @@ namespace RecipiesMVC.Modules
 
 		#endregion
 
+#if DEBUG
+          [StopWatchPostSharp]
+#endif
+        
 		/// <summary>
 		/// Processes the response and sets a response filter for conditional GETs.
 		/// </summary>
