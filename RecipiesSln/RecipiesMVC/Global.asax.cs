@@ -14,6 +14,7 @@ using RecipiesMVC.Models;
 using RecipiesWebFormApp;
 using RecipiesMVC.App_Start;
 using RecipiesMVC.Infrastructure;
+using RecipiesWebFormApp.Quartz.ActionsForScheduling;
 using RecipiesWebFormApp.Shared;
 using System.Web.Http;
 using System.Web.Routing;
@@ -82,6 +83,8 @@ namespace RecipiesMVC
 
             LogentriesHelper.WriteMessage("public class MvcApplication : System.Web.HttpApplication START",
                 LogentriesMessageType.Info);
+
+            ActionsForScheduling.StartAll();
         }
 
 

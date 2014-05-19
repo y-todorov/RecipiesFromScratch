@@ -74,7 +74,7 @@ namespace RecipiesWebFormApp.Quartz.ActionsForScheduling
         }
         public static void RefreshWebsiteAction()
         {
-            IJobDetail job = JobBuilder.Create<CalculateProductsUnitPriceJob>()
+            IJobDetail job = JobBuilder.Create<RefreshWebsiteJob>()
                 .WithIdentity("RefreshWebsiteAction", "group3")
                 .Build();
 

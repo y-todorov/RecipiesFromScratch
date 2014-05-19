@@ -346,11 +346,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\BaseHandler.cs" />
+    <Compile Include="Handlers\CombinedStylesheetHandler.cs" />
+    <Compile Include="Handlers\JavaScriptHandler.cs" />
+    <Compile Include="Handlers\StylesheetHandler.cs" />
     <Compile Include="Infrastructure\ActionFilterRegistry.cs" />
     <Compile Include="Infrastructure\ControllerConvention.cs" />
     <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\CurrentUser.cs" />
     <Compile Include="Infrastructure\ICurrentUser.cs" />
+    <Compile Include="Infrastructure\JavaScriptMinifier.cs" />
     <Compile Include="Infrastructure\MvcRegistry.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\Processor.cs" />

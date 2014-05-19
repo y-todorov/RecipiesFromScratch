@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
+using OmeksEnterprise;
 
 #endregion
 
@@ -108,11 +109,11 @@ namespace RecipiesMVC
 		/// </summary>
 		/// <param name="body">The body text of which to remove white space from.</param>
 		/// <returns>The specified body with no white space.</returns>
-        //public static string RemoveWhiteSpaceFromJavaScript(string body)
-        //{
-        //    JavaScriptMinifier jsmin = new JavaScriptMinifier();
-        //    return jsmin.Minify(body);
-        //}
+        public static string RemoveWhiteSpaceFromJavaScript(string body)
+        {
+            JavaScriptMinifier jsmin = new JavaScriptMinifier();
+            return jsmin.Minify(body);
+        }
 
 		/// <summary>
 		/// Strips the whitespace from any .css file.
