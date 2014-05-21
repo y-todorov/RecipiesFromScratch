@@ -43,6 +43,16 @@
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
           <Property Name="ModifiedByUser" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="__RecipiesDataBase">
           <Key>
             <PropertyRef Name="id" />
@@ -54,55 +64,55 @@
           <Key>
             <PropertyRef Name="DepartmentId" />
           </Key>
-          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="1000" />
-          <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedByUser" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DepartmentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedByUser" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="1000" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
           <Property Name="BirthDate" Type="datetime" />
-          <Property Name="HireDate" Type="datetime" />
-          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
-          <Property Name="City" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Region" Type="nvarchar" MaxLength="1000" />
-          <Property Name="PostalCode" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Country" Type="nvarchar" MaxLength="1000" />
-          <Property Name="HomePhone" Type="nvarchar" MaxLength="1000" />
-          <Property Name="PreviousExperience" Type="nvarchar" MaxLength="1000" />
-          <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedByUser" Type="nvarchar" MaxLength="1000" />
-          <Property Name="Email" Type="nvarchar" MaxLength="1000" />
-          <Property Name="MobilePhone" Type="nvarchar" MaxLength="1000" />
+          <Property Name="HireDate" Type="datetime2" Precision="7" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Region" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="HomePhone" Type="nvarchar(max)" />
+          <Property Name="PreviousExperience" Type="nvarchar(max)" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedByUser" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="MobilePhone" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="EmployeeDepartment">
           <Key>
             <PropertyRef Name="EmployeeDepartmentId" />
           </Key>
-          <Property Name="EmployeeDepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeDepartmentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeId" Type="int" />
-          <Property Name="DepartmentId" Type="int" />
-          <Property Name="ShiftId" Type="int" />
-          <Property Name="StartDate" Type="datetime" />
-          <Property Name="EndDate" Type="datetime" />
-          <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedByUser" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DepartmentId" Type="bigint" />
+          <Property Name="ShiftId" Type="bigint" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedByUser" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Shift">
           <Key>
             <PropertyRef Name="ShiftId" />
           </Key>
-          <Property Name="ShiftId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="1000" />
-          <Property Name="StartHour" Type="datetime" />
-          <Property Name="EndHour" Type="datetime" />
+          <Property Name="ShiftId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="StartHour" Type="datetime2" Precision="7" />
+          <Property Name="EndHour" Type="datetime2" Precision="7" />
           <Property Name="ModifiedDate" Type="datetime" />
-          <Property Name="ModifiedByUser" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ModifiedByUser" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -910,6 +920,7 @@
         <EntityContainer Name="RecipiesModelNSStoreContainer">
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="Admin" store:Type="Tables" />
           <EntitySet Name="SendGridMail" EntityType="Self.SendGridMail" Schema="Admin" store:Type="Tables" />
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="__RecipiesDataBase" EntityType="Self.__RecipiesDataBase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="HumanResources" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="HumanResources" store:Type="Tables" />
@@ -1303,7 +1314,8 @@
             <End Role="ProductWaste" EntitySet="Wastes" />
           </AssociationSet>
           <EntitySet Name="SendGridMails" EntityType="RecipiesModelNS.SendGridMail" />
-        </EntityContainer>
+          <EntitySet Name="C__MigrationHistory" EntityType="RecipiesModelNS.C__MigrationHistory" />
+          </EntityContainer>
         <EntityType Name="EmailTemplate">
           <Key>
             <PropertyRef Name="EmailTemplateId" />
@@ -1325,9 +1337,9 @@
             <PropertyRef Name="DepartmentId" />
           </Key>
           <Property Type="Int32" Name="DepartmentId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
-          <Property Type="String" Name="ModifiedByUser" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="7" />
+          <Property Type="String" Name="ModifiedByUser" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EmployeeDepartments"
                               Relationship="RecipiesModelNS.FK_EmployeeDepartment_Department" FromRole="Department"
                               ToRole="EmployeeDepartment" />
@@ -1337,19 +1349,19 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Type="Int32" Name="EmployeeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="LastName" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FirstName" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="BirthDate" Precision="3" />
-          <Property Type="DateTime" Name="HireDate" Precision="3" />
-          <Property Type="String" Name="Address" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="City" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Region" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="PostalCode" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Country" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="HomePhone" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="PreviousExperience" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
-          <Property Type="String" Name="ModifiedByUser" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="HireDate" Precision="7" />
+          <Property Type="String" Name="Address" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Region" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PostalCode" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HomePhone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PreviousExperience" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="7" />
+          <Property Type="String" Name="ModifiedByUser" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EmployeeDepartments" Relationship="RecipiesModelNS.FK_EmployeeDepartment_Employee"
                               FromRole="Employee" ToRole="EmployeeDepartment" />
           <NavigationProperty Name="SalesOrderHeaders" Relationship="RecipiesModelNS.FK_Order_Employee"
@@ -1357,8 +1369,8 @@
           <NavigationProperty Name="PurchaseOrderHeaders"
                               Relationship="RecipiesModelNS.FK_PurchaseOrderHeader_Employee" FromRole="Employee"
                               ToRole="PurchaseOrderHeader" />
-          <Property Type="String" Name="Email" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="MobilePhone" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MobilePhone" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmployeeDepartment">
           <Key>
@@ -1369,10 +1381,10 @@
           <Property Type="Int32" Name="EmployeeId" />
           <Property Type="Int32" Name="DepartmentId" />
           <Property Type="Int32" Name="ShiftId" />
-          <Property Type="DateTime" Name="StartDate" Precision="3" />
-          <Property Type="DateTime" Name="EndDate" Precision="3" />
-          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
-          <Property Type="String" Name="ModifiedByUser" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="StartDate" Precision="7" />
+          <Property Type="DateTime" Name="EndDate" Precision="7" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="7" />
+          <Property Type="String" Name="ModifiedByUser" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="RecipiesModelNS.FK_EmployeeDepartment_Department"
                               FromRole="EmployeeDepartment" ToRole="Department" />
           <NavigationProperty Name="Employee" Relationship="RecipiesModelNS.FK_EmployeeDepartment_Employee"
@@ -1385,11 +1397,11 @@
             <PropertyRef Name="ShiftId" />
           </Key>
           <Property Type="Int32" Name="ShiftId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="StartHour" Precision="3" />
-          <Property Type="DateTime" Name="EndHour" Precision="3" />
+          <Property Type="String" Name="Name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="StartHour" Precision="7" />
+          <Property Type="DateTime" Name="EndHour" Precision="7" />
           <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
-          <Property Type="String" Name="ModifiedByUser" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ModifiedByUser" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EmployeeDepartments" Relationship="RecipiesModelNS.FK_EmployeeDepartment_Shift"
                               FromRole="Shift" ToRole="EmployeeDepartment" />
         </EntityType>
@@ -2350,7 +2362,17 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
           <Property Name="ModifiedByUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -2828,7 +2850,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="RecipiesModelNS.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

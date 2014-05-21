@@ -51,6 +51,9 @@
     <Compile Include="Customer.cs">
       <DependentUpon>RecipiesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>RecipiesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SendGridMail.partial.cs" />
     <Compile Include="Customer.partial.cs" />
     <Compile Include="C__RecipiesDataBase.cs">

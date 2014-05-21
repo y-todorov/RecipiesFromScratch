@@ -203,6 +203,19 @@ namespace RecipiesMVC.Controllers
         {
             return DateTime.Now.ToString();
         }
+
+          public string CalculateProductsUnitPrice()
+          {
+              //try
+              {
+                    Product.UpdateUnitPriceOfAllProducts();
+                    return "CalculateProductsUnitPrice succeeded!";
+              }
+              //catch (Exception ex)
+              //{
+              //    return ex.Message;
+              //}
+          }
         
         
     }

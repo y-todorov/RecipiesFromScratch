@@ -55,5 +55,6 @@ namespace RecipiesModelNS
         public DbSet<C__RecipiesDataBase> C__RecipiesDataBase { get; set; }
         public DbSet<ProductWasteHeader> ProductWasteHeaders { get; set; }
         public DbSet<SendGridMail> SendGridMails { get; set; }
+        public DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
     }
 }
