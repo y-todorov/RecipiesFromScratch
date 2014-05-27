@@ -20,12 +20,11 @@
               .Expanded(true)
               .Content(@<text>@(Html.Kendo().Chart<object>()
                                     .Name("VendorPurchasesByWeek").Theme("blueopal")
+                                    .ChartArea(c => c.Width(ChartBuilder.ChartWidth))
                                     .Legend(legend => legend
                                         .Position(ChartLegendPosition.Top)
                                     )
-     
                                     .AddVendorsValuePerWeekOptions()
-
                                     .ValueAxis(axis => axis.Numeric("Value").Labels(l => l.Format("{0:C3}"))
                                     )
                                     .Tooltip(tooltip => tooltip
@@ -38,6 +37,7 @@
               .Expanded(true)
               .Content(@<text>@(Html.Kendo().Chart<GpPerDay>()
                                     .Name("chartGPperDay").Theme("blueopal")
+                                    .ChartArea(c => c.Width(ChartBuilder.ChartWidth))
                                     .Legend(legend => legend
                                         .Position(ChartLegendPosition.Top)
                                     )
@@ -59,6 +59,7 @@
               .Expanded(true)
               .Content(@<text>@(Html.Kendo().Chart<TotalPoByVendor>()
                                     .Name("TotalPurchaseOrdersValuePerVendor").Theme("blueopal")
+                                    .ChartArea(c => c.Width(ChartBuilder.ChartWidth))
                                     .Legend(legend => legend
                                         .Position(ChartLegendPosition.Top)
                                     )
@@ -79,6 +80,7 @@
               .Expanded(true)
               .Content(@<text>@(Html.Kendo().Chart<RecipeByGP>()
                                     .Name("chartRecipeByGP").Theme("blueopal")
+                                    .ChartArea(c => c.Width(ChartBuilder.ChartWidth).Height(600))
                                     .Legend(legend => legend
                                         .Position(ChartLegendPosition.Top)
                                     )
@@ -98,7 +100,7 @@
               .Expanded(true)
               .Content(@<text>@(Html.Kendo().Chart<ProductsPerCategory>()
                                     .Name("ProductsCountAndStockValue").Theme("blueopal")
-                                    //.Title("Products count and stock value by category")
+                                    .ChartArea(c => c.Width(ChartBuilder.ChartWidth))
                                     .Legend(legend => legend
                                         .Position(ChartLegendPosition.Top)
                                     )
@@ -132,7 +134,7 @@
               .Expanded(true)
               .Content(@<text>@(Html.Kendo().Chart<LowProduct>()
                                     .Name("LowProducts").Theme("blueopal")
-                                    //.Title("Products count and stock value by category")
+                                    .ChartArea(c => c.Width(ChartBuilder.ChartWidth))
                                     .Legend(legend => legend
                                         .Position(ChartLegendPosition.Top)
                                     )
@@ -161,73 +163,3 @@
       }
       )
       )
-
-@*<telerik:RadHtmlChart runat="server" ID="rhcProductsForReorder">
-        <plotarea>
-            <series>
-                <telerik:columnseries datafieldy="UnitsInStock" name="Units In Stock">
-                </telerik:columnseries>
-                <telerik:columnseries datafieldy="UnitsOnOrder" name="Units On Order">
-                </telerik:columnseries>
-                <telerik:columnseries datafieldy="ReorderLevel" name="Reorder Level">
-                </telerik:columnseries>
-            </series>
-            <xaxis datalabelsfield="Name">
-            </xaxis>
-            <yaxis>
-                <titleappearance text="Units"></titleappearance>
-            </yaxis>
-        </plotarea>
-        <charttitle text="Low products">
-        </charttitle>
-    </telerik:RadHtmlChart>*@
-
-@*@(Html.Kendo().Chart<GpPerDay>()
-                  .Name("chartGPperDay1").Theme("blueopal")
-                  .Title("GP per day (Last 30 days)")
-              .Legend(legend => legend
-                  .Position(ChartLegendPosition.Top)
-              )
-                  .DataSource(ds => ds.Read(read => read.Action("GpPerDayLastDays", "Chart")))
-
-              .Series(series =>
-              {
-                  series.Line(p => p.DayGp).Name("Value per day").Labels(l => l.Visible(true)).Axis("ValuePerDay");
-              })
-              .CategoryAxis(axis => axis.Categories(p => p.Days)
-                  .Labels(labels => labels.Rotation(90)).AxisCrossingValue(0, int.MaxValue)
-              )
-                  .ValueAxis(axis => axis.Numeric("ValuePerDay")
-              )
-              .Tooltip(tooltip => tooltip
-                  .Visible(true)
-              )
-    )
-
-
-    @(Html.Kendo().Chart<ProductsPerCategory>()
-              .Name("chart").Theme("blueopal")
-              .Title("Products count and stock value by category")
-              .Legend(legend => legend
-                  .Position(ChartLegendPosition.Top)
-              )
-              .DataSource(ds => ds.Read(read => read.Action("ProductsCountByCategory", "Chart")))
-              .Series(series =>
-              {
-                  series.Column(p => p.ProductCount).Name("Product count").Labels(l => l.Format("{0:N}").Visible(true)).Axis("ProductCountAxis");
-                  series.Column(p => p.ProductValue).Name("Product value").Labels(l => l.Format("{0:C3}").Visible(true)).Axis("ProductValueAxis");
-              })
-              .CategoryAxis(axis => axis.Categories(p => p.CategoryName)
-                  .Labels(labels => labels.Rotation(90)).AxisCrossingValue(0, int.MaxValue)
-              )
-              .ValueAxis(axis => axis.Numeric("ProductCountAxis")
-                  .Labels(labels => labels.Format("{0:N}"))
-              )
-              .ValueAxis(axis => axis.Numeric("ProductValueAxis")
-                  .Labels(labels => labels.Format("{0:C3}"))
-              )
-              .Tooltip(tooltip => tooltip
-                  .Visible(true)
-                  .Format("{0:N0}")
-              )
-    )*@

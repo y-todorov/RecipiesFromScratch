@@ -20,6 +20,8 @@ namespace RecipiesMVC.Extensions
 {
     public static class ChartBuilder
     {
+        public const int ChartWidth = 2500;
+
         public static ChartBuilder<T> AddVendorsValuePerWeekOptions<T>(this ChartBuilder<T> builder) where T : class
         {
             ChartController cc = new ChartController();
