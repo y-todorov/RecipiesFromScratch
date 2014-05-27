@@ -316,7 +316,12 @@ namespace RecipiesModelNS
         public double GetBaseUnitMeasureQuantityForProduct(double? quantity, UnitMeasure quantityUnitMeasure,
             PurchaseOrderDetail pod = null)
         {
-           
+            if (quantity.GetValueOrDefault() == 0 || quantityUnitMeasure == null) // invalid data, fix for CalculateProductsUnitPrice
+           {
+               return 0;
+           }
+
+
             if (pod != null && pod.UnitMeasure == null)
             {
                 throw new ArgumentException("UnitMeasure cannot be null for Purchase order detail with id " + pod.PurchaseOrderDetailId);
