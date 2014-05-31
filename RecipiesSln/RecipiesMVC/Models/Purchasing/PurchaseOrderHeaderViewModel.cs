@@ -86,7 +86,7 @@ namespace RecipiesMVC.Models.Purchasing
             pohViewModel.StatusId = pohEntity.StatusId;
             //pohViewModel.SubTotal = pohEntity.SubTotal;
 
-            //pohViewModel.SubTotal = (decimal)pohEntity.PurchaseOrderDetails.Sum(d => d.LineTotal);
+            pohViewModel.SubTotal = pohEntity.PurchaseOrderDetails.Sum(d => d.LineTotal);
 
 
             pohViewModel.VAT = pohEntity.VAT;
@@ -122,7 +122,7 @@ namespace RecipiesMVC.Models.Purchasing
                 pohEntity.ShipDate = pohViewModel.ShipDate.Value.Date;
             }
             pohEntity.StatusId = pohViewModel.StatusId;
-            //pohEntity.SubTotal = pohViewModel.SubTotal; // All fields that are read obly should not be set through model !!!
+            pohEntity.SubTotal = (decimal?)pohViewModel.SubTotal; // All fields that are read obly should not be set through model !!!
             //pohEntity.TotalDue = pohViewModel.TotalDue;
             pohEntity.VAT = pohViewModel.VAT;
             pohEntity.VendorId = pohViewModel.VendorId;
