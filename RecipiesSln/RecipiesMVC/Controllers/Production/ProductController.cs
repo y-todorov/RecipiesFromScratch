@@ -26,7 +26,7 @@ namespace RecipiesMVC.Controllers
         {
             return View();
         }
-        
+
         public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
             JsonResult result = ReadBase<Product, ProductViewModel>(request, context.Products);
@@ -37,7 +37,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Create([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
-            var result = CreateBase(request, products, typeof (ProductViewModel), typeof (Product));
+            var result = CreateBase(request, products, typeof(ProductViewModel), typeof(Product));
             return result;
         }
 
@@ -47,7 +47,7 @@ namespace RecipiesMVC.Controllers
         {
             //HttpRuntime.Close(); .. THIS IS God Damn fucking slow. NEVER EVER use it!
 
-            var result = UpdateBase(request, products, typeof (ProductViewModel), typeof (Product));
+            var result = UpdateBase(request, products, typeof(ProductViewModel), typeof(Product));
             return result;
         }
 
@@ -55,13 +55,13 @@ namespace RecipiesMVC.Controllers
         public ActionResult Destroy([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
-            var result = DestroyBase(request, products, typeof (ProductViewModel), typeof (Product));
+            var result = DestroyBase(request, products, typeof(ProductViewModel), typeof(Product));
             return result;
         }
 
         public ActionResult ReadProductRecipies(int? productId, [DataSourceRequest] DataSourceRequest request)
         {
-            var result = ReadBase(request, typeof (RecipeViewModel), typeof (Recipe),
+            var result = ReadBase(request, typeof(RecipeViewModel), typeof(Recipe),
                 ContextFactory.Current.Recipes.Where(r => r.ProductIngredients.Any(pi => pi.ProductId == productId))
                     .ToList());
             return result;
@@ -75,7 +75,7 @@ namespace RecipiesMVC.Controllers
                     .OrderByDescending(de => de.ProductInventoryHeader.ForDate)
                     .ToList();
 
-            var result = ReadBase(request, typeof (ProductInventoryViewModel), typeof (ProductInventory),
+            var result = ReadBase(request, typeof(ProductInventoryViewModel), typeof(ProductInventory),
                 productInventories);
             return result;
         }
@@ -103,7 +103,7 @@ namespace RecipiesMVC.Controllers
                     (pi => pi.ProductId == productId).ToList().Where(w => w.Quantity.GetValueOrDefault() != 0)
                     .OrderByDescending(de => de.ProductWasteHeader.ForDate)
                     .ToList();
-            var result = ReadBase(request, typeof (ProductWasteViewModel), typeof (ProductWaste),
+            var result = ReadBase(request, typeof(ProductWasteViewModel), typeof(ProductWaste),
                 productWastes);
 
 
@@ -158,8 +158,8 @@ namespace RecipiesMVC.Controllers
 
         }
 
-          public ActionResult ReadProductUnitsInStockProductWastes(int? productId,
-            [DataSourceRequest] DataSourceRequest request)
+        public ActionResult ReadProductUnitsInStockProductWastes(int? productId,
+          [DataSourceRequest] DataSourceRequest request)
         {
             Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
@@ -181,42 +181,47 @@ namespace RecipiesMVC.Controllers
             return null;
         }
 
-          public ActionResult ReadProductInventory(int? productId,
-            [DataSourceRequest] DataSourceRequest request)
-          {
-              Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
-              if (product != null)
-              {
-                  ProductInventory inv = product.GetLastInventoryForDate(DateTime.Now.Date);
+        public ActionResult ReadProductInventory(int? productId,
+          [DataSourceRequest] DataSourceRequest request)
+        {
+            Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
+            if (product != null)
+            {
+                //ProductInventory inv = product.GetLastInventoryForDate(DateTime.Now.Date);
+              
+                //if (inv == null)
+                //{
 
-                  List<ProductInventory> invs = new List<ProductInventory>() {inv};
+                //}
 
-                  var result = ReadBase(request, typeof(ProductInventoryViewModel), typeof(ProductInventory), invs);
-                  return result;
-                  
-              }
-              return null;
-          }
+                List<ProductInventory> invs = product.ProductInventories.ToList(); // new List<ProductInventory>() { inv };
+
+                var result = ReadBase(request, typeof(ProductInventoryViewModel), typeof(ProductInventory), invs);
+                return result;
+
+            }
+            return null;
+        }
 
 
-          public string Test(int? productId)
+        public string Test(int? productId)
         {
             return DateTime.Now.ToString();
         }
 
-          public string CalculateProductsUnitPrice()
-          {
-              //try
-              {
-                    Product.UpdateUnitPriceOfAllProducts();
-                    return "CalculateProductsUnitPrice succeeded!";
-              }
-              //catch (Exception ex)
-              //{
-              //    return ex.Message;
-              //}
-          }
-        
-        
+        public string CalculateProductsUnitPrice()
+        {
+            //try
+            {
+                Product.UpdateUnitPriceOfAllProducts();
+                return "CalculateProductsUnitPrice succeeded!";
+            }
+            //catch (Exception ex)
+            //{
+            //    return ex.Message;
+            //}
+        }
+
+
     }
 }
