@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -34,6 +35,10 @@ namespace RecipiesModelNS
 
         public double GetAveragePriceLastDays(int lastDays, out string text)
         {
+            if (ProductId == 363)
+            {
+
+            }
             RecipiesEntities context = ContextFactory.Current;
 
             DateTime fromDate = DateTime.Now.AddDays(-lastDays).Date;
@@ -41,7 +46,7 @@ namespace RecipiesModelNS
             List<PurchaseOrderDetail> pods;
             pods = context.PurchaseOrderDetails.Where(
                 pod => pod.ProductId == ProductId && pod.PurchaseOrderHeader.ShipDate.HasValue &&
-                       pod.OrderQuantity != 0 && // this is important
+                       pod.OrderQuantity != 0 && pod.OrderQuantity != null && // this is important
                        pod.PurchaseOrderHeader.ShipDate >= fromDate && pod.PurchaseOrderHeader.ShipDate <= toDate &&
                        pod.PurchaseOrderHeader.StatusId == (int) PurchaseOrderStatusEnum.Completed).ToList();
             pods = pods.OrderByDescending(p => p.PurchaseOrderHeader.ShipDate).ToList();
@@ -84,7 +89,7 @@ namespace RecipiesModelNS
             {
                 DateTime nowDate = DateTime.Now.Date;
                 PurchaseOrderDetail lastPod = context.PurchaseOrderDetails.Where(pod => pod.ProductId == ProductId &&
-                                                                                        pod.OrderQuantity != 0 &&
+                                                                                        pod.OrderQuantity != 0 && pod.OrderQuantity != null &&
                                                                                         // this is important
                                                                                         pod.PurchaseOrderHeader.ShipDate <=
                                                                                         nowDate &&
@@ -418,5 +423,7 @@ namespace RecipiesModelNS
             }
             ContextFactory.Current.SaveChanges();
         }
+
+       
     }
 }
