@@ -110,7 +110,7 @@ namespace RecipiesMVC.Controllers
                 return;
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 Debugger.Break();
             }

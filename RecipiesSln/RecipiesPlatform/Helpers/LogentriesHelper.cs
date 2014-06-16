@@ -128,7 +128,7 @@ namespace RecipiesWebFormApp.Shared
                             sslStream.AuthenticateAsClient(server);
                             sslStream.Write(data, 0, data.Length);
                         }
-                        catch (AuthenticationException e)
+                        catch (AuthenticationException)
                         {
                             using (TcpClient client = new TcpClient(server, nonSecurePort80))
                             {

@@ -6,9 +6,11 @@
 <head>
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico" />
-    @Styles.Render("~/Content/ThisMustBeHere")
-    <script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>
-    @Scripts.Render("~/js")
+    <link href="~/Content/AllCSS.css" rel="stylesheet" />
+    <script src="~/Scripts/JQuery/AllJS.js"></script>
+    @*@Styles.Render("~/Content/ThisMustBeHere")*@
+    @*<script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>*@
+    @*@Scripts.Render("~/js")*@
 </head>
 <body>
     <header>
@@ -23,8 +25,9 @@
                 });
             })
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
-        )
-        <span id="popupNotification"></span>
+              )
+        <span id="centeredNotification" style="display:none;"></span>
+        <span id="popupNotification" style="display:none;"></span>
     </header>
 
     <div id="body">
@@ -33,9 +36,36 @@
     </div>
     <footer>
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
+
+                var centered = $("#centeredNotification").kendoNotification({
+                    hideOnClick: false,
+                    stacking: "down",
+                    show: onShow,
+                    button: true,
+                    autoHideAfter: 30000
+                }).data("kendoNotification");
+
                 $("#popupNotification").kendoNotification().data("kendoNotification");
+
+                function onShow(e) {
+                    if (!$("." + e.sender._guid)[1]) {
+                        var element = e.element.parent(),
+                            eWidth = element.width(),
+                            eHeight = element.height(),
+                            wWidth = $(window).width(),
+                            wHeight = $(window).height(),
+                            newTop, newLeft;
+
+                        newLeft = Math.floor(wWidth / 2 - eWidth / 2);
+                        newTop = Math.floor(wHeight / 2 - eHeight / 2);
+
+                        e.element.parent().css({ top: newTop, left: newLeft });
+                    }
+                }
             });
+
+           
         </script>
     </footer>
 </body>

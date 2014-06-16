@@ -8,8 +8,10 @@ namespace RecipiesWebFormApp
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            /*
             bundles.UseCdn = false;
             BundleTable.EnableOptimizations = true;
+
 
             bundles.Add(new ScriptBundle("~/js")
                 .Include("~/Scripts/*.js")
@@ -33,6 +35,7 @@ namespace RecipiesWebFormApp
                 //.Include("~/Content/textures/*.gif")
                 
                 );
+             */ 
 
         }
     }

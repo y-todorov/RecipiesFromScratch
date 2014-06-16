@@ -40,11 +40,13 @@ namespace RecipiesMVC.Filters
 		/// <param name="count">The number of bytes to be written to the current stream.</param>
 		protected override void Process(byte[] buffer, int offset, int count)
 		{
-			string html = Encoding.Default.GetString(buffer, offset, count);
+            string html = Encoding.Default.GetString(buffer, offset, count);
 			html = Processor.RemoveWhitespaceFromHtml(html);
 
 			byte[] outdata = System.Text.Encoding.Default.GetBytes(html);
 			this.Sink.Write(outdata, 0, outdata.GetLength(0));
+
+
 		}
 	}
 }

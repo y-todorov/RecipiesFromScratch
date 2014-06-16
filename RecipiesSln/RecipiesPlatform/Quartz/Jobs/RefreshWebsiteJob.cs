@@ -17,7 +17,7 @@ namespace RecipiesWebFormApp.Quartz.Jobs
             {
                 string res = client.DownloadStringTaskAsync(new Uri("http://bluesystems.azurewebsites.net/")).Result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // no need to rethrow here
             }

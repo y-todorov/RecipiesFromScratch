@@ -59,6 +59,7 @@ namespace RecipiesMVC.Handlers
 		/// <param name="file">The JavaScript file to minify.</param>
 		private static void WriteContent(HttpContext context, string file)
 		{
+
 			using (StreamReader reader = new StreamReader(file))
 			{
 				string body = reader.ReadToEnd();

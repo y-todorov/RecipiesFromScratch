@@ -3,17 +3,33 @@
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Linq;
 
 namespace RecipiesModelNS
 {
     public partial class RecipiesEntities : DbContext
     {
-        protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(
-            System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, IDictionary<object, object> items)
+        protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
         {
+            var result = new DbEntityValidationResult(entityEntry, new List<DbValidationError>());
+            YordanBaseEntity ybe = entityEntry.Entity as YordanBaseEntity;
+            if (ybe != null)
+            {
+                var validationErrors = ybe.ValidateEntitiyBeforeSave(entityEntry);
+                foreach (DbValidationError validationError in validationErrors)
+                {
+                    result.ValidationErrors.Add(validationError);
+                }
+
+            }
+            if (result.ValidationErrors.Count > 0)
+            {
+                return result;
+            }
             return base.ValidateEntity(entityEntry, items);
         }
 

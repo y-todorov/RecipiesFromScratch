@@ -46,7 +46,7 @@ namespace RecipiesMVC.Controllers
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
             //HttpRuntime.Close(); .. THIS IS God Damn fucking slow. NEVER EVER use it!
-
+            
             var result = UpdateBase(request, products, typeof(ProductViewModel), typeof(Product));
             return result;
         }

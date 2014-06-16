@@ -10,7 +10,6 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using Kendo.Mvc;
-using RecipiesMVC.Models;
 
 namespace RecipiesMVC.Controllers
 {

@@ -57,7 +57,7 @@ namespace RecipiesMVC.Controllers
                             pi.QuantityByDocuments =
                                 product.GetQuantityByDocumentsForDate(pihModel.ForDate.GetValueOrDefault());
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             throw;
                         }

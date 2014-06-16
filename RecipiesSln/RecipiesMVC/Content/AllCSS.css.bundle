@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle minify="true" runOnBuild="true" output="AllCSS.css">
+  <!--The order of the <file> elements determines the order of the file contents when bundled.-->
+  <file>/Content/kendo.blueopal.min.css</file>
+  <file>/Content/kendo.common.core.min.css</file>
+  <file>/Content/kendo.common.min.css</file>
+  <file>/Content/kendo.dataviz.blueopal.min.css</file>
+  <file>/Content/MyStyleSheet.css</file>
+</bundle>

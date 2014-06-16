@@ -80,7 +80,7 @@ WHERE database_id = DB_ID( 'recipies')";
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                     }
                 }

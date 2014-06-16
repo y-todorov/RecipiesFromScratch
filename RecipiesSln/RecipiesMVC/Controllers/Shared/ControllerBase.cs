@@ -6,6 +6,7 @@ using System.Web.UI;
 using AutoMapper.QueryableExtensions;
 using DevTrends.MvcDonutCaching;
 using DevTrends.MvcDonutCaching.Annotations;
+using RecipiesMVC.ActionFilters;
 using RecipiesMVC.DataAnnotations;
 using RecipiesMVC.Helpers;
 using RecipiesMVC.Models;
@@ -33,6 +34,7 @@ namespace RecipiesMVC.Controllers
 
     //[DonutOutputCache(Duration = 24 * 3600)] // NEVER EVER CACHE POST REQUESTS !!! That is deletes, updates and inserts
     
+    [AjaxExceptionFilter]
     public abstract class ControllerBase : Controller
     {
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding,
@@ -96,7 +98,9 @@ namespace RecipiesMVC.Controllers
         [StopWatchPostSharp]
         public ActionResult CreateBase([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
-            if (models != null && ModelState.IsValid)
+            //if (models != null && ModelState.IsValid)
+            // ModelState check for valid state in Validate entity Not in the client context
+            if (models != null)
             {
                 DbSet dbset = ContextFactory.Current.Set(entityType);
 
@@ -122,17 +126,22 @@ namespace RecipiesMVC.Controllers
                     dynamic model = entitiesHash[dummyEntity];
                     model.ConvertFromEntity(dummyEntity);
                 }
+
+                DataSourceResult dataSourceResult = models.ToList().ToDataSourceResult(request, ModelState);
+                ControllerHelper.RemoveAllDataItemsFromCache();
+                return Json(dataSourceResult);
             }
-            DataSourceResult dataSourceResult = models.ToList().ToDataSourceResult(request, ModelState);
-            ControllerHelper.RemoveAllDataItemsFromCache();
-            return Json(dataSourceResult);
+            else
+            {
+                throw new ArgumentException("Models cannot be null!");
+            }
         }
 
         [StopWatchPostSharp]
         public ActionResult UpdateBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
-            if (models != null && ModelState.IsValid)
+            if (models != null)
             {
                 List<object> entitiesToUpdate = GetEntitiesFromModels(models, modelType, entityType);
 
@@ -162,10 +171,15 @@ namespace RecipiesMVC.Controllers
                     dynamic model = entitiesHash[entity];
                     model.ConvertFromEntity(entity);
                 }
+
+                DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
+                ControllerHelper.RemoveAllDataItemsFromCache();
+                return Json(dataSourceResult);
             }
-            DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
-            ControllerHelper.RemoveAllDataItemsFromCache();
-            return Json(dataSourceResult);
+            else
+            {
+                throw new ArgumentException("Models cannot be null!");
+            }
 
         }
 
@@ -173,25 +187,32 @@ namespace RecipiesMVC.Controllers
         public ActionResult DestroyBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
-            if (models.Any())
+            if (models != null)
             {
-                List<object> entitiesToDelete = GetEntitiesFromModels(models, modelType, entityType);
-                DbSet dbset = ContextFactory.Current.Set(entityType);
-
-                foreach (var entityToDelete in entitiesToDelete)
+                if (models.Any())
                 {
-                    if (entityToDelete != null)
+                    List<object> entitiesToDelete = GetEntitiesFromModels(models, modelType, entityType);
+                    DbSet dbset = ContextFactory.Current.Set(entityType);
+
+                    foreach (var entityToDelete in entitiesToDelete)
                     {
-                        dbset.Remove(entityToDelete);
+                        if (entityToDelete != null)
+                        {
+                            dbset.Remove(entityToDelete);
+                        }
                     }
+                    ContextFactory.Current.SaveChanges();
                 }
-                ContextFactory.Current.SaveChanges();
+
+                DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
+                ControllerHelper.RemoveAllDataItemsFromCache();
+
+                return Json(dataSourceResult);
             }
-
-            DataSourceResult dataSourceResult = models.ToDataSourceResult(request, ModelState);
-            ControllerHelper.RemoveAllDataItemsFromCache();
-
-            return Json(dataSourceResult);
+            else
+            {
+                throw new ArgumentException("Models cannot be null!");
+            }
         }
 
         private List<object> GetEntitiesFromModels(IEnumerable<object> models, Type modelType, Type entityType)

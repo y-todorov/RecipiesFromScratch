@@ -67,7 +67,7 @@ WHERE database_id = DB_ID( 'recipies')";
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             // do not call this for now

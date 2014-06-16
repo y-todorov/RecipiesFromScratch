@@ -11,21 +11,17 @@ $(document).ready(function () {
 });
 
 function onKendoGridDataSourceError(e) {
-    if (e.errors) {
-        var message = "Errors:\n";
-        $.each(e.errors, function (key, value) {
-            if ('errors' in value) {
-                $.each(value.errors, function () {
-                    message += this + "\n";
-                });
-            }
-        });
-        alert(message);
-    }
+    //debugger;
+    //var popupNotification = $("#centeredNotification").data("kendoNotification");
+    //if (e.errors) {
+    //    $.each(e.errors, function (key, value) {
+    //        debugger;
+    //        popupNotification.show(value.errors, "error");
+    //    });
+    //}
 }
 
 function onKendoGridSave(e) {
-    debugger;
     var popupNotification = $("#popupNotification").data("kendoNotification");
     for (var key in e.values) {
         var value = e.values[key];
@@ -34,13 +30,11 @@ function onKendoGridSave(e) {
 }
 
 function onKendoGridSaveChanges() {
-    debugger;
     var popupNotification = $("#popupNotification").data("kendoNotification");
     popupNotification.show("All pending changes are successfully saved!");
 }
 
 function onKendoGridRemove() {
-    debugger;
     var popupNotification = $("#popupNotification").data("kendoNotification");
     popupNotification.show("Item removed! Press 'Save Changes' to delete the item from the database!");
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -57,6 +59,11 @@ namespace RecipiesModelNS
                     piModifiedByUser.SetValue(this, userName);
                 }
             }
+        }
+
+        public virtual List<DbValidationError> ValidateEntitiyBeforeSave(DbEntityEntry entityEntry)
+        {
+            return new List<DbValidationError>();
         }
 
     }

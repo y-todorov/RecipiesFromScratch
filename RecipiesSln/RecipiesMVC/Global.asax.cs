@@ -17,7 +17,6 @@ using RecipiesMVC.Infrastructure;
 using RecipiesWebFormApp.Quartz.ActionsForScheduling;
 using RecipiesWebFormApp.Shared;
 using System.Web.Http;
-using System.Web.Routing;
 using StructureMap;
 using StructureMap.Graph;
 
@@ -104,6 +103,14 @@ namespace RecipiesMVC
             {
                 task.Execute();
             }
+
+            Exception exc = Server.GetLastError();
+
+            //if (exc is HttpUnhandledException)
+            //{
+            //    // Pass the error on to the error page.
+            //    Server.Transfer("Error", false);
+            //}
         }
 
         public void Application_EndRequest()

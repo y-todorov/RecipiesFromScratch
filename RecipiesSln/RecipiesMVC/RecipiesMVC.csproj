@@ -302,6 +302,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\AjaxExceptionFilter.cs" />
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseTableChangeWatcher.cs" />
@@ -414,6 +415,12 @@
       <Link>AutoMapper.Net4.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\AllCSS.css">
+      <DependentUpon>AllCSS.css.bundle</DependentUpon>
+    </Content>
+    <Content Include="Content\AllCSS.min.css">
+      <DependentUpon>AllCSS.css.bundle</DependentUpon>
+    </Content>
     <Content Include="Content\BlueOpal\editor.png" />
     <Content Include="Content\BlueOpal\imagebrowser.png" />
     <Content Include="Content\BlueOpal\indeterminate.gif" />
@@ -466,6 +473,13 @@
     <Content Include="Content\textures\transtexture.png" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\jQueryAjaxEvents.js" />
+    <Content Include="Scripts\JQuery\AllJS.js">
+      <DependentUpon>AllJS.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Scripts\JQuery\AllJS.min.js">
+      <DependentUpon>AllJS.js.bundle</DependentUpon>
+    </Content>
     <Content Include="Scripts\JQuery\jquery-2.1.0.min.js" />
     <Content Include="Scripts\JQuery\jquery.validate.js" />
     <Content Include="Scripts\JQuery\jquery.validate.unobtrusive.js" />
@@ -563,6 +577,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SendGridMail\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\AllCSS.css.bundle" />
+    <None Include="Scripts\JQuery\AllJS.js.bundle" />
+    <Content Include="Scripts\JQuery\AllJS.min.js.map">
+      <DependentUpon>AllJS.js.bundle</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
