@@ -16,7 +16,7 @@ namespace RecipiesMVC.Models
         public bool? IsBaseUnit { get; set; }
 
         [Relation(EntityType = typeof (UnitMeasure), DataFieldValue = "UnitMeasureId", DataFieldText = "Name")]
-        [Display(Name = "Unit Measure")]
+        [Display(Name = "Base Unit Measure")]
         [Required()]
 
         public int? BaseUnitId { get; set; }
