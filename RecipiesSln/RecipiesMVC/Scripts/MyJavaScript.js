@@ -10,6 +10,35 @@ $(document).ready(function () {
     $("input[type=submit]").addClass("k-button");
 });
 
+$(document).ready(function () {
+
+    var centered = $("#centeredNotification").kendoNotification({
+        hideOnClick: false,
+        stacking: "down",
+        show: onShow,
+        button: true,
+        autoHideAfter: 30000
+    }).data("kendoNotification");
+
+    $("#popupNotification").kendoNotification().data("kendoNotification");
+
+    function onShow(e) {
+        if (!$("." + e.sender._guid)[1]) {
+            var element = e.element.parent(),
+                eWidth = element.width(),
+                eHeight = element.height(),
+                wWidth = $(window).width(),
+                wHeight = $(window).height(),
+                newTop, newLeft;
+
+            newLeft = Math.floor(wWidth / 2 - eWidth / 2);
+            newTop = Math.floor(wHeight / 2 - eHeight / 2);
+
+            e.element.parent().css({ top: newTop, left: newLeft });
+        }
+    }
+});
+
 function onKendoGridDataSourceError(e) {
     //debugger;
     //var popupNotification = $("#centeredNotification").data("kendoNotification");
