@@ -6,11 +6,8 @@
 <head>
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico" />
-    <link href="~/Content/AllCSS.css" rel="stylesheet" />
-    <script src="~/Scripts/JQuery/AllJS.js"></script>
-    @*@Styles.Render("~/Content/ThisMustBeHere")*@
-    @*<script src="~/Scripts/JQuery/jquery-2.1.0.min.js"></script>*@
-    @*@Scripts.Render("~/js")*@
+    <link href="~/Content/CssBundle.min.css" rel="stylesheet" />
+    <script src="~/Scripts/JsBundle.min.js"></script>
 </head>
 <body>
     <header>
@@ -25,7 +22,7 @@
                 });
             })
             .SecurityTrimming(false) // causes EXTREMELY slow debugging.
-              )
+        )
         <span id="centeredNotification" style="display:none;"></span>
         <span id="popupNotification" style="display:none;"></span>
     </header>
@@ -35,7 +32,7 @@
         @RenderBody()
     </div>
     <footer>
-        <script type="text/javascript">
+        @*<script type="text/javascript">
             $(document).ready(function () {
 
                 var centered = $("#centeredNotification").kendoNotification({
@@ -65,8 +62,8 @@
                 }
             });
 
-           
-        </script>
+
+        </script>*@
     </footer>
 </body>
 </html>

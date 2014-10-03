@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesMVC", "RecipiesMVC\RecipiesMVC.csproj", "{2DE3455A-D94B-426F-83C8-CC4451FBF92B}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesPlatform", "RecipiesPlatform\RecipiesPlatform.csproj", "{C64D5533-F659-4121-AE8B-7F80B10AE7EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesWebJob", "RecipiesWebJob\RecipiesWebJob.csproj", "{77AFA779-6E53-4DAA-8AD5-535F07824668}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{F66A4ED5-4A54-4B3E-A888-FC72269472C8}"
+	ProjectSection(SolutionItems) = preProject
+		KendoDojoDefaultTemplate.html = KendoDojoDefaultTemplate.html
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
