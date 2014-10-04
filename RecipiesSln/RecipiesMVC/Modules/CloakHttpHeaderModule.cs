@@ -26,7 +26,7 @@ namespace RecipiesMVC.Modules
         {
             this.headersToCloak = new List<string>
                                       {
-                                              "E-Tag",
+                                              "ETag",
                                               "Server",
                                               "X-AspNet-Version",
                                               "X-AspNetMvc-Version",
