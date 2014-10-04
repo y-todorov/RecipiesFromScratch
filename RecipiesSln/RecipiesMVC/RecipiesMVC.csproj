@@ -407,6 +407,7 @@
     <Compile Include="Models\Sales\SalesOrderDetailViewModel.cs" />
     <Compile Include="Models\Sales\SalesOrderHeaderViewModel.cs" />
     <Compile Include="Models\Shared\ViewModelBase.cs" />
+    <Compile Include="Modules\CloakHttpHeaderModule.cs" />
     <Compile Include="Modules\RemoveWhitespaceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App_Start\Startup.cs" />
