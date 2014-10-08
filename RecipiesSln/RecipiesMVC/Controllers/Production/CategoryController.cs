@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using AutoMapper.QueryableExtensions;
-using RecipiesMVC.Models;
-using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
-using Kendo.Mvc;
+using RecipiesMVC.Models;
 
 namespace RecipiesMVC.Controllers
 {
@@ -28,7 +22,8 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult ReadProducts(int? categoryId, [DataSourceRequest] DataSourceRequest request)
         {
-            var result = ReadBase(request, typeof(ProductViewModel), typeof(Product), ContextFactory.Current.Products.Where(p => p.CategoryId == categoryId).ToList());
+            ActionResult result = ReadBase(request, typeof (ProductViewModel), typeof (Product),
+                ContextFactory.Current.Products.Where(p => p.CategoryId == categoryId).ToList());
             return result;
         }
 
@@ -37,7 +32,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Create([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<CategoryViewModel> categories)
         {
-            var result = CreateBase(request, categories, typeof(CategoryViewModel), typeof(ProductCategory));
+            ActionResult result = CreateBase(request, categories, typeof (CategoryViewModel), typeof (ProductCategory));
             return result;
         }
 
@@ -45,7 +40,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Update([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<CategoryViewModel> categories)
         {
-            var result = UpdateBase(request, categories, typeof(CategoryViewModel), typeof(ProductCategory));
+            ActionResult result = UpdateBase(request, categories, typeof (CategoryViewModel), typeof (ProductCategory));
             return result;
         }
 
@@ -53,8 +48,10 @@ namespace RecipiesMVC.Controllers
         public ActionResult Destroy([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<CategoryViewModel> categories)
         {
-            var result = DestroyBase(request, categories, typeof(CategoryViewModel), typeof(ProductCategory));
+            ActionResult result = DestroyBase(request, categories, typeof (CategoryViewModel), typeof (ProductCategory));
             return result;
         }
     }
 }
+
+// This is test for revert commit
