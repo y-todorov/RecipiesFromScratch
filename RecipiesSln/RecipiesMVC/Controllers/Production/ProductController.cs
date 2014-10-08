@@ -1,22 +1,12 @@
-﻿using System.Collections;
+﻿//using RecipiesWebFormApp.Caching;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using RecipiesModelNS;
-using System.Data.Entity;
-using RecipiesPlatform.PostSharp;
-using RecipiesWebFormApp;
-using System.Web;
-using System.Web.Caching;
-//using RecipiesWebFormApp.Caching;
-using DevTrends.MvcDonutCaching;
-using System;
+using RecipiesMVC.Models;
 
 namespace RecipiesMVC.Controllers
 {
@@ -37,7 +27,7 @@ namespace RecipiesMVC.Controllers
         public ActionResult Create([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
-            var result = CreateBase(request, products, typeof(ProductViewModel), typeof(Product));
+            ActionResult result = CreateBase(request, products, typeof (ProductViewModel), typeof (Product));
             return result;
         }
 
@@ -46,8 +36,8 @@ namespace RecipiesMVC.Controllers
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
             //HttpRuntime.Close(); .. THIS IS God Damn fucking slow. NEVER EVER use it!
-            
-            var result = UpdateBase(request, products, typeof(ProductViewModel), typeof(Product));
+
+            ActionResult result = UpdateBase(request, products, typeof (ProductViewModel), typeof (Product));
             return result;
         }
 
@@ -55,13 +45,13 @@ namespace RecipiesMVC.Controllers
         public ActionResult Destroy([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<ProductViewModel> products)
         {
-            var result = DestroyBase(request, products, typeof(ProductViewModel), typeof(Product));
+            ActionResult result = DestroyBase(request, products, typeof (ProductViewModel), typeof (Product));
             return result;
         }
 
         public ActionResult ReadProductRecipies(int? productId, [DataSourceRequest] DataSourceRequest request)
         {
-            var result = ReadBase(request, typeof(RecipeViewModel), typeof(Recipe),
+            ActionResult result = ReadBase(request, typeof (RecipeViewModel), typeof (Recipe),
                 ContextFactory.Current.Recipes.Where(r => r.ProductIngredients.Any(pi => pi.ProductId == productId))
                     .ToList());
             return result;
@@ -75,7 +65,7 @@ namespace RecipiesMVC.Controllers
                     .OrderByDescending(de => de.ProductInventoryHeader.ForDate)
                     .ToList();
 
-            var result = ReadBase(request, typeof(ProductInventoryViewModel), typeof(ProductInventory),
+            ActionResult result = ReadBase(request, typeof (ProductInventoryViewModel), typeof (ProductInventory),
                 productInventories);
             return result;
         }
@@ -103,7 +93,7 @@ namespace RecipiesMVC.Controllers
                     (pi => pi.ProductId == productId).ToList().Where(w => w.Quantity.GetValueOrDefault() != 0)
                     .OrderByDescending(de => de.ProductWasteHeader.ForDate)
                     .ToList();
-            var result = ReadBase(request, typeof(ProductWasteViewModel), typeof(ProductWaste),
+            ActionResult result = ReadBase(request, typeof (ProductWasteViewModel), typeof (ProductWaste),
                 productWastes);
 
 
@@ -116,22 +106,20 @@ namespace RecipiesMVC.Controllers
             Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
-                var inv = product.GetLastInventoryForDate(DateTime.Now.Date);
+                ProductInventory inv = product.GetLastInventoryForDate(DateTime.Now.Date);
 
                 if (inv != null)
                 {
-                    var res = product.GetPurchaseOrderDetailsInPeriod(inv.ProductInventoryHeader.ForDate.GetValueOrDefault(), DateTime.Now);
-                    var result = ReadBase(request, typeof(PurchaseOrderDetailViewModel), typeof(PurchaseOrderDetail),
-               res);
+                    List<PurchaseOrderDetail> res =
+                        product.GetPurchaseOrderDetailsInPeriod(inv.ProductInventoryHeader.ForDate.GetValueOrDefault(),
+                            DateTime.Now);
+                    ActionResult result = ReadBase(request, typeof (PurchaseOrderDetailViewModel),
+                        typeof (PurchaseOrderDetail),
+                        res);
                     return result;
-                }
-                else
-                {
-
                 }
             }
             return null;
-
         }
 
         public ActionResult ReadProductUnitsInStockSalesOrderDetails(int? productId,
@@ -140,65 +128,61 @@ namespace RecipiesMVC.Controllers
             Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
-                var inv = product.GetLastInventoryForDate(DateTime.Now.Date);
+                ProductInventory inv = product.GetLastInventoryForDate(DateTime.Now.Date);
 
                 if (inv != null)
                 {
-                    var res = product.GetSalesOrderDetailsForPeriod(inv.ProductInventoryHeader.ForDate.GetValueOrDefault(), DateTime.Now);
-                    var result = ReadBase(request, typeof(SalesOrderDetailViewModel), typeof(SalesOrderDetail),
-               res);
+                    List<SalesOrderDetail> res =
+                        product.GetSalesOrderDetailsForPeriod(inv.ProductInventoryHeader.ForDate.GetValueOrDefault(),
+                            DateTime.Now);
+                    ActionResult result = ReadBase(request, typeof (SalesOrderDetailViewModel),
+                        typeof (SalesOrderDetail),
+                        res);
                     return result;
-                }
-                else
-                {
-
                 }
             }
             return null;
-
         }
 
         public ActionResult ReadProductUnitsInStockProductWastes(int? productId,
-          [DataSourceRequest] DataSourceRequest request)
+            [DataSourceRequest] DataSourceRequest request)
         {
             Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
-                var inv = product.GetLastInventoryForDate(DateTime.Now.Date);
+                ProductInventory inv = product.GetLastInventoryForDate(DateTime.Now.Date);
 
                 if (inv != null)
                 {
-                    var res = product.GetProductWastes(inv.ProductInventoryHeader.ForDate.GetValueOrDefault(), DateTime.Now);
-                    var result = ReadBase(request, typeof(ProductWasteViewModel), typeof(ProductWaste),
-               res);
+                    List<ProductWaste> res =
+                        product.GetProductWastes(inv.ProductInventoryHeader.ForDate.GetValueOrDefault(), DateTime.Now);
+                    ActionResult result = ReadBase(request, typeof (ProductWasteViewModel), typeof (ProductWaste),
+                        res);
                     return result;
-                }
-                else
-                {
-
                 }
             }
             return null;
         }
 
         public ActionResult ReadProductInventory(int? productId,
-          [DataSourceRequest] DataSourceRequest request)
+            [DataSourceRequest] DataSourceRequest request)
         {
             Product product = ContextFactory.Current.Products.FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
                 //ProductInventory inv = product.GetLastInventoryForDate(DateTime.Now.Date);
-              
+
                 //if (inv == null)
                 //{
 
                 //}
 
-                List<ProductInventory> invs = product.ProductInventories.ToList(); // new List<ProductInventory>() { inv };
+                List<ProductInventory> invs = product.ProductInventories.ToList();
+                    // new List<ProductInventory>() { inv };
 
-                var result = ReadBase(request, typeof(ProductInventoryViewModel), typeof(ProductInventory), invs);
+                ActionResult result = ReadBase(request, typeof (ProductInventoryViewModel), typeof (ProductInventory),
+                    invs);
                 return result;
-
             }
             return null;
         }
@@ -221,7 +205,7 @@ namespace RecipiesMVC.Controllers
             //    return ex.Message;
             //}
         }
-
-
     }
 }
+
+// test 2
