@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Kendo.Mvc.UI;
 
 namespace RecipiesMVC.ActionFilters
 {
-     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
     public class AjaxExceptionFilter : ActionFilterAttribute, IExceptionFilter
     {
         public void OnException(ExceptionContext filterContext)
@@ -27,22 +25,25 @@ namespace RecipiesMVC.ActionFilters
             // it is important to be not 500
 
             //Set the response status code to 500
-            filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            filterContext.HttpContext.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 
             //Needed for IIS7.0
             filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
-            
-            List<string> listOfExMessages = new List<string>();
+
+            var listOfExMessages = new List<string>();
 
             if (exception is DbEntityValidationException)
             {
-                DbEntityValidationException dbEx = exception as DbEntityValidationException;
+                var dbEx = exception as DbEntityValidationException;
 
                 foreach (DbEntityValidationResult entityValidationResult in dbEx.EntityValidationErrors)
                 {
                     foreach (DbValidationError dbValidationError in entityValidationResult.ValidationErrors)
                     {
-                        listOfExMessages.Add(dbValidationError.ErrorMessage);
+                        string fullErrorMessage = string.Format("Field: '{0}', Error: '{1}'.",
+                            dbValidationError.PropertyName,
+                            dbValidationError.ErrorMessage);
+                        listOfExMessages.Add(fullErrorMessage);
                     }
                 }
             }
@@ -51,8 +52,9 @@ namespace RecipiesMVC.ActionFilters
                 listOfExMessages.Add(exception.Message);
             }
 
-            JsonResult jr = new JsonResult();
-            jr.Data = new DataSourceResult()
+
+            var jr = new JsonResult();
+            jr.Data = new DataSourceResult
             {
                 Errors = listOfExMessages
             };

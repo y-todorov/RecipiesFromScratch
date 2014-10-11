@@ -1,0 +1,17 @@
+﻿@using RecipiesMVC.Controllers
+@using RecipiesMVC.Extensions
+@using RecipiesMVC.Models;
+
+@model IEnumerable<EmployeeViewModel>
+
+@(
+ Html.Kendo().Grid(Model)
+            .Name("EmployeeViewModelGrid")
+            .AddDefaultOptions()
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Create(cop => cop.Action<EmployeeController>(cc => cc.Create(null, null)))
+                    .Read(cop => cop.Action<EmployeeController>(cc => cc.Read(null, null)))
+                    .Update(cop => cop.Action<EmployeeController>(cc => cc.Update(null, null)))
+                    .Destroy(cop => cop.Action<EmployeeController>(cc => cc.Destroy(null, null))))
+)

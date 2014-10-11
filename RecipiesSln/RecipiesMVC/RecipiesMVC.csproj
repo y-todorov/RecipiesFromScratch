@@ -15,7 +15,7 @@
     <AssemblyName>RecipiesMVC</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -59,11 +59,13 @@
     <Reference Include="Autofac">
       <HintPath>..\Libs\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=3.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    <Reference Include="AutoMapper.Net4, Version=3.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="Blitline.Net">
       <HintPath>..\Libs\Blitline.Net.dll</HintPath>
@@ -318,6 +320,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\Dashboard\HomeController.cs" />
+    <Compile Include="Controllers\HumanResources\EmployeeController.cs" />
     <Compile Include="Controllers\Production\CategoryController.cs" />
     <Compile Include="Controllers\Production\ProductController.cs" />
     <Compile Include="Controllers\Production\ProductIngredientController.cs" />
@@ -383,6 +386,7 @@
     <Compile Include="Models\Chart\TotalPoByVendor.cs" />
     <Compile Include="Models\Chart\VendorPurchasesByWeek.cs" />
     <Compile Include="Models\Account\IdentityModels.cs" />
+    <Compile Include="Models\HumanResources\EmployeeViewModel.cs" />
     <Compile Include="Models\Production\CategoryViewModel.cs" />
     <Compile Include="Models\Production\InventoryViewModel.cs" />
     <Compile Include="Models\Production\ProductIngredientViewModel.cs" />
@@ -413,10 +417,6 @@
     <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\AutoMapper.3.1.1\lib\net40\AutoMapper.Net4.dll">
-      <Link>AutoMapper.Net4.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\BlueOpal\editor.png" />
     <Content Include="Content\BlueOpal\imagebrowser.png" />
     <Content Include="Content\BlueOpal\indeterminate.gif" />
@@ -1199,8 +1199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\HumanResources\" />
-    <Folder Include="Models\HumanResources\" />
     <Folder Include="Views\Api\" />
   </ItemGroup>
   <ItemGroup>
@@ -1507,6 +1505,9 @@
   <ItemGroup>
     <Content Include="Views\TestForIntellisense.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Employee\Index.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1525,7 +1526,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>45024</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/RecipiesMVC</IISUrl>
+          <IISUrl>http://localhost:45024/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

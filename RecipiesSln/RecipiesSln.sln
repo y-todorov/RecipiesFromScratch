@@ -18,6 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{F66A4ED5-4
 		KendoDojoDefaultTemplate.html = KendoDojoDefaultTemplate.html
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipiesMVC.Tests", "RecipiesMVC.Tests\RecipiesMVC.Tests.csproj", "{EC3B0FF9-8E6E-4892-A4AF-C6790A34E60B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4904C5E9-F664-4BF7-9355-F820C7AC72BA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +51,10 @@ Global
 		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77AFA779-6E53-4DAA-8AD5-535F07824668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC3B0FF9-8E6E-4892-A4AF-C6790A34E60B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3B0FF9-8E6E-4892-A4AF-C6790A34E60B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC3B0FF9-8E6E-4892-A4AF-C6790A34E60B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC3B0FF9-8E6E-4892-A4AF-C6790A34E60B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,18 +1,18 @@
-﻿using System.Data.SqlClient;
-using System.Reflection;
-using System.Web.Mvc;
+﻿using System;
+using System.Data.SqlClient;
 using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using RecipiesModelNS;
+
 //using RecipiesWebFormApp.Caching;
 
 namespace RecipiesWebFormApp.Quartz.Jobs
 {
     public class CheckDatabaseForChangesJob : JobBase
     {
+        private static SqlConnection sqlConn;
+        private static SqlCommand command;
+
+        private static DateTime? lastProductChangeDate;
 
         static CheckDatabaseForChangesJob()
         {
@@ -21,12 +21,10 @@ namespace RecipiesWebFormApp.Quartz.Jobs
             command.Connection = sqlConn;
         }
 
-        private static SqlConnection sqlConn;
-        private static SqlCommand command;
-
-        private static DateTime? lastProductChangeDate;
         public override void Execute(IJobExecutionContext context)
         {
+            // This code throws exceptions - there is already open reader associated with this command
+            /*
             // Entire database 
             command.CommandText = @"SELECT  max(last_user_update) last_user_update
 FROM sys.dm_db_index_usage_stats
@@ -72,7 +70,7 @@ WHERE database_id = DB_ID( 'recipies')";
             }
             // do not call this for now
             //base.Execute(context);
+             */
         }
-
     }
 }

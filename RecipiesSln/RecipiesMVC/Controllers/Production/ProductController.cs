@@ -1,4 +1,5 @@
 ﻿//using RecipiesWebFormApp.Caching;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -178,7 +179,7 @@ namespace RecipiesMVC.Controllers
                 //}
 
                 List<ProductInventory> invs = product.ProductInventories.ToList();
-                    // new List<ProductInventory>() { inv };
+                // new List<ProductInventory>() { inv };
 
                 ActionResult result = ReadBase(request, typeof (ProductInventoryViewModel), typeof (ProductInventory),
                     invs);
@@ -195,7 +196,7 @@ namespace RecipiesMVC.Controllers
 
         public string CalculateProductsUnitPrice()
         {
-            //try
+            //trywe
             {
                 Product.UpdateUnitPriceOfAllProducts();
                 return "CalculateProductsUnitPrice succeeded!";
