@@ -1500,9 +1500,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TestForIntellisense.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Employee\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
