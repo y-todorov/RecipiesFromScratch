@@ -41,4 +41,3 @@ using System.Runtime.InteropServices;
 //[assembly: RecipiesPlatform.PostSharp.StopWatchPostSharp(
 //                       AttributeTargetTypes = "RecipiesMVC.Controllers.*")]
 
-[assembly: RecipiesPlatform.PostSharp.ExceptionPolicyPostSharpAttribute()]

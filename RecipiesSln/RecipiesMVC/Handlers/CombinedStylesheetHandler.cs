@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
-using RecipiesPlatform.PostSharp;
 
 #endregion
 
@@ -94,9 +93,7 @@ namespace RecipiesMVC.Handlers
 			return body;
 		}
 
-#if DEBUG
-          [StopWatchPostSharp]
-#endif
+
 		/// <summary>
 		/// This will make the browser and server keep the output
 		/// in its cache and thereby improve performance.

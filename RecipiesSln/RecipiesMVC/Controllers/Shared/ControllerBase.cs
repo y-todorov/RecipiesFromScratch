@@ -22,7 +22,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Collections;
-using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Controllers
 {
@@ -52,7 +51,6 @@ namespace RecipiesMVC.Controllers
             return jr;
         }
 
-        [StopWatchPostSharp]
         public ActionResult ReadBase([DataSourceRequest] DataSourceRequest request, Type modelType, Type entityType, IEnumerable<object> entities)
         {
             DbSet dbset = ContextFactory.Current.Set(entityType);
@@ -74,7 +72,6 @@ namespace RecipiesMVC.Controllers
             return Json(dataSourceResult);
         }
 
-        [StopWatchPostSharp]
         public JsonResult ReadBase<TSourceType, TDestinationType>([DataSourceRequest] DataSourceRequest request, IQueryable<TSourceType> query)
         {
             string cacheKey = "_Data_" + query;
@@ -95,7 +92,6 @@ namespace RecipiesMVC.Controllers
             return jresult;
         }
 
-        [StopWatchPostSharp]
         public ActionResult CreateBase([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
             //if (models != null && ModelState.IsValid)
@@ -137,7 +133,6 @@ namespace RecipiesMVC.Controllers
             }
         }
 
-        [StopWatchPostSharp]
         public ActionResult UpdateBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {
@@ -183,7 +178,6 @@ namespace RecipiesMVC.Controllers
 
         }
 
-        [StopWatchPostSharp]
         public ActionResult DestroyBase([DataSourceRequest] DataSourceRequest request,
             [Bind(Prefix = "models")] IEnumerable<object> models, Type modelType, Type entityType)
         {

@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Web;
-using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Handlers
 {
@@ -49,9 +48,7 @@ namespace RecipiesMVC.Handlers
 			context.Response.Cache.SetValidUntilExpires(true);
 		}
 
-#if DEBUG
-          [StopWatchPostSharp]
-#endif
+
 		/// <summary>
 		/// Writes the content of the individual stylesheets to the response stream.
 		/// </summary>

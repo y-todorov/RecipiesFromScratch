@@ -11,7 +11,6 @@ using Kendo.Mvc.UI;
 using RecipiesModelNS;
 using System.Data.Entity;
 using DevTrends.MvcDonutCaching; // .Include !!!!!!! THIS IS SO IMPROTANT
-using RecipiesPlatform.PostSharp;
 
 namespace RecipiesMVC.Controllers
 {
