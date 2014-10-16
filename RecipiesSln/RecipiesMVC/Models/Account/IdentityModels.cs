@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Configuration;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace RecipiesMVC.Models
 {
@@ -10,7 +11,7 @@ namespace RecipiesMVC.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base(ConfigurationManager.AppSettings["LoginConnectionString"])
         {
         }
 
