@@ -23,6 +23,8 @@ namespace RecipiesMVC.Tests.Automapper
 
             // Assert
             Assert.Equal(employee.FirstName, employeeViewModel.FirstName);
+
+            // just a test
         }
     }
 }
