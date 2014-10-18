@@ -1,6 +1,7 @@
 ﻿@using RecipiesMVC.Controllers
 @using RecipiesMVC.Extensions
 @using RecipiesMVC.Models;
+@using Microsoft.Web.Mvc;
 
 @model IEnumerable<CategoryViewModel>
 
@@ -34,8 +35,10 @@
                           var catId = new {categoryId = "#=CategoryId#"};
                           dataSource
                               .Ajax()
-                              //.Read(read => read.Action("ReadProducts", "Category", new { categoryId = "#=CategoryId#" }))
-                              .Read(cop => cop.Action<CategoryController>(cc => cc.ReadProducts(null, null)).Route("Default", new { categoryId = "#=CategoryId#" }));
+                              .Read(read => read.Action("ReadProducts", "Category", new {categoryId = "#=CategoryId#"}));
+                          //.Read(cop => cop.Action<CategoryController>(cc => cc.ReadProducts(null, null))); //.Route("Default", new { categoryId = "#=CategoryId#" }));
+                          // Този закоментирания код не работи!
+
                       }
                       )
                       .ToClientTemplate()

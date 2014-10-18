@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace RecipiesMVC.Controllers
 {
+    [OutputCache(Duration=3600)]
     public class ChartController : ControllerBase
     {
         private int maxXLabelTextLenght = 10;

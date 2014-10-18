@@ -83,7 +83,7 @@ namespace RecipiesMVC
             LogentriesHelper.WriteMessage("public class MvcApplication : System.Web.HttpApplication START",
                 LogentriesMessageType.Info);
 
-            ActionsForScheduling.StartAll();
+            ActionsForScheduling.StartAll(); //Тук много се бавят нещата според дотТрасе. Трябва да се види!
         }
 
 

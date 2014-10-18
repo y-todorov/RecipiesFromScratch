@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using System.Threading.Tasks;
+using Quartz;
 using RecipiesModelNS;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,15 @@ namespace RecipiesWebFormApp.Quartz.Jobs
             WebClient client = new WebClient();
             try
             {
-                string res = client.DownloadStringTaskAsync(new Uri("http://bluesystems.azurewebsites.net/")).Result;
+                List<Task> tasks = new List<Task>();
+                client = new WebClient();
+                tasks.Add(client.DownloadStringTaskAsync(new Uri("http://bluesystems.azurewebsites.net/")));
+                client = new WebClient();
+                tasks.Add(client.DownloadStringTaskAsync(new Uri("http://bluesystems2.azurewebsites.net/")));
+                client = new WebClient();
+                tasks.Add(client.DownloadStringTaskAsync(new Uri("http://recipiesfromscratchdatabase.apphb.com")));
+
+                //Task.WaitAll(tasks.ToArray());
             }
             catch (Exception)
             {
