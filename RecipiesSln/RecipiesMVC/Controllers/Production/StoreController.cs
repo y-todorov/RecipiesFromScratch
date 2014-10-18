@@ -21,29 +21,8 @@ namespace RecipiesMVC.Controllers
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request, RecipiesEntities context)
         {
-            //JsonResult cachedResult = HttpContext.Cache["stores"] as JsonResult;
-            //if (cachedResult != null)
-            //{
-            //    return cachedResult;
-            //}
-            //else
-            //{
-
-            //    IQueryable<StoreViewModel> stores =
-            //        context.Stores.Project().To<StoreViewModel>();
-            //    DataSourceResult dataSourceResult = stores.ToDataSourceResult(request);
-            //    JsonResult jresult = Json(dataSourceResult);
-            //    HttpContext.Cache.Add("stores", jresult,
-            //        null, DateTime.Now.AddMinutes(10),
-            //        TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
-            //    return jresult;
-            //}
-
             var newRes = ReadBase<Store, StoreViewModel>(request, context.Stores);
             return newRes;
-
-            //var result = ReadBase(request, typeof(StoreViewModel), typeof(Store), context.Stores.ToList());
-            //return result;
         }
         
         [AcceptVerbs(HttpVerbs.Post)]

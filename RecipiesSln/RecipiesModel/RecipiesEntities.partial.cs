@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Linq;
+using System.Runtime.Caching;
 
 namespace RecipiesModelNS
 {
@@ -82,6 +83,18 @@ namespace RecipiesModelNS
                 }
             }
             int result = base.SaveChanges();
+
+            if (result != 0)
+            {
+                //MemoryCache.Default.Dispose(); NEVER CALL DISPOSE. YOU WILL NE LONGER CAN USE IT.
+                List<string> cacheKeys = MemoryCache.Default.Select(kvp => kvp.Key).ToList();
+
+                foreach (string cacheKey in cacheKeys)
+                {
+                    MemoryCache.Default.Remove(cacheKey);
+                }
+
+            }
 
             // THIS HERE IS REALLY PROBLEMATIC AND REALLY SLOW BECAUSE OF THE RECURSION -> SAVE CHANGES IS CALLED MANY MANY TIMES
 

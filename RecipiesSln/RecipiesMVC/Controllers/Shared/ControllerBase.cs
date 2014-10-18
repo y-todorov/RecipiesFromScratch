@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.UI;
@@ -22,6 +23,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Collections;
+using System.Runtime.Caching;
+using System.Configuration;
 
 namespace RecipiesMVC.Controllers
 {
@@ -32,7 +35,7 @@ namespace RecipiesMVC.Controllers
 
 
     //[DonutOutputCache(Duration = 24 * 3600)] // NEVER EVER CACHE POST REQUESTS !!! That is deletes, updates and inserts
-    
+
     [AjaxExceptionFilter]
     public abstract class ControllerBase : Controller
     {
@@ -72,10 +75,44 @@ namespace RecipiesMVC.Controllers
             return Json(dataSourceResult);
         }
 
+        private SqlChangeMonitor GetSqlDependencyAllDatabase()
+        {
+            return null;
+                 
+            string connString = ConfigurationManager.AppSettings["LoginConnectionString"];
+            SqlConnectionStringBuilder scsb = new SqlConnectionStringBuilder(connString);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                string commandText =
+                    string.Format(
+                        "SELECT  max(last_user_update) last_user_update FROM sys.dm_db_index_usage_stats WHERE database_id = DB_ID( '{0}')", scsb.InitialCatalog);
+                using (SqlCommand command = new SqlCommand(commandText, conn))
+                {
+                    SqlDependency dep = new SqlDependency();
+
+                    //A first chance exception of type 'System.InvalidOperationException' occurred in System.Data.dll
+
+                    //Additional information: The SQL Server Service Broker for the current database is not enabled, and as a result query notifications are not supported.  Please enable the Service Broker for this database if you wish to use notifications.
+                    SqlDependency.Start(connString);
+
+                    dep.AddCommandDependency(command);
+
+                    SqlChangeMonitor monitor = new SqlChangeMonitor(dep);
+
+                    return monitor;
+                }
+            }
+
+        }
+
         public JsonResult ReadBase<TSourceType, TDestinationType>([DataSourceRequest] DataSourceRequest request, IQueryable<TSourceType> query)
         {
             string cacheKey = "_Data_" + query;
-            JsonResult cachedJsonResult = HttpContext.Cache[cacheKey] as JsonResult;
+
+            JsonResult cachedJsonResult = MemoryCache.Default.Get(cacheKey) as JsonResult;
+
+            //JsonResult cachedJsonResult = HttpContext.Cache[cacheKey] as JsonResult;
             if (cachedJsonResult != null)
             {
                 return cachedJsonResult;
@@ -84,10 +121,13 @@ namespace RecipiesMVC.Controllers
             var stores = query.Project().To<TDestinationType>();
             DataSourceResult dataSourceResult = stores.ToDataSourceResult(request);
             JsonResult jresult = Json(dataSourceResult);
+            
+            MemoryCache.Default.Add(cacheKey, jresult, null);
 
-            HttpContext.Cache.Add(cacheKey, jresult,
-                null, DateTime.Now.AddDays(10),
-                TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
+
+            //HttpContext.Cache.Add(cacheKey, jresult,
+            //    null, DateTime.Now.AddDays(10),
+            //    TimeSpan.Zero, System.Web.Caching.CacheItemPriority.Normal, null);
 
             return jresult;
         }
@@ -277,7 +317,7 @@ namespace RecipiesMVC.Controllers
             return false;
 
         }
-        
+
 
     }
 }
