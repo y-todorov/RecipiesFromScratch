@@ -1,4 +1,5 @@
-﻿using RecipiesWebFormApp.Extensions;
+﻿using RecipiesMVC.Filters;
+using RecipiesWebFormApp.Extensions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,6 +9,7 @@ namespace RecipiesWebFormApp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new NotificationFilter());
             //filters.Add(new HandleErrorAttribute());
             //filters.Add(new CustomHandleErrorAttribute());
         }

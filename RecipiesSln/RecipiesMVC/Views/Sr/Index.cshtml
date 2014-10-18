@@ -1,0 +1,17 @@
+﻿<div id="discussion"></div>
+
+<script type="text/javascript">
+    $(function() {
+
+        debugger;
+        // Declare a proxy to reference the hub.
+        var chat = $.connection.notificationHub;
+        // Create a function that the hub can call to broadcast messages.
+        chat.client.notify = function (name) {
+            $('#discussion').append('<li><strong>' + name
+                      + '</strong>:&nbsp;&nbsp;' + '</li>');
+        };
+
+        $.connection.hub.start().done(function() {});
+    });
+</script>

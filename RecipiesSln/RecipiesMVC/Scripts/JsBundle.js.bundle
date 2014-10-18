@@ -11,7 +11,6 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/Scripts/JQuery/jquery-2.1.1.js</file>
-    <file>/Scripts/JQuery/jquery.signalR-2.1.2.js</file>
     <file>/Scripts/JQuery/jquery.validate.js</file>
     <file>/Scripts/JQuery/jquery.validate.unobtrusive.js</file>
     <file>/Scripts/modernizr.2.6.2.js</file>
@@ -21,6 +20,7 @@
     <file>/Scripts/Kendo/cultures/kendo.culture.en-IE.js</file>
     <file>/Scripts/Kendo/messages/kendo.messages.en-US.js</file>
     <file>/Scripts/MyJavaScript.js</file>
+    <file>/Scripts/KendoConsole.js</file>
     <file>/Scripts/jQueryAjaxEvents.js</file>
   </files>
 </bundle>
