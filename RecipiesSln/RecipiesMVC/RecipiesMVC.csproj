@@ -131,16 +131,12 @@
     <Reference Include="Microsoft.AspNet.Membership.OpenAuth">
       <HintPath>..\Libs\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Client">
-      <HintPath>..\Libs\Microsoft.AspNet.SignalR.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Owin">
-      <HintPath>..\Libs\Microsoft.AspNet.SignalR.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
@@ -698,6 +694,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\jQueryAjaxEvents.js" />
     <Content Include="Scripts\JQuery\jquery-2.1.1.js" />
+    <Content Include="Scripts\JQuery\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\JQuery\jquery.validate.js" />
     <Content Include="Scripts\JQuery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\JsBundle.js">

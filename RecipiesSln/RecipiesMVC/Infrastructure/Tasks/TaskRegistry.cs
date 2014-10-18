@@ -9,7 +9,8 @@ namespace RecipiesMVC.Infrastructure.Tasks
 		{
 			Scan(scan =>
 			{
-			    scan.AssembliesFromApplicationBaseDirectory();
+			    //scan.AssembliesFromApplicationBaseDirectory();
+                scan.TheCallingAssembly();
 				//	a => a.FullName.StartsWith("")); // ?
 				scan.AddAllTypesOf<IRunAtInit>();
 				scan.AddAllTypesOf<IRunAtStartup>();
