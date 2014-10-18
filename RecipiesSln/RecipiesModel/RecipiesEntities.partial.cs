@@ -33,17 +33,8 @@ namespace RecipiesModelNS
             }
             return base.ValidateEntity(entityEntry, items);
         }
-
-        protected override bool ShouldValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry entityEntry)
-        {
-            return base.ShouldValidateEntity(entityEntry);
-        }
-
-        private int saveChangesHits = 0;
-
         public override int SaveChanges()
         {
-            saveChangesHits++;
             ChangeTracker.DetectChanges();
             IEnumerable<DbEntityEntry> entries = ChangeTracker.Entries();
 
@@ -115,11 +106,6 @@ namespace RecipiesModelNS
             //ContextFactory.RemoveFromCache();
 
             return result;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
         }
     }
 }
