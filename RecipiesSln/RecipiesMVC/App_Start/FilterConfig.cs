@@ -9,7 +9,7 @@ namespace RecipiesWebFormApp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new NotificationFilter());
+            //filters.Add(new NotificationFilter());
             //filters.Add(new HandleErrorAttribute());
             //filters.Add(new CustomHandleErrorAttribute());
         }

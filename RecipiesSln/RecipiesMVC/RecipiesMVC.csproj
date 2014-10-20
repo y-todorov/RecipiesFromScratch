@@ -353,7 +353,7 @@
     <Compile Include="Extensions\GridBuilderExtension.cs" />
     <Compile Include="Extensions\MyFileResult.cs" />
     <Compile Include="Filters\BaseFilterStream.cs" />
-    <Compile Include="Filters\NotificationFilter.cs" />
+    <Compile Include="ActionFilters\NotificationFilter.cs" />
     <Compile Include="Filters\RemoveWhitespaceFilterStream.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -364,6 +364,7 @@
     <Compile Include="Handlers\StylesheetHandler.cs" />
     <Compile Include="Hubs\NotificationHub.cs" />
     <Compile Include="Infrastructure\ActionFilterRegistry.cs" />
+    <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\ControllerConvention.cs" />
     <Compile Include="Infrastructure\ControllerRegistry.cs" />
     <Compile Include="Infrastructure\CurrentUser.cs" />
@@ -375,6 +376,8 @@
     <Compile Include="Infrastructure\StandardRegistry.cs" />
     <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
     <Compile Include="Infrastructure\StructureMapFilterProvider.cs" />
+    <Compile Include="Infrastructure\TasksImplementations\RunAfterEachRequestSignalR.cs" />
+    <Compile Include="Infrastructure\TasksImplementations\RunOnEachRequestSignalR.cs" />
     <Compile Include="Infrastructure\Tasks\IRunAfterEachRequest.cs" />
     <Compile Include="Infrastructure\Tasks\IRunAtInit.cs" />
     <Compile Include="Infrastructure\Tasks\IRunAtStartup.cs" />

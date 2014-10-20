@@ -78,7 +78,7 @@ namespace RecipiesModelNS
             if (result != 0)
             {
                 //MemoryCache.Default.Dispose(); NEVER CALL DISPOSE. YOU WILL NE LONGER CAN USE IT.
-                List<string> cacheKeys = MemoryCache.Default.Select(kvp => kvp.Key).ToList();
+                List<string> cacheKeys = MemoryCache.Default.Where(kvp => kvp.Key.StartsWith("_DATA_")).Select(kvp => kvp.Key).ToList();
 
                 foreach (string cacheKey in cacheKeys)
                 {

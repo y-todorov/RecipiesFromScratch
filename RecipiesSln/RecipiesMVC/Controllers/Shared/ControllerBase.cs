@@ -10,6 +10,7 @@ using DevTrends.MvcDonutCaching.Annotations;
 using RecipiesMVC.ActionFilters;
 using RecipiesMVC.DataAnnotations;
 using RecipiesMVC.Helpers;
+using RecipiesMVC.Infrastructure;
 using RecipiesMVC.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -108,7 +109,7 @@ namespace RecipiesMVC.Controllers
 
         public JsonResult ReadBase<TSourceType, TDestinationType>([DataSourceRequest] DataSourceRequest request, IQueryable<TSourceType> query)
         {
-            string cacheKey = "_Data_" + query;
+            string cacheKey = Constants.EfCachePrefix + query;
 
             JsonResult cachedJsonResult = MemoryCache.Default.Get(cacheKey) as JsonResult;
 
