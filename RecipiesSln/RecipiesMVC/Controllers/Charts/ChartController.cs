@@ -113,9 +113,9 @@ namespace RecipiesMVC.Controllers
 
             catch (Exception)
             {
-                Debugger.Break();
+                //Debugger.Break();
             }
-            throw new ApplicationException();
+            //throw new ApplicationException();
         }
 
 
